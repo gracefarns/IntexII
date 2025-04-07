@@ -1,0 +1,12 @@
+.homepage {
+  /* Dark gradient background with hints of blue */
+  background: linear-gradient(180deg, #242424, #141414 70%, #1a1a1a);
+  min-height: 100vh;
+  padding-top: 70px; /* Space for the fixed navbar */
+  color: #a3c1ad; /* Soft, earthy text color */
+  font-family: 'Poppins', sans-serif;
+}
+
+.content {
+  padding: 20px 40px;
+}

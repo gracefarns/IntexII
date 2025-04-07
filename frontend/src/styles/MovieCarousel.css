@@ -1,0 +1,73 @@
+/* Carousel Section */
+.carousel-section {
+  margin-top: 20px;
+  padding: 20px 0;
+  background-color: #fa0000; /* Ensures a dark background */
+}
+
+/* Title */
+.carousel-title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #fff; /* White text for visibility */
+  text-align: center;
+}
+
+/* Carousel Container */
+.carousel {
+  display: flex;
+  overflow-x: scroll;
+  gap: 20px;
+  padding: 10px 40px;
+  scrollbar-width: none; /* For Firefox */
+  min-height: 320px; /* Ensures container height */
+}
+
+/* Hide scrollbar in Webkit browsers */
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Carousel Item */
+.carousel-item {
+  flex: 0 0 auto;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.carousel-item:hover {
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+/* Movie Poster */
+.movie-poster {
+  width: 200px;
+  height: 300px;
+  background-color: #5a7d7c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  color: #fff; /* White text */
+}
+
+/* Journey Button */
+.journey-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(90, 125, 124, 0.9);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-item:hover .journey-button {
+  opacity: 1;
+}

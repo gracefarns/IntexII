@@ -1,34 +1,23 @@
-import ContainerFilter from '../components/MovieFilter';
-import Header from '../components/Header';
-import { useState } from 'react';
-import AuthorizeView, { AuthorizedUser } from '../components/AuthorizeView';
-import Logout from '../components/Logout';
-//import MovieList from '../components/MovieList';
+import React from 'react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import '../styles/HomePage.css';
+import MovieCarousel from '../components/MovieCarousel';
+import FAQSection from '../components/FAQSection';
 
-function HomePage() {
-  const [selectedContainers, setSelectedContainers] = useState<string[]>([]);
+const HomePage: React.FC = () => {
   return (
-    <AuthorizeView>
-      <span>
-        <Logout>
-          Logout <AuthorizedUser value="email" />
-        </Logout>
-      </span>
-      <div className="Container mt-4">
-        <Header />
-        <div className="row">
-          <div className="col-md-3">
-            <ContainerFilter
-              selectedContainers={selectedContainers}
-              setSelectedContainers={setSelectedContainers}
-            />
-          </div>
-          <div className="col-md-9">
-            {/* <MovieList selectedContainers={selectedContainers} /> */}
-          </div>
+    <>
+      <Navbar />
+      <div className="homepage">
+        <div className="content">
+          <MovieCarousel />
+          <FAQSection />
         </div>
+        <Footer />
       </div>
-    </AuthorizeView>
+    </>
   );
-}
+};
+
 export default HomePage;

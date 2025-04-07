@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './ContainerFilter.css'; // Assuming you have some CSS for styling
+import '../styles/MovieFilter.css'; // Assuming you have some CSS for styling
 
 function ContainerFilter({
   selectedContainers,

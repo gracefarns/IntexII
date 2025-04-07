@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap');
+
+.header {
+  padding: 5px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  font-family: 'Rubik', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #a3c1ad; /* Soft pastel green for a lighter, earthy tone */
+  letter-spacing: 2px;
+}
+
+.capital {
+  color: #5a7d7c; /* Rich vintage teal for accentuating capital letters */
+  font-size: 3.5rem; /* Slightly larger to ensure capitals stand out */
+  margin: 0 2px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
