@@ -98,17 +98,19 @@ function CompetitionList({
       </button>
 
       <br />
-      <label>
-        Results per page:
-        <select
-          value={pageSize}
-          onChange={(e) => setPageSize(Number(e.target.value))}
-        >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-        </select>
-      </label>
+      <div className="resultsCount">
+        <label>
+          Results per page:&nbsp;
+          <select
+            value={pageSize}
+            onChange={(e) => setPageSize(Number(e.target.value))}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+        </label>
+      </div>
     </>
   );
 }
