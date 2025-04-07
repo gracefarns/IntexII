@@ -44,22 +44,23 @@ function Register() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
-          password: password,
+          email,
+          password,
         }),
       })
-        //.then((response) => response.json())
-        .then((data) => {
-          // handle success or error from the server
-          console.log(data);
-          if (data.ok) setError('Successful registration. Please log in.');
-          else setError('Error registering.');
+        .then(async (response) => {
+          if (response.ok) {
+            navigate('/login');
+          } else {
+            const err = await response.json();
+            setError(err.message || 'Error registering.');
+          }
         })
         .catch((error) => {
-          // handle network error
           console.error(error);
-          setError('Error registering.');
+          setError('Network error. Please try again.');
         });
+      
     }
   };
 
