@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RootkitAuth.API.Data;
 using RootkitAuth.API.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -35,12 +36,21 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<IdentityUser>, CustomUserClaimsPrincipalFactory>();
 
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SameSite = SameSiteMode.None; //change after adding https for production
+    options.Cookie.Name = ".AspNetCore.Identity.Application";
+    options.LoginPath = "/login";
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000") // Replace with your frontend URL
+            policy.WithOrigins("http://localhost:3000", "https://intex-frontend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net") // Replace with your frontend URL
                 .AllowCredentials() // Required to allow cookies
                 .AllowAnyMethod()
                 .AllowAnyHeader();
@@ -58,18 +68,24 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+
 
 app.MapControllers();
 app.MapIdentityApi<IdentityUser>();
 
 app.MapPost("/logout", async (HttpContext context, SignInManager<IdentityUser> signInManager) =>
 {
-    await signInManager.SignOutAsync();
-    
-    // Ensure authentication cookie is removed
-    context.Response.Cookies.Delete(".AspNetCore.Identity.Application");
+await signInManager.SignOutAsync();
+
+// Ensure authentication cookie is removed
+context.Response.Cookies.Delete(".AspNetCore.Identity.Application", new CookieOptions
+{
+    HttpOnly = true,
+    SameSite = SameSiteMode.None, //change after adding https for production
+    Secure = true // Set to true in production
+});
 
     return Results.Ok(new { message = "Logout successful" });
 }).RequireAuthorization();

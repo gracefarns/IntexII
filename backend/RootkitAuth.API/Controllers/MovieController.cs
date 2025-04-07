@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
@@ -8,6 +9,7 @@ namespace RootkitAuth.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class MovieController : ControllerBase
     {
         private MovieDbContext _movieDbContext;
@@ -16,6 +18,7 @@ namespace RootkitAuth.API.Controllers
             _movieDbContext = temp;
         }
         [HttpGet("GetMovies")]
+
         public IActionResult GetMovies(int pageSize = 10, int pageNum = 1, [FromQuery] List<string>? containers = null)
         {
             var query = _movieDbContext.movies_titles.AsQueryable();
