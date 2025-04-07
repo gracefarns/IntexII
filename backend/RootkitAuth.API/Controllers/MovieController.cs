@@ -53,5 +53,20 @@ namespace RootkitAuth.API.Controllers
             
             return Ok(movieRatings);
         }
+
+        [HttpGet("GetSingleMovie/{id}")]
+        public IActionResult GetSingleMovie(string id)
+        {
+            var movie = _movieDbContext.movies_titles
+                .First(m => m.show_id == id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(movie);
+        }
+
     }
 }

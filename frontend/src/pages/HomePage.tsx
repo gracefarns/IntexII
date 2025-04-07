@@ -1,12 +1,11 @@
-import ContainerFilter from '../components/ContainerFilter';
-import CompetitionList from '../components/CompetitionList';
+import ContainerFilter from '../components/MovieFilter';
 import Header from '../components/Header';
 import { useState } from 'react';
-import CartSummary from '../components/CartSummary';
 import AuthorizeView, { AuthorizedUser } from '../components/AuthorizeView';
 import Logout from '../components/Logout';
+import MovieList from '../components/MovieList';
 
-function CompetitionPage() {
+function HomePage() {
   const [selectedContainers, setSelectedContainers] = useState<string[]>([]);
   return (
     <AuthorizeView>
@@ -16,7 +15,6 @@ function CompetitionPage() {
         </Logout>
       </span>
       <div className="Container mt-4">
-        <CartSummary />
         <Header />
         <div className="row">
           <div className="col-md-3">
@@ -26,11 +24,11 @@ function CompetitionPage() {
             />
           </div>
           <div className="col-md-9">
-            <CompetitionList selectedContainers={selectedContainers} />
+            <MovieList selectedContainers={selectedContainers} />
           </div>
         </div>
       </div>
     </AuthorizeView>
   );
 }
-export default CompetitionPage;
+export default HomePage;
