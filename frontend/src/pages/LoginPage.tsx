@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/identity.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+import { API_URL } from '../config'; // adjust path if needed
 
 function LoginPage() {
   // state variables for email and passwords
@@ -38,10 +39,10 @@ function LoginPage() {
       setError('Please fill in all fields.');
       return;
     }
-
     const loginUrl = rememberme
-      ? 'https://localhost:5000/login?useCookies=true'
-      : 'https://localhost:5000/login?useSessionCookies=true';
+      ? `${API_URL}/login?useCookies=true`
+      : `${API_URL}/login?useSessionCookies=true`;
+    
 
     try {
       const response = await fetch(loginUrl, {
