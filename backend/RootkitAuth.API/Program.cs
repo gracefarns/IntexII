@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RootkitAuth.API.Data;
 using RootkitAuth.API.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -49,7 +50,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000") // Replace with your frontend URL
+            policy.WithOrigins("http://localhost:3000", "https://intex-frontend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net") // Replace with your frontend URL
                 .AllowCredentials() // Required to allow cookies
                 .AllowAnyMethod()
                 .AllowAnyHeader();
