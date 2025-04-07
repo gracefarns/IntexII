@@ -23,9 +23,9 @@ const EditMovieForm = ({ movie, onSuccess, onCancel }: EditMovieFormProps) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Add a new movie</h2>
-      {/* <label>
-        Book Title:{' '}
+      <h2>Edit movie</h2>
+      <label>
+        Movie Title:{' '}
         <input
           type="text"
           name="title"
@@ -34,72 +34,72 @@ const EditMovieForm = ({ movie, onSuccess, onCancel }: EditMovieFormProps) => {
         />
       </label>
       <label>
-        Author:{' '}
+        Director:{' '}
         <input
           type="text"
-          name="author"
-          value={formData.author}
+          name="director"
+          value={formData.director}
           onChange={handleChange}
         />
       </label>
       <label>
-        Publisher:{' '}
+        Cast:{' '}
         <input
           type="text"
-          name="publisher"
-          value={formData.publisher}
+          name="cast"
+          value={formData.cast}
           onChange={handleChange}
         />
       </label>
       <label>
-        ISBN:{' '}
+        Country:{' '}
         <input
           type="text"
-          name="isbn"
-          value={formData.isbn}
+          name="country"
+          value={formData.country}
           onChange={handleChange}
         />
       </label>
       <label>
-        Classification:{' '}
-        <input
-          type="text"
-          name="classification"
-          value={formData.classification}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Category:{' '}
-        <input
-          type="text"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Number of Pages:{' '}
+        Release Year:{' '}
         <input
           type="number"
-          name="pageCount"
-          value={formData.pageCount}
+          name="release_year"
+          value={formData.release_year}
           onChange={handleChange}
         />
       </label>
       <label>
-        Price:{' '}
+        Rating:{' '}
         <input
-          type="number"
-          name="price"
-          value={formData.price}
+          type="text"
+          name="rating"
+          value={formData.rating}
           onChange={handleChange}
         />
       </label>
-      <button type="submit">Update Book</button>
+      <label>
+        Duration:{' '}
+        <input
+          type="text"
+          name="duration"
+          value={formData.duration}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Description{' '}
+        <input
+          type="text"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+        />
+      </label>
+      <button type="submit">Edit Movie</button>
       <button type="button" onClick={onCancel}>
         Cancel
-      </button> */}
+      </button>
     </form>
   );
 };

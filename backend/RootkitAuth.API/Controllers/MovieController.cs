@@ -69,7 +69,7 @@ namespace RootkitAuth.API.Controllers
         }
 
         [HttpPost("AddMovie")]
-        public IActionResult AddMovie([FromBody] Movie newMovie)
+        public IActionResult AddMovie([FromBody] MovieTitle newMovie)
         {
             _movieDbContext.movies_titles.Add(newMovie);
             _movieDbContext.SaveChanges();
@@ -77,7 +77,7 @@ namespace RootkitAuth.API.Controllers
         }
 
         [HttpPut("UpdateMovie/{movieId}")]
-        public IActionResult UpdateMovie(string movieId, [FromBody] Book updatedMovie)
+        public IActionResult UpdateMovie(string movieId, [FromBody] MovieTitle updatedMovie)
         {
             var existingMovie = _movieDbContext.movies_titles.Find(movieId);
 
