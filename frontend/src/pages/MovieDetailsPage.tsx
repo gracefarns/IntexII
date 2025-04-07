@@ -10,7 +10,9 @@ const MovieDetailPage: React.FC = () => {
 
   useEffect(() => {
     // Replace with your actual API endpoint for fetching a single movie
-    fetch(`https://localhost:5000/Movie/GetSingleMovie/${id}`)
+    fetch(
+      `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Movie/GetSingleMovie/${id}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setMovie(data);
