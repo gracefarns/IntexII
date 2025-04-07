@@ -1,0 +1,38 @@
+# -------------------------
+# .NET API Backend
+# -------------------------
+# Build output directories
+bin/
+obj/
+
+# Visual Studio specific files
+.vs/
+*.user
+*.suo
+
+# NuGet packages (if not checking in)
+packages/
+
+# -------------------------
+# React Vite Frontend
+# -------------------------
+# Node modules and build output
+node_modules/
+dist/
+
+# Environment configuration files (avoid checking in sensitive data)
+.env
+.env.local
+.env.*.local
+
+# Log files
+*.log
+
+# -------------------------
+# System files and miscellaneous
+# -------------------------
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
