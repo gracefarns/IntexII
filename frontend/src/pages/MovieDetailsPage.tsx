@@ -1,13 +1,11 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import Header from '../components/Header';
 import { useCart } from '../context/CartContext';
 import { CartItem } from '../types/CartItem';
 import { useState } from 'react';
-import CartSummary from '../components/CartSummary';
 import AuthorizeView, { AuthorizedUser } from '../components/AuthorizeView';
 import Logout from '../components/Logout';
 
-function ProductPage() {
+function MovieDetailsPage() {
   const navigate = useNavigate();
   const { rootbeerName, rootbeerId, currentRetailPrice } = useParams();
   const price = currentRetailPrice ? parseFloat(currentRetailPrice) : 0; // Convert to number or fallback to 0
@@ -38,7 +36,6 @@ function ProductPage() {
             Logout <AuthorizedUser value="email" />
           </Logout>
         </span>
-        <CartSummary />
         <h1>Want a cold refreshing {rootbeerName}?</h1>
         <h2>Only ${price.toFixed(2)}</h2>
         <div>
@@ -61,4 +58,4 @@ function ProductPage() {
     </>
   );
 }
-export default ProductPage;
+export default MovieDetailsPage;

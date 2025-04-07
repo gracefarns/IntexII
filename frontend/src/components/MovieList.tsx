@@ -2,11 +2,7 @@ import { useEffect, useState } from 'react';
 import { Rootbeer } from '../types/Rootbeer';
 import { useNavigate } from 'react-router-dom';
 
-function CompetitionList({
-  selectedContainers,
-}: {
-  selectedContainers: string[];
-}) {
+function MovieList({ selectedContainers }: { selectedContainers: string[] }) {
   const [competition, setCompetition] = useState<Rootbeer[]>([]);
   const [pageSize, setPageSize] = useState<number>(10);
   const [pageNum, setPageNum] = useState<number>(1);
@@ -115,4 +111,4 @@ function CompetitionList({
   );
 }
 
-export default CompetitionList;
+export default MovieList;
