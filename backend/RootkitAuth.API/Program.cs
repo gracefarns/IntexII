@@ -15,8 +15,8 @@ builder.Services.AddSwaggerGen();
 
 
 
-builder.Services.AddDbContext<CompetitionDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("CompetitionConnection")));
+builder.Services.AddDbContext<MovieDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("MovieConnection")));
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>  
     options.UseSqlite(builder.Configuration.GetConnectionString("IdentityConnection")));
@@ -59,6 +59,7 @@ app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 app.MapIdentityApi<IdentityUser>();
