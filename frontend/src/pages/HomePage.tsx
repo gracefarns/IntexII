@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import { useState } from 'react';
 import AuthorizeView, { AuthorizedUser } from '../components/AuthorizeView';
 import Logout from '../components/Logout';
-import MovieList from '../components/MovieList';
+//import MovieList from '../components/MovieList';
 
 function HomePage() {
   const [selectedContainers, setSelectedContainers] = useState<string[]>([]);
@@ -24,7 +24,7 @@ function HomePage() {
             />
           </div>
           <div className="col-md-9">
-            <MovieList selectedContainers={selectedContainers} />
+            {/* <MovieList selectedContainers={selectedContainers} /> */}
           </div>
         </div>
       </div>
