@@ -1,61 +1,31 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
-import { CartItem } from '../types/CartItem';
-import { useState } from 'react';
-import AuthorizeView, { AuthorizedUser } from '../components/AuthorizeView';
-import Logout from '../components/Logout';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import MovieDetail from '../components/MovieDetail';
+import { Movie } from '../types/Movie';
 
-function MovieDetailsPage() {
-  const navigate = useNavigate();
-  const { rootbeerName, rootbeerId, currentRetailPrice } = useParams();
-  const price = currentRetailPrice ? parseFloat(currentRetailPrice) : 0; // Convert to number or fallback to 0
-  if (!rootbeerName || !rootbeerId) {
-    throw new Error(
-      'Missing required route parameters: rootBeerName or rootBeerId'
-    );
-  }
-  const { addToCart } = useCart();
-  const [quantity, setQuantity] = useState<number>(1);
+const MovieDetailPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [movie, setMovie] = useState<Movie | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const handleAddToCart = () => {
-    const newItem: CartItem = {
-      rootbeerId,
-      rootbeerName,
-      price,
-      quantity,
-    };
-    addToCart(newItem);
-    navigate('/cart');
-  };
+  useEffect(() => {
+    // Replace with your actual API endpoint for fetching a single movie
+    fetch(`https://localhost:5000/Movie/GetSingleMovie/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMovie(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, [id]);
 
-  return (
-    <>
-      <AuthorizeView>
-        <span>
-          <Logout>
-            Logout <AuthorizedUser value="email" />
-          </Logout>
-        </span>
-        <h1>Want a cold refreshing {rootbeerName}?</h1>
-        <h2>Only ${price.toFixed(2)}</h2>
-        <div>
-          <select
-            name="quantity"
-            className="form-select form-select-lg mb-3"
-            onChange={(e) => setQuantity(Number(e.target.value))}
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-          <button onClick={handleAddToCart}>Add to Cart</button>
-        </div>
+  if (loading) return <div>Loading...</div>;
+  if (!movie) return <div>Movie not found.</div>;
 
-        <button onClick={() => navigate('/competition')}>Go Back</button>
-      </AuthorizeView>
-    </>
-  );
-}
-export default MovieDetailsPage;
+  return <MovieDetail movie={movie} />;
+};
+
+export default MovieDetailPage;

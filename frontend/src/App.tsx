@@ -18,10 +18,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/admin" element={<AdminPage />} />
-          <Route
-            path="/movie/:movieName/:movieId/:movieRating"
-            element={<MovieDetailsPage />}
-          />
+          <Route path="/moviedetails/:id" element={<MovieDetailsPage />} />
         </Routes>
       </Router>
     </>
