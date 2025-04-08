@@ -47,7 +47,7 @@ function LoginPage() {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, rememberMe: rememberme }),
+        body: JSON.stringify({ email, password }),
       });
 
       // Ensure we only parse JSON if there is content
