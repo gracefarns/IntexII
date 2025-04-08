@@ -41,16 +41,14 @@ function LoginPage() {
     const loginUrl = rememberme
       ? 'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/login?useCookies=true'
       : 'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/login?useSessionCookies=true';
-    
 
     try {
       const response = await fetch(loginUrl, {
         method: 'POST',
-        credentials: 'include', 
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, rememberMe: rememberme }),
       });
-
 
       // Ensure we only parse JSON if there is content
       let data = null;
@@ -63,7 +61,7 @@ function LoginPage() {
         throw new Error(data?.message || 'Invalid email or password.');
       }
 
-      navigate('/competition');
+      navigate('/moviepage');
     } catch (error: any) {
       setError(error.message || 'Error logging in.');
       console.error('Fetch attempt failed:', error);

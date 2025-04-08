@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import PrivacyPage from './pages/PrivacyPage';
 import AdminPage from './pages/AdminPage';
+import MoviePage from './pages/MoviePage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/moviedetails/:id" element={<MovieDetailPage />} />
+          <Route path="/moviepage" element={<MoviePage />} />
         </Routes>
       </Router>
     </>
