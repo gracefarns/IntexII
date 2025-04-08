@@ -8,7 +8,7 @@ namespace RootkitAuth.API.Data
         [Key]
         public int user_id { get; set; }
         [ForeignKey("show_id")]
-        public string? show_id { get; set; }
+        public int? show_id { get; set; }
         public MovieTitle? MovieTitle { get; set; }
 
         [ForeignKey("user_id")]

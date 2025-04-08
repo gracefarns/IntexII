@@ -5,7 +5,7 @@ namespace RootkitAuth.API.Data
     public class MovieTitle
     {
         [Key]
-        public string? show_id { get; set; }
+        public int? show_id { get; set; }
         public string? type { get; set; }
         public string? title { get; set; }
         public string? director { get; set; }
