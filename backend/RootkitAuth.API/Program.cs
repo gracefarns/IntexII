@@ -55,11 +55,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000", "https://ambitious-sky-052f4611e.6.azurestaticapps.net") // Replace with your frontend URL
+            policy.WithOrigins("http://localhost:3000", "https://ambitious-sky-052f4611e.6.azurestaticapps.net/register") // Replace with your frontend URL
                 .AllowCredentials() // Required to allow cookies
                 .AllowAnyMethod()
-                .AllowAnyHeader()
-                .WithExposedHeaders("Content-Security-Policy");
+                .AllowAnyHeader();
+                //.WithExposedHeaders("Content-Security-Policy");
         });
 });
 
@@ -75,8 +75,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();
