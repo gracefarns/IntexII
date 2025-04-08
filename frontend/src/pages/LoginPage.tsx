@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/identity.css';
 import '@fortawesome/fontawesome-free/css/all.css';
-import { API_URL } from '../config'; // adjust path if needed
 
 function LoginPage() {
   // state variables for email and passwords
@@ -40,8 +39,8 @@ function LoginPage() {
       return;
     }
     const loginUrl = rememberme
-      ? `${API_URL}/login?useCookies=true`
-      : `${API_URL}/login?useSessionCookies=true`;
+      ? 'https://ambitious-sky-052f4611e.6.azurestaticapps.net/login?useCookies=true'
+      : 'https://ambitious-sky-052f4611e.6.azurestaticapps.net/login?useSessionCookies=true';
     
 
     try {
