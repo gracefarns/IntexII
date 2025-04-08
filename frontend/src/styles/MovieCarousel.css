@@ -1,38 +1,49 @@
-/* Carousel Section */
 .carousel-section {
-  margin-top: 20px;
-  padding: 20px 0;
-  background-color: #fa0000; /* Ensures a dark background */
+  margin-top: 60px;
+  padding: 40px 0;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
 }
 
-/* Title */
 .carousel-title {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-  color: #fff; /* White text for visibility */
+  font-size: 2.4rem;
+  margin-bottom: 30px;
+  color: #000;
   text-align: center;
 }
 
-/* Carousel Container */
-.carousel {
-  display: flex;
-  overflow-x: scroll;
-  gap: 20px;
-  padding: 10px 40px;
-  scrollbar-width: none; /* For Firefox */
-  min-height: 320px; /* Ensures container height */
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  min-height: 550px;
 }
 
-/* Hide scrollbar in Webkit browsers */
+.carousel {
+  display: flex;
+  gap: 30px;
+  padding: 20px 80px;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  z-index: 1;
+  height: 100%;
+}
+
 .carousel::-webkit-scrollbar {
   display: none;
 }
 
-/* Carousel Item */
 .carousel-item {
   flex: 0 0 auto;
+  min-width: 333px;
+  height: 100%;
   position: relative;
-  transition: transform 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  background-color: rgba(255, 0, 0, 0.05); /* light red to test visibility */
 }
 
 .carousel-item:hover {
@@ -40,34 +51,91 @@
   z-index: 2;
 }
 
-/* Movie Poster */
 .movie-poster {
-  width: 200px;
-  height: 300px;
-  background-color: #5a7d7c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  color: #fff; /* White text */
+  width: 333px;
+  height: 500px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  display: block;
+  border: 2px solid red;
 }
 
-/* Journey Button */
+.movie-label {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+
 .journey-button {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 15px;
+  right: 15px;
   background-color: rgba(90, 125, 124, 0.9);
   color: #fff;
   border: none;
-  padding: 6px 12px;
-  font-size: 0.9rem;
+  padding: 8px 14px;
+  font-size: 1rem;
   border-radius: 4px;
   opacity: 0;
   transition: opacity 0.3s ease;
+  z-index: 2;
 }
 
 .carousel-item:hover .journey-button {
   opacity: 1;
+}
+
+/* Fade Overlays */
+.fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.fade-left {
+  left: 0;
+  background: linear-gradient(to right, white 0%, transparent 100%);
+}
+
+.fade-right {
+  right: 0;
+  background: linear-gradient(to left, white 0%, transparent 100%);
+}
+
+/* Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 5;
+  padding: 10px;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-arrow.left {
+  left: 10px;
+}
+
+.carousel-arrow.right {
+  right: 10px;
 }
