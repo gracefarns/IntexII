@@ -39,17 +39,18 @@ function LoginPage() {
       return;
     }
     const loginUrl = rememberme
-      ? 'https://ambitious-sky-052f4611e.6.azurestaticapps.net/login?useCookies=true'
-      : 'https://ambitious-sky-052f4611e.6.azurestaticapps.net/login?useSessionCookies=true';
+      ? 'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/login?useCookies=true'
+      : 'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/login?useSessionCookies=true';
     
 
     try {
       const response = await fetch(loginUrl, {
         method: 'POST',
-        credentials: 'include', // ✅ Ensures cookies are sent & received
+        credentials: 'include', 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
+
 
       // Ensure we only parse JSON if there is content
       let data = null;
