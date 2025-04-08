@@ -10,10 +10,10 @@ export default defineConfig({
       'Content-Security-Policy':
         "default-src 'self'; " +
         "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com; " +
-        "style-src 'self' 'unsafe-inline' fonts.googleapis.com https://accounts.google.com; " +
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com; " +
         "img-src 'self' data:; " +
         "frame-ancestors 'none'; " +
-        "font-src 'self' fonts.gstatic.com data:; " +
+        "font-src 'self' https://fonts.gstatic.com data:; " +
         "connect-src 'self' https://localhost:5000 https://accounts.google.com https://oauth2.googleapis.com https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net https://localhost:3000; " + // ✅ Allow OAuth token exchange
         "object-src 'none'; " +
         "base-uri 'self'; " +

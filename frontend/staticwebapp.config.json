@@ -1,9 +1,9 @@
 {
   "routes": [
     {
-      "route": "/*",
+      "route": "/**",
       "headers": {
-        "Content-Security-Policy": "default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; script-src 'self';"
+        "Content-Security-Policy": "default-src 'self'; connect-src 'self' https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net https://localhost:5000; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; object-src 'none';"
       }
     }
   ]
