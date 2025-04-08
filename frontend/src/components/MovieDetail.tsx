@@ -36,19 +36,34 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie }) => {
           boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
         }}
       >
-        {/* Movie Banner/Image Placeholder */}
+        {/* Movie Banner/Image with actual <img> */}
         <div
           className="movie-image"
           style={{
             width: '100%',
             height: '400px',
             backgroundColor: '#333',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             position: 'relative',
+            overflow: 'hidden',
           }}
         >
-          {/* Dark gradient overlay for better text visibility */}
+          {/* Image from Azure Blob */}
+          <img
+            src={`https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(
+              movie.title
+            )}.jpg`}
+            alt={`${movie.title} Poster`}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+            onError={(e) => {
+              e.currentTarget.src = '/placeholder.jpg'; // Local fallback image
+            }}
+          />
+
+          {/* Dark gradient overlay for text visibility */}
           <div
             style={{
               position: 'absolute',
