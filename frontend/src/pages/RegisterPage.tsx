@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from '../config';
 
 function Register() {
   // state variables for email and passwords
@@ -38,7 +37,7 @@ function Register() {
       // clear error message
       setError('');
       // post data to the /register api
-      fetch(`${API_URL}/register`, {
+      fetch('https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,18 +47,20 @@ function Register() {
           password,
         }),
       })
-        .then(async (response) => {
-          if (response.ok) {
-            navigate('/login');
-          } else {
-            const err = await response.json();
-            setError(err.message || 'Error registering.');
+      .then(async (response) => {
+        if (response.ok) {
+          navigate('/login');
+        } else {
+          let err;
+          try {
+            err = await response.json();
+          } catch {
+            err = {};
           }
-        })
-        .catch((error) => {
-          console.error(error);
-          setError('Network error. Please try again.');
-        });
+          setError(err.message || 'Error registering.');
+        }
+      })
+      
       
     }
   };

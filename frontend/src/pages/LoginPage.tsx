@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/identity.css';
 import '@fortawesome/fontawesome-free/css/all.css';
-import { API_URL } from '../config'; // adjust path if needed
 
 function LoginPage() {
   // state variables for email and passwords
@@ -40,17 +39,18 @@ function LoginPage() {
       return;
     }
     const loginUrl = rememberme
-      ? `${API_URL}/login?useCookies=true`
-      : `${API_URL}/login?useSessionCookies=true`;
+      ? 'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/login?useCookies=true'
+      : 'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/login?useSessionCookies=true';
     
 
     try {
       const response = await fetch(loginUrl, {
         method: 'POST',
-        credentials: 'include', // ✅ Ensures cookies are sent & received
+        credentials: 'include', 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
+
 
       // Ensure we only parse JSON if there is content
       let data = null;
