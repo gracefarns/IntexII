@@ -71,6 +71,12 @@ export const updateMovie = async (
       body: JSON.stringify(updatedMovie),
     });
 
+    if (!response.ok) {
+      const errorText = await response.text(); // debugging
+      console.error('Update failed:', response.status, errorText);
+      throw new Error(`Update failed with status ${response.status}`);
+    }
+
     return await response.json();
   } catch (error) {
     console.error('Error updating movie:', error);
