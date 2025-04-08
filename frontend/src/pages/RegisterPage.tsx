@@ -37,7 +37,7 @@ function Register() {
       // clear error message
       setError('');
       // post data to the /register api
-      fetch(`https://ambitious-sky-052f4611e.6.azurestaticapps.net/register`, {
+      fetch('https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
