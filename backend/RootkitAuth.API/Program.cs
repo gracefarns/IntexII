@@ -106,30 +106,7 @@ app.MapGet("/pingauth", (ClaimsPrincipal user) =>
     return Results.Json(new { email = email }); // Return as JSON
 }).RequireAuthorization();
 
-using (var scope = app.Services.CreateScope())
-{
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-    var email = "Grace@gmail.com";
-    var password = "GraceFarns32!";
-
-    var existingUser = await userManager.FindByEmailAsync(email);
-    if (existingUser == null)
-    {
-        var user = new IdentityUser { UserName = email, Email = email };
-        var result = await userManager.CreateAsync(user, password);
-        if (result.Succeeded)
-        {
-            Console.WriteLine("Seed user created.");
-        }
-        else
-        {
-            Console.WriteLine("Error creating seed user:");
-            foreach (var error in result.Errors)
-                Console.WriteLine($" - {error.Description}");
-        }
-    }
-}
 
 
 app.Run();
