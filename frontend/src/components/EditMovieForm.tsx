@@ -22,6 +22,7 @@ const EditMovieForm = ({ movie, onSuccess, onCancel }: EditMovieFormProps) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
+      console.log(formData);
       await updateMovie(formData.show_id, formData);
       onSuccess();
     } catch (error) {
