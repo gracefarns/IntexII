@@ -18,7 +18,10 @@ export const fetchMovies = async (
       .join('&');
 
     const response = await fetch(
-      `${API_URL}/Movie/GetMovies?pageSize=${pageSize}&pageNum=${pageNum}${selectedCategories.length ? `&${categoryParams}` : ''}`
+      `${API_URL}/Movie/GetMovies?pageSize=${pageSize}&pageNum=${pageNum}${selectedCategories.length ? `&${categoryParams}` : ''}`,
+      {
+        credentials: 'include',
+      }
     );
 
     if (!response.ok) {

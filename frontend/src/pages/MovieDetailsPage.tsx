@@ -11,7 +11,11 @@ const MovieDetailPage: React.FC = () => {
   useEffect(() => {
     // Replace with your actual API endpoint for fetching a single movie
     fetch(
-      `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Movie/GetSingleMovie/${id}`
+      `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Movie/GetSingleMovie/${id}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
     )
       .then((res) => res.json())
       .then((data) => {

@@ -10,61 +10,144 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie }) => {
     <div
       className="movie-detail-container"
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '20px',
-        backgroundColor: '#141414',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.75)',
+        backdropFilter: 'blur(8px)',
         color: '#fff',
-        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 1000,
+        overflow: 'auto',
       }}
     >
-      {/* Movie Banner/Image Placeholder */}
+      {/* Content column - 60% width centered */}
       <div
-        className="movie-image"
         style={{
-          width: '100%',
-          height: '500px',
-          backgroundColor: '#333',
-          marginBottom: '20px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '1.5rem',
+          width: '60%',
+          maxHeight: '90vh',
+          backgroundColor: '#181818',
+          borderRadius: '8px',
+          overflow: 'auto',
+          boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
         }}
       >
-        {/* Replace this with an <img> tag when ready */}
-        Movie Image Placeholder
-      </div>
+        {/* Movie Banner/Image Placeholder */}
+        <div
+          className="movie-image"
+          style={{
+            width: '100%',
+            height: '400px',
+            backgroundColor: '#333',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            position: 'relative',
+          }}
+        >
+          {/* Dark gradient overlay for better text visibility */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: '100%',
+              height: '200px',
+              background: 'linear-gradient(to top, #181818, transparent)',
+            }}
+          />
 
-      {/* Movie Information */}
-      <div
-        className="movie-info"
-        style={{ maxWidth: '800px', textAlign: 'left' }}
-      >
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>
-          {movie.title}
-        </h1>
-        <p style={{ fontSize: '1.2rem', marginBottom: '20px' }}>
-          {movie.description}
-        </p>
-        <div style={{ marginBottom: '10px' }}>
-          <strong>Rating:</strong> {movie.rating}
+          {/* Movie title positioned at bottom of banner */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '20px',
+              left: '20px',
+              right: '20px',
+            }}
+          >
+            <h1
+              style={{
+                fontSize: '2.5rem',
+                fontWeight: 'bold',
+                marginBottom: '10px',
+                textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+              }}
+            >
+              {movie.title}
+            </h1>
+          </div>
         </div>
-        <div style={{ marginBottom: '10px' }}>
-          <strong>Release Year:</strong> {movie.release_year}
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <strong>Director:</strong> {movie.director}
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <strong>Cast:</strong> {movie.cast}
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <strong>Duration:</strong> {movie.duration}
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <strong>Country:</strong> {movie.country}
+
+        {/* Movie Information */}
+        <div
+          className="movie-info"
+          style={{
+            padding: '20px 30px 40px 30px',
+            textAlign: 'left',
+          }}
+        >
+          {/* Quick facts row */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '15px',
+              marginBottom: '20px',
+              fontSize: '0.9rem',
+            }}
+          >
+            <span style={{ color: '#46d369' }}>{movie.rating}</span>
+            <span>{movie.release_year}</span>
+            <span>{movie.duration}</span>
+            <span
+              style={{
+                border: '1px solid rgba(255, 255, 255, 0.4)',
+                padding: '1px 5px',
+                fontSize: '0.8rem',
+              }}
+            >
+              HD
+            </span>
+          </div>
+
+          {/* Description */}
+          <p
+            style={{
+              fontSize: '1.1rem',
+              marginBottom: '25px',
+              lineHeight: '1.5',
+              color: '#d2d2d2',
+            }}
+          >
+            {movie.description}
+          </p>
+
+          {/* Details with flexbox layout */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '15px 30px',
+              fontSize: '0.95rem',
+            }}
+          >
+            <div style={{ marginBottom: '10px' }}>
+              <span style={{ color: '#777' }}>Director: </span>
+              <span>{movie.director}</span>
+            </div>
+            <div style={{ marginBottom: '10px' }}>
+              <span style={{ color: '#777' }}>Cast: </span>
+              <span>{movie.cast}</span>
+            </div>
+            <div style={{ marginBottom: '10px' }}>
+              <span style={{ color: '#777' }}>Country: </span>
+              <span>{movie.country}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
