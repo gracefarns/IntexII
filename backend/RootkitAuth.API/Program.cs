@@ -108,4 +108,8 @@ app.MapGet("/pingauth", (ClaimsPrincipal user) =>
 
 
 
+
 app.Run();
+
+
+
