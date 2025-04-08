@@ -1,5 +1,5 @@
 export interface Movie {
-  show_id: string;
+  show_id: number;
   type: string;
   title: string;
   director: string;

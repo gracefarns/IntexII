@@ -32,7 +32,7 @@ const AdminPage = () => {
     loadMovies();
   }, [pageSize, pageNum]);
 
-  const handleDelete = async (show_id: string) => {
+  const handleDelete = async (show_id: number) => {
     const confirmDelete = window.confirm(
       'Are you sure you want to delete this movie?'
     );
