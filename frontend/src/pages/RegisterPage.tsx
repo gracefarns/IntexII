@@ -37,7 +37,7 @@ function Register() {
       // clear error message
       setError('');
       // post data to the /register api
-      fetch('https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net', {
+      fetch('https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
