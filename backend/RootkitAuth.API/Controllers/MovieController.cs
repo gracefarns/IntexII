@@ -55,7 +55,7 @@ namespace RootkitAuth.API.Controllers
         }
 
         [HttpGet("GetSingleMovie/{id}")]
-        public IActionResult GetSingleMovie(string id)
+        public IActionResult GetSingleMovie(int id)
         {
             var movie = _movieDbContext.movies_titles
                 .First(m => m.show_id == id);
@@ -77,7 +77,7 @@ namespace RootkitAuth.API.Controllers
         }
 
         [HttpPut("UpdateMovie/{movieId}")]
-        public IActionResult UpdateMovie(string movieId, [FromBody] MovieTitle updatedMovie)
+        public IActionResult UpdateMovie(int movieId, [FromBody] MovieTitle updatedMovie)
         {
             var existingMovie = _movieDbContext.movies_titles.Find(movieId);
 
@@ -131,7 +131,7 @@ namespace RootkitAuth.API.Controllers
         }
 
         [HttpDelete("DeleteMovie/{movieId}")]
-        public IActionResult DeleteMovie(string movieId)
+        public IActionResult DeleteMovie(int movieId)
         {
             var movie = _movieDbContext.movies_titles.Find(movieId);
 
