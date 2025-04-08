@@ -8,6 +8,14 @@ DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
+builder.Services.AddDbContext<MovieRecDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("RecommendationConnection"))
+        .EnableSensitiveDataLogging()
+        .LogTo(Console.WriteLine, LogLevel.Information));
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -58,8 +66,8 @@ builder.Services.AddCors(options =>
             policy.WithOrigins("http://localhost:3000", "https://ambitious-sky-052f4611e.6.azurestaticapps.net") // Replace with your frontend URL
                 .AllowCredentials() // Required to allow cookies
                 .AllowAnyMethod()
-                .AllowAnyHeader()
-                .WithExposedHeaders("Content-Security-Policy");
+                .AllowAnyHeader();
+                //.WithExposedHeaders("Content-Security-Policy");
         });
 });
 
@@ -75,8 +83,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();

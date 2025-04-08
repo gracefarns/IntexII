@@ -13,9 +13,9 @@ namespace RootkitAuth.API.Controllers
     public class MovieController : ControllerBase
     {
         private MovieDbContext _movieDbContext;
-        public MovieController(MovieDbContext temp)
+        public MovieController(MovieDbContext movieDbContext)
         {
-            _movieDbContext = temp;
+            _movieDbContext = movieDbContext;
         }
         [HttpGet("GetMovies")]
 
@@ -144,33 +144,5 @@ namespace RootkitAuth.API.Controllers
 
             return NoContent();
         }
-        
-        
-        private readonly MovieRecDbContext _movieRecDbContext;
-
-        // Update the constructor to include the new DbContext
-        public MovieController(MovieDbContext movieDbContext, MovieRecDbContext movieRecDbContext)
-        {
-            _movieDbContext = movieDbContext;
-            _movieRecDbContext = movieRecDbContext;
-        }
-
-        [HttpGet("GetMovieRecommendations/{sourceId}")]
-        public IActionResult GetMovieRecommendations(int sourceId)
-        {
-            var recommendations = _movieRecDbContext.movie_recommendations
-                .Where(r => r.source_show_id == sourceId)
-                .OrderBy(r => r.rec_rank)
-                .Take(10)
-                .ToList();
-
-            if (recommendations.Count == 0)
-            {
-                return NotFound(new { message = "No recommendations found for this movie" });
-            }
-
-            return Ok(recommendations);
-        }
-
     }
 }
