@@ -59,7 +59,7 @@ function Register() {
           }
           setError(err.message || 'Error registering.');
         }
-      })
+        })
       
       
     }
