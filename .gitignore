@@ -36,3 +36,10 @@ dist/
 
 # Windows
 Thumbs.db
+
+# Ignore Windows system folders
+AppData/
+*.log
+*.tmp
+*.bak
+*.cache

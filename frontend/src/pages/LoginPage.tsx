@@ -38,18 +38,19 @@ function LoginPage() {
       setError('Please fill in all fields.');
       return;
     }
-
     const loginUrl = rememberme
-      ? 'https://localhost:5000/login?useCookies=true'
-      : 'https://localhost:5000/login?useSessionCookies=true';
+      ? 'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/login?useCookies=true'
+      : 'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/login?useSessionCookies=true';
+    
 
     try {
       const response = await fetch(loginUrl, {
         method: 'POST',
-        credentials: 'include', // ✅ Ensures cookies are sent & received
+        credentials: 'include', 
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, rememberMe: rememberme }),
       });
+
 
       // Ensure we only parse JSON if there is content
       let data = null;

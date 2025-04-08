@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RootkitAuth.API.Data;
 using RootkitAuth.API.Services;
 
+DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()  
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier;
@@ -43,6 +45,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.Name = ".AspNetCore.Identity.Application";
     options.LoginPath = "/login";
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.ExpireTimeSpan = TimeSpan.FromDays(30); // Cookie lasts 30 days
+    options.SlidingExpiration = true; // Resets expiration on activity
 });
 
 builder.Services.AddCors(options =>
@@ -50,7 +54,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000", "https://intex-frontend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net") // Replace with your frontend URL
+            policy.WithOrigins("http://localhost:3000", "https://ambitious-sky-052f4611e.6.azurestaticapps.net") // Replace with your frontend URL
                 .AllowCredentials() // Required to allow cookies
                 .AllowAnyMethod()
                 .AllowAnyHeader();
@@ -101,5 +105,7 @@ app.MapGet("/pingauth", (ClaimsPrincipal user) =>
     var email = user.FindFirstValue(ClaimTypes.Email) ?? "unknown@example.com"; // Ensure it's never null
     return Results.Json(new { email = email }); // Return as JSON
 }).RequireAuthorization();
+
+
 
 app.Run();

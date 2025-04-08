@@ -37,28 +37,31 @@ function Register() {
       // clear error message
       setError('');
       // post data to the /register api
-      fetch('https://localhost:5000/register', {
+      fetch('https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
-          password: password,
+          email,
+          password,
         }),
       })
-        //.then((response) => response.json())
-        .then((data) => {
-          // handle success or error from the server
-          console.log(data);
-          if (data.ok) setError('Successful registration. Please log in.');
-          else setError('Error registering.');
-        })
-        .catch((error) => {
-          // handle network error
-          console.error(error);
-          setError('Error registering.');
-        });
+      .then(async (response) => {
+        if (response.ok) {
+          navigate('/login');
+        } else {
+          let err;
+          try {
+            err = await response.json();
+          } catch {
+            err = {};
+          }
+          setError(err.message || 'Error registering.');
+        }
+      })
+      
+      
     }
   };
 
