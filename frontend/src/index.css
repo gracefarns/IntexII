@@ -65,3 +65,22 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+/* Add this to your global CSS file */
+.movie-recommendation-link {
+  text-decoration: none;
+}
+
+.movie-recommendation-card {
+  position: relative;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    z-index 0.3s ease;
+}
+
+.movie-recommendation-card:hover {
+  transform: scale(1.4);
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
