@@ -58,7 +58,7 @@ namespace RootkitAuth.API.Controllers
         public IActionResult GetSingleMovie(int id)
         {
             var movie = _movieDbContext.movies_titles
-                .First(m => m.show_id == id);
+                .Find(id);
 
             if (movie == null)
             {
