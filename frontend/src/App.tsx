@@ -1,7 +1,7 @@
 import './App.css';
 import HomePage from './pages/HomePage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MovieDetailPage from './pages/MovieDetailsPage';
+import MovieDetailPage from './pages/MovieDetailPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import PrivacyPage from './pages/PrivacyPage';
@@ -19,7 +19,10 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="/moviedetails/:id" element={<MovieDetailPage />} />
+          <Route
+            path="/moviedetails/${recommendation.rec_show_id}"
+            element={<MovieDetailPage />}
+          />
           <Route path="/moviepage" element={<MoviePage />} />
         </Routes>
       </Router>

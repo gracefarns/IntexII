@@ -4,7 +4,7 @@ import MovieDetail from '../components/MovieDetail';
 import MovieRecommendationCarousel from '../components/MovieRecommendationCarousel';
 import { Movie } from '../types/Movie';
 import { SimilarMovies } from '../types/SimilarMovies';
-import './MovieDetailPage.css';
+import '../styles/MovieDetailPage.css';
 
 const MovieDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
