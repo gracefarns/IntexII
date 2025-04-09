@@ -12,7 +12,7 @@ const MovieRecommendation: React.FC<MovieRecommendationProps> = ({
 }) => {
   return (
     <Link
-      to={`/movie/${recommendation.rec_show_id}`}
+      to={`/moviedetails/${recommendation.rec_show_id}`}
       className="movie-recommendation-link"
     >
       <div

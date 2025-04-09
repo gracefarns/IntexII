@@ -9,7 +9,7 @@ namespace RootkitAuth.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    // [Authorize]
+    [Authorize]
     public class MovieController : ControllerBase
     {
         private MovieDbContext _movieDbContext;
@@ -84,6 +84,7 @@ namespace RootkitAuth.API.Controllers
         }
 
         [HttpPost("AddMovie")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult AddMovie([FromBody] MovieTitle newMovie)
         {
             _movieDbContext.movies_titles.Add(newMovie);
@@ -92,6 +93,7 @@ namespace RootkitAuth.API.Controllers
         }
 
         [HttpPut("UpdateMovie/{movieId}")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult UpdateMovie(int movieId, [FromBody] MovieTitle updatedMovie)
         {
             Console.WriteLine($"Looking for movie ID: {movieId}");
@@ -147,6 +149,7 @@ namespace RootkitAuth.API.Controllers
         }
 
         [HttpDelete("DeleteMovie/{movieId}")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult DeleteMovie(int movieId)
         {
             var movie = _movieDbContext.movies_titles.Find(movieId);
