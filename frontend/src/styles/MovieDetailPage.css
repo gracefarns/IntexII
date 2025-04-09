@@ -2,7 +2,7 @@
 .movie-detail-page {
   background-color: #1a1a1a;
   color: #fff;
-  min-height: 100vh;
+  min-height: 80vh;
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   overflow-x: hidden;
   width: 100%;
@@ -31,7 +31,7 @@
 .movie-hero {
   position: relative;
   height: auto;
-  min-height: 700px;
+  min-height: 100px;
   background-color: #0d0d0d;
   overflow: hidden;
 }
@@ -70,11 +70,11 @@
   z-index: 3;
   max-width: 1400px;
   margin: 0 auto; /* Keeps the hero content centered on wider screens */
-  padding: 80px 60px;
+  padding: 20px 15px;
   display: flex;
   flex-direction: column; /* Stack elements vertically instead of side by side */
   align-items: flex-start; /* Left-align children instead of stretching or centering */
-  gap: 20px; /* Spacing between the poster and the text */
+  gap: 10px; /* Spacing between the poster and the text */
 }
 
 /* Fixed poster sizing and alignment */
@@ -102,8 +102,8 @@
 }
 
 .poster-image {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover;
   object-position: center;
 }
@@ -122,7 +122,7 @@
 }
 
 .movie-title {
-  font-size: 90px;
+  font-size: 35px !important;
   font-weight: 800;
   margin: 0 0 20px;
   line-height: 1.5;
@@ -256,7 +256,7 @@
 }
 
 .details-title {
-  font-size: 28px;
+  font-size: 22px !important;
   margin-bottom: 0px;
   font-weight: 700;
   color: #f2f2f2;
@@ -275,13 +275,13 @@
 .details-item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
 }
 
 .details-label {
   font-size: 14px;
   color: #999;
-  margin-bottom: 6px;
+  margin-bottom: 2px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -294,7 +294,7 @@
 
 /* Recommendations section */
 .recommendations-section {
-  padding: 60px;
+  padding: 5px;
   background-color: #1a1a1a;
 }
 
@@ -304,9 +304,17 @@
 }
 
 .recommendation-title {
-  font-size: 28px;
-  margin-bottom: 30px;
+  font-size: 17px !important;
+  margin-bottom: 5px !important;
   font-weight: 700;
+  color: #f2f2f2;
+}
+
+.sigma-title {
+  font-size: 28px !important;
+  margin-bottom: 5px !important;
+  font-weight: 700;
+  padding-left: 25px;
   color: #f2f2f2;
 }
 
@@ -477,7 +485,7 @@
 /* Responsive adjustments */
 @media (max-width: 1280px) {
   .hero-content {
-    padding: 60px 40px;
+    padding: 30px 20px;
   }
 
   .movie-title {
@@ -485,8 +493,8 @@
   }
 
   .movie-poster {
-    width: 280px;
-    height: 400px;
+    width: 750px;
+    height: 1050px;
   }
 
   .movie-details-section,
@@ -495,7 +503,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1048px) {
   .hero-content {
     padding: 40px 30px;
     flex-direction: column;
@@ -512,8 +520,8 @@
   }
 
   .movie-poster {
-    width: 240px;
-    height: 360px;
+    width: 750px;
+    height: 1050px;
   }
 
   .poster-initial {
@@ -530,13 +538,13 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1048px) {
   .movie-hero {
     min-height: 600px;
   }
 
   .hero-content {
-    padding: 40px 20px;
+    padding: 10px 5px;
   }
 
   .recommendation-carousel-wrapper {
@@ -598,8 +606,8 @@
   }
 
   .movie-poster {
-    width: 180px;
-    height: 270px;
+    width: 750px;
+    height: 1050px;
   }
 
   .poster-initial {

@@ -299,7 +299,7 @@ const MovieDetailPage: React.FC = () => {
           </div>
         ) : recommendations.length > 0 ? (
           <div className="recommendation-carousel-container">
-            <h2 className="recommendation-title">More Like This...</h2>
+            <h2 className="sigma-title">More Like This...</h2>
             <div className="recommendation-carousel-wrapper">
               {/* Left arrow */}
               <button
