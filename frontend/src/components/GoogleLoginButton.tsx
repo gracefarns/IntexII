@@ -1,6 +1,13 @@
 import { GoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
 
 const GoogleLoginButton = () => {
+  const navigate = useNavigate();
+
+  function setUser(data: any) {
+    localStorage.setItem('user', JSON.stringify(data));
+  }
+
   return (
     <GoogleLogin
       onSuccess={credentialResponse => {
@@ -14,8 +21,9 @@ const GoogleLoginButton = () => {
         })
         .then(res => res.json())
         .then(data => {
-          console.log('User info from backend:', data);
-          // Optionally store user info or redirect
+          setUser(data);
+          navigate('/moviepage');
+          //redirect
         });
       }}
       onError={() => {
