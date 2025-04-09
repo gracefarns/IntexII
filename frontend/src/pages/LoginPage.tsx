@@ -100,20 +100,6 @@ function LoginPage() {
                 <label htmlFor="password">Password</label>
               </div>
 
-              <div className="form-check mb-3">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="rememberme"
-                  name="rememberme"
-                  checked={rememberme}
-                  onChange={handleChange}
-                />
-                <label className="form-check-label" htmlFor="rememberme">
-                  Remember password
-                </label>
-              </div>
               <div className="d-grid mb-2">
                 <button
                   className="btn btn-primary btn-login text-uppercase fw-bold"
@@ -132,13 +118,14 @@ function LoginPage() {
               </div>
               <hr className="my-4" />
               <div className="d-grid mb-2">
-                <button
-                  className="btn btn-google btn-login text-uppercase fw-bold"
-                  type="button"
-                >
-                  <i className="fa-brands fa-google me-2"></i> Sign in with
-                  Google
-                </button>
+              <button
+                className="btn btn-google btn-login text-uppercase fw-bold"
+                type="button"
+                onClick={() => window.location.href = "/account/externallogin?provider=Google"}
+              >
+                <i className="fa-brands fa-google me-2"></i> Sign in with Google
+              </button>
+
               </div>
               <div className="d-grid mb-2">
                 <button

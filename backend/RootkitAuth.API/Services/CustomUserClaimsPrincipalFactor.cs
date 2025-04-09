@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
+
 namespace RootkitAuth.API.Services;
 
 public class CustomUserClaimsPrincipalFactory : UserClaimsPrincipalFactory<IdentityUser>
