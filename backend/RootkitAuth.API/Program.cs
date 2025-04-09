@@ -33,15 +33,15 @@ builder.Services.AddDbContext<MovieRecDbContext>(options =>
 
 
 // Allow google sign in
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie()
-    .AddGoogle(options =>
-    {
-        options.ClientId = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID")
-            ?? throw new InvalidOperationException("Missing GOOGLE_CLIENT_ID");
-        options.ClientSecret = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_SECRET")
-            ?? throw new InvalidOperationException("Missing GOOGLE_CLIENT_SECRET");
-    });
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie()
+//    .AddGoogle(options =>
+//    {
+//        options.ClientId = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID")
+//            ?? throw new InvalidOperationException("Missing GOOGLE_CLIENT_ID");
+//        options.ClientSecret = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_SECRET")
+//            ?? throw new InvalidOperationException("Missing GOOGLE_CLIENT_SECRET");
+//    });
 
 
 
