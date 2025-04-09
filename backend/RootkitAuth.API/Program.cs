@@ -25,6 +25,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MovieDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MovieConnection")));
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
 
@@ -33,18 +35,16 @@ builder.Services.AddDbContext<MovieRecDbContext>(options =>
 
 
 // Allow google sign in
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-})
-.AddCookie() // <-- This is important
-.AddGoogle(options =>
-{
-    options.ClientId = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID") ?? throw new InvalidOperationException("Missing GOOGLE_CLIENT_ID");
-    options.ClientSecret = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_SECRET") ?? throw new InvalidOperationException("Missing GOOGLE_CLIENT_SECRET");
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie()
+    .AddGoogle(options =>
+    {
+        options.ClientId = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID")
+            ?? throw new InvalidOperationException("Missing GOOGLE_CLIENT_ID");
+        options.ClientSecret = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_SECRET")
+            ?? throw new InvalidOperationException("Missing GOOGLE_CLIENT_SECRET");
+    });
 
-});
 
 
 
@@ -59,6 +59,13 @@ builder.Services.Configure<IdentityOptions>(options =>
 {
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier;
     options.ClaimsIdentity.UserNameClaimType = ClaimTypes.Email; // Ensure email is stored in claims
+    // Password settings: only require minimum length
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 12;
+    options.Password.RequiredUniqueChars = 0;
 });
 
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<IdentityUser>, CustomUserClaimsPrincipalFactory>();
@@ -91,17 +98,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddSingleton<IEmailSender<IdentityUser>, NoOpEmailSender<IdentityUser>>();
 
 
-
 var app = builder.Build();
-
-
-// remove later
-app.Use(async (context, next) =>
-{
-    Console.WriteLine($"Incoming request: {context.Request.Method} {context.Request.Path}");
-    await next();
-});
-
 
 
 
@@ -153,7 +150,7 @@ app.MapGet("/pingauth", (HttpContext context, ClaimsPrincipal user) =>
 
     return Results.Json(new { email = email });
 }).RequireAuthorization()
-.RequireCors("AllowFrontend");;
+.RequireCors("AllowFrontend");
 
 app.Run();
 
