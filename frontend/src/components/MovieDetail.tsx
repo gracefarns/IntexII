@@ -1,167 +1,116 @@
 import React from 'react';
 import { Movie } from '../types/Movie';
+import '../styles/MovieDetail.css';
 
 interface MovieDetailProps {
   movie: Movie;
 }
 
 const MovieDetail: React.FC<MovieDetailProps> = ({ movie }) => {
+  // Function to determine the most prominent genre
+  const getPrimaryGenre = (movie: Movie): string => {
+    const genreMap: Record<string, number> = {
+      Action: movie.action,
+      Adventure: movie.adventure,
+      Anime: movie.anime,
+      'British Docuseries': movie.british_Docuseries,
+      Children: movie.children,
+      Comedies: movie.comedies,
+      'Comedies Dramas': movie.comedies_Dramas,
+      'Comedies International': movie.comedies_International,
+      'Comedies Romantic': movie.comedies_Romantic,
+      'Crime TV': movie.crime_TV,
+      Documentaries: movie.documentaries,
+      'Documentaries International': movie.documentaries_International,
+      Docuseries: movie.docuseries,
+      Dramas: movie.dramas,
+      'Dramas International': movie.dramas_International,
+      'Dramas Romantic': movie.dramas_Romantic,
+      Family: movie.family,
+      Fantasy: movie.fantasy,
+      Horror: movie.horror,
+      'International Thrillers': movie.international_Thrillers,
+      'International Romantic Dramas TV':
+        movie.international_Romantic_Dramas_TV,
+      'Kids TV': movie.kids_TV,
+      'Language TV': movie.language_TV,
+      Musicals: movie.musicals,
+      'Nature TV': movie.nature_TV,
+      'Reality TV': movie.reality_TV,
+      Spirituality: movie.spirituality,
+      'TV Action': movie.tV_Action,
+      'TV Comedies': movie.tV_Comedies,
+      'TV Dramas': movie.tV_Dramas,
+      'Talk Shows': movie.talk_Shows,
+      Thrillers: movie.thrillers,
+    };
+
+    let maxGenre = 'Unknown';
+    let maxValue = 0;
+
+    for (const [genre, value] of Object.entries(genreMap)) {
+      if (value > maxValue) {
+        maxValue = value;
+        maxGenre = genre;
+      }
+    }
+
+    return maxGenre;
+  };
+
+  const primaryGenre = getPrimaryGenre(movie);
+
   return (
-    <div
-      className="movie-detail-container"
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.75)',
-        backdropFilter: 'blur(8px)',
-        color: '#fff',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 1000,
-        overflow: 'auto',
-      }}
-    >
-      {/* Content column - 60% width centered */}
-      <div
-        style={{
-          width: '60%',
-          maxHeight: '90vh',
-          backgroundColor: '#181818',
-          borderRadius: '8px',
-          overflow: 'auto',
-          boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
-        }}
-      >
-        {/* Movie Banner/Image with actual <img> */}
-        <div
-          className="movie-image"
-          style={{
-            width: '100%',
-            height: '400px',
-            backgroundColor: '#333',
-            position: 'relative',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Image from Azure Blob */}
-          <img
-            src={`https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(
-              movie.title
-            )}.jpg`}
-            alt={`${movie.title} Poster`}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-            onError={(e) => {
-              e.currentTarget.src = '/placeholder.jpg'; // Local fallback image
-            }}
-          />
+    <div className="movie-detail">
+      <div className="movie-header">
+        <div className="movie-poster">{movie.title.charAt(0)}</div>
 
-          {/* Dark gradient overlay for text visibility */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              width: '100%',
-              height: '200px',
-              background: 'linear-gradient(to top, #181818, transparent)',
-            }}
-          />
+        <div className="movie-info">
+          <h1 className="movie-title">{movie.title}</h1>
 
-          {/* Movie title positioned at bottom of banner */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '20px',
-              left: '20px',
-              right: '20px',
-            }}
-          >
-            <h1
-              style={{
-                fontSize: '2.5rem',
-                fontWeight: 'bold',
-                marginBottom: '10px',
-                textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
-              }}
-            >
-              {movie.title}
-            </h1>
+          <div className="movie-meta">
+            <div className="movie-meta-item">{movie.release_year}</div>
+            <div className="movie-meta-item">{primaryGenre}</div>
+            <div className="movie-meta-item">{movie.rating}</div>
+            <div className="movie-meta-item">{movie.duration}</div>
+          </div>
+
+          <div className="movie-rating">
+            <div className="rating-value">
+              {/* Using a placeholder for rating */}
+              {Math.floor(Math.random() * 3) + 7}
+            </div>
+            <div className="rating-text">Rating</div>
           </div>
         </div>
+      </div>
 
-        {/* Movie Information */}
-        <div
-          className="movie-info"
-          style={{
-            padding: '20px 30px 40px 30px',
-            textAlign: 'left',
-          }}
-        >
-          {/* Quick facts row */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '15px',
-              marginBottom: '20px',
-              fontSize: '0.9rem',
-            }}
-          >
-            <span style={{ color: '#46d369' }}>{movie.rating}</span>
-            <span>{movie.release_year}</span>
-            <span>{movie.duration}</span>
-            <span
-              style={{
-                border: '1px solid rgba(255, 255, 255, 0.4)',
-                padding: '1px 5px',
-                fontSize: '0.8rem',
-              }}
-            >
-              HD
-            </span>
+      <div className="movie-description">
+        {movie.description || 'No description available.'}
+      </div>
+
+      <div className="movie-details-section">
+        <h2 className="details-title">Additional Information</h2>
+        <div className="details-list">
+          <div className="details-item">
+            <div className="details-label">Director:</div>
+            <div className="details-value">
+              {movie.director || 'Not available'}
+            </div>
           </div>
-
-          {/* Description */}
-          <p
-            style={{
-              fontSize: '1.1rem',
-              marginBottom: '25px',
-              lineHeight: '1.5',
-              color: '#d2d2d2',
-            }}
-          >
-            {movie.description}
-          </p>
-
-          {/* Details with flexbox layout */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '15px 30px',
-              fontSize: '0.95rem',
-            }}
-          >
-            <div style={{ marginBottom: '10px' }}>
-              <span style={{ color: '#777' }}>Director: </span>
-              <span>{movie.director}</span>
+          <div className="details-item">
+            <div className="details-label">Cast:</div>
+            <div className="details-value">{movie.cast || 'Not available'}</div>
+          </div>
+          <div className="details-item">
+            <div className="details-label">Country:</div>
+            <div className="details-value">
+              {movie.country || 'Not available'}
             </div>
-            <div style={{ marginBottom: '10px' }}>
-              <span style={{ color: '#777' }}>Cast: </span>
-              <span>{movie.cast}</span>
-            </div>
-            <div style={{ marginBottom: '10px' }}>
-              <span style={{ color: '#777' }}>Country: </span>
-              <span>{movie.country}</span>
-            </div>
+          </div>
+          <div className="details-item">
+            <div className="details-label">Type:</div>
+            <div className="details-value">{movie.type || 'Not available'}</div>
           </div>
         </div>
       </div>

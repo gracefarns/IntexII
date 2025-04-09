@@ -1,0 +1,142 @@
+/* Color palette */
+:root {
+  --dark-blue: rgb(0, 18, 25);
+  --teal: rgb(0, 95, 115);
+  --bright-teal: rgb(10, 147, 150);
+  --mint: rgb(148, 210, 189);
+  --cream: rgb(233, 216, 166);
+  --gold: rgb(238, 155, 0);
+  --orange: rgb(202, 103, 2);
+  --rust: rgb(187, 62, 3);
+  --dark-red: rgb(174, 32, 18);
+  --burgundy: rgb(155, 34, 38);
+}
+
+.movie-detail {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--teal);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.movie-header {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.movie-poster {
+  width: 200px;
+  height: 300px;
+  background-color: var(--mint);
+  border-radius: 8px;
+  margin-right: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--dark-blue);
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.movie-info {
+  flex: 1;
+}
+
+.movie-title {
+  color: var(--cream);
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 0 12px;
+}
+
+.movie-meta {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.movie-meta-item {
+  background-color: var(--dark-blue);
+  color: var(--cream);
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.movie-description {
+  background-color: var(--dark-blue);
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 16px;
+  color: var(--cream);
+  line-height: 1.6;
+}
+
+.movie-rating {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.rating-value {
+  background-color: var(--gold);
+  color: var(--dark-blue);
+  font-size: 24px;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.rating-text {
+  color: var(--cream);
+  font-size: 16px;
+}
+
+.movie-details-section {
+  margin-top: 24px;
+}
+
+.details-title {
+  color: var(--cream);
+  font-size: 20px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid var(--bright-teal);
+  padding-bottom: 6px;
+}
+
+.details-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.details-item {
+  display: flex;
+  background-color: var(--dark-blue);
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.details-label {
+  font-weight: bold;
+  color: var(--mint);
+  margin-right: 10px;
+  min-width: 100px;
+}
+
+.details-value {
+  color: var(--cream);
+  flex: 1;
+}

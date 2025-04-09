@@ -1,0 +1,58 @@
+/* Color palette */
+:root {
+  --dark-blue: rgb(0, 18, 25);
+  --teal: rgb(0, 95, 115);
+  --bright-teal: rgb(10, 147, 150);
+  --mint: rgb(148, 210, 189);
+  --cream: rgb(233, 216, 166);
+  --gold: rgb(238, 155, 0);
+  --orange: rgb(202, 103, 2);
+  --rust: rgb(187, 62, 3);
+  --dark-red: rgb(174, 32, 18);
+  --burgundy: rgb(155, 34, 38);
+}
+
+.movie-detail-page {
+  background-color: var(--dark-blue);
+  min-height: 100vh;
+  padding: 20px;
+  color: var(--cream);
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-detail-container {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.recommendations-section {
+  width: 100%;
+  margin-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--dark-blue);
+  color: var(--cream);
+}
+
+.loading-recommendations {
+  text-align: center;
+  margin-top: 40px;
+  color: var(--mint);
+}
+
+.no-recommendations {
+  text-align: center;
+  margin-top: 40px;
+  color: var(--mint);
+  padding: 20px;
+  background-color: var(--teal);
+  border-radius: 8px;
+}
