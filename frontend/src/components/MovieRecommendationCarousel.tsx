@@ -24,9 +24,7 @@ const MovieRecommendationCarousel: React.FC<
 
   return (
     <div className="recommendation-carousel-container">
-      <h2 className="recommendation-carousel-title">
-        Similar Movies You Might Enjoy
-      </h2>
+      <h2 className="recommendation-carousel-title">You Might Also Like...</h2>
 
       <div className="recommendation-carousel-wrapper">
         {/* Left arrow */}
