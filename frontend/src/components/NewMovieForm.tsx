@@ -61,7 +61,8 @@ const NewMovieForm = ({ onSuccess, onCancel }: NewMovieFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await addMovie(formData);
+    const { show_id, ...movieWithoutId } = formData;
+    await addMovie(movieWithoutId);
     onSuccess();
   };
 

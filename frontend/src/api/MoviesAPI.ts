@@ -37,7 +37,7 @@ export const fetchMovies = async (
 
 export const addMovie = async (newMovie: Movie): Promise<Movie> => {
   try {
-    const response = await fetch(`${API_URL}/AddMovie`, {
+    const response = await fetch(`${API_URL}/Movie/AddMovie`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,6 +47,8 @@ export const addMovie = async (newMovie: Movie): Promise<Movie> => {
     });
 
     if (!response.ok) {
+      const text = await response.text();
+      console.error('Add failed:', response.status, text);
       throw new Error('Failed to add movie');
     }
 
@@ -62,7 +64,7 @@ export const updateMovie = async (
   updatedMovie: Movie
 ): Promise<Movie> => {
   try {
-    const response = await fetch(`${API_URL}/UpdateMovie/${movieId}`, {
+    const response = await fetch(`${API_URL}/Movie/UpdateMovie/${movieId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +88,7 @@ export const updateMovie = async (
 
 export const deleteMovie = async (movieId: number): Promise<void> => {
   try {
-    const response = await fetch(`${API_URL}/DeleteMovie/${movieId}`, {
+    const response = await fetch(`${API_URL}/Movie/DeleteMovie/${movieId}`, {
       method: 'DELETE',
       credentials: 'include',
     });
