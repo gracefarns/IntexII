@@ -164,7 +164,7 @@ const MovieDetailPage: React.FC = () => {
     }
   };
 
-  // Image error handling
+  // Image error handling for movie poster
   const handlePosterError = () => {
     setPosterError(true);
   };
@@ -200,9 +200,11 @@ const MovieDetailPage: React.FC = () => {
   const primaryGenre = getPrimaryGenre(movie);
 
   // Use a default poster URL if the image doesn't exist
-  const fallbackPosterUrl = '/default-poster.jpg';
+  const fallbackPosterUrl = '/assets/movies/DefaultMoviePoster.jpg';
   const posterUrl = !posterError
-    ? `https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(cleanTitleForImageUrl(movie.title))}.jpg`
+    ? `https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(
+        cleanTitleForImageUrl(movie.title)
+      )}.jpg`
     : fallbackPosterUrl;
 
   return (
@@ -224,7 +226,11 @@ const MovieDetailPage: React.FC = () => {
                 className="poster-image"
               />
             ) : (
-              <div className="poster-initial">{movie.title.charAt(0)}</div>
+              <img
+                src={fallbackPosterUrl}
+                alt="Default Poster"
+                className="poster-image"
+              />
             )}
           </div>
 
@@ -329,10 +335,10 @@ const MovieDetailPage: React.FC = () => {
                   {recommendations.map((recommendation) => {
                     // Fixed TypeScript error by converting rec_show_id to string
                     const recId = String(recommendation.rec_show_id);
-
                     // Update the recPosterUrl to use the cleaned recommendation title
-                    const recPosterUrl = `https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(cleanTitleForImageUrl(recommendation.rec_title))}.jpg`;
-
+                    const recPosterUrl = `https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(
+                      cleanTitleForImageUrl(recommendation.rec_title)
+                    )}.jpg`;
                     return (
                       <div
                         key={`${recommendation.source_show_id}-${recommendation.rec_show_id}`}
@@ -349,12 +355,10 @@ const MovieDetailPage: React.FC = () => {
                               alt={recommendation.rec_title}
                               className="recommendation-image"
                               onError={(e) => {
-                                (e.target as HTMLImageElement).style.display =
-                                  'none';
-                                (
-                                  (e.target as HTMLImageElement)
-                                    .nextElementSibling as HTMLElement
-                                ).style.display = 'flex';
+                                const target = e.target as HTMLImageElement;
+                                target.onerror = null; // Prevent infinite loop
+                                target.src =
+                                  '/assets/movies/DefaultMoviePoster.jpg';
                               }}
                             />
                             <div className="recommendation-image-fallback">
