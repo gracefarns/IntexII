@@ -34,7 +34,7 @@ const MoviePage: React.FC = () => {
     const fetchRecommendations = async () => {
       try {
         const res = await fetch(
-          'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/personalized',
+          'https://localhost:5000/Recommendation/personalized',
           {
             credentials: 'include',
           }
