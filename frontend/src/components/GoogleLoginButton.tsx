@@ -9,12 +9,13 @@ const GoogleLoginButton = () => {
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include', // ✅ Important for auth cookies!
           body: JSON.stringify({ idToken: credentialResponse.credential }),
         })
         .then(res => res.json())
         .then(data => {
           console.log('User info from backend:', data);
-          // You can store user/token here or redirect
+          // Optionally store user info or redirect
         });
       }}
       onError={() => {

@@ -14,8 +14,6 @@ DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -32,25 +30,15 @@ builder.Services.AddDbContext<MovieRecDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("RecommendationConnection")));
 
 
-// Allow google sign in
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//    .AddCookie()
-//    .AddGoogle(options =>
-//    {
-//        options.ClientId = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID")
-//            ?? throw new InvalidOperationException("Missing GOOGLE_CLIENT_ID");
-//        options.ClientSecret = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_SECRET")
-//            ?? throw new InvalidOperationException("Missing GOOGLE_CLIENT_SECRET");
-//    });
-
-
-
-
 builder.Services.AddAuthorization();
 
+
+// Allow google sign in
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-     .AddEntityFrameworkStores<ApplicationDbContext>()
-     .AddDefaultTokenProviders();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
 
 // add this for security
 builder.Services.Configure<IdentityOptions>(options =>
