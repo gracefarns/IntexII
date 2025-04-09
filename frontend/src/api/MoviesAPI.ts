@@ -5,7 +5,7 @@ interface FetchMoviesResponse {
   totalNumMovies: number;
 }
 
-const API_URL = `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net`; //change to deployed backend when it gets deployed!!!
+const API_URL = `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net`;
 
 export const fetchMovies = async (
   pageSize: number,
