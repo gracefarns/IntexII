@@ -51,13 +51,10 @@ const MovieDetailPage: React.FC = () => {
       });
 
     // Fetch movie recommendations
-    fetch(
-      `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${id}`,
-      {
-        method: 'GET',
-        credentials: 'include',
-      }
-    )
+    fetch(`https://localhost:5000/Recommendation/ForMovie/${id}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch recommendations');
@@ -73,7 +70,7 @@ const MovieDetailPage: React.FC = () => {
           const randomFallbackId =
             fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
           return fetch(
-            `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
+            `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
             {
               method: 'GET',
               credentials: 'include',
@@ -92,7 +89,7 @@ const MovieDetailPage: React.FC = () => {
         const randomFallbackId =
           fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
         fetch(
-          `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
+          `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
           {
             method: 'GET',
             credentials: 'include',
