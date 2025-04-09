@@ -1,0 +1,52 @@
+.carousel-section {
+  margin-bottom: 40px;
+  padding-left: 20px;
+}
+
+.carousel-title {
+  font-size: 1.5rem;
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+.carousel-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 14px;
+  padding-bottom: 10px;
+}
+
+.carousel-tile {
+  flex: 0 0 auto;
+  width: 140px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.carousel-tile:hover {
+  transform: scale(1.05);
+}
+
+.carousel-image {
+  width: 140px;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid #444;
+}
+
+.carousel-info {
+  margin-top: 6px;
+  text-align: center;
+}
+
+.carousel-title-text {
+  color: #ffd700;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.carousel-rating {
+  font-size: 0.75rem;
+  color: #aaa;
+}

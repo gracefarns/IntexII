@@ -6,6 +6,7 @@ import { fetchMovies } from '../api/MoviesAPI'; // Reuse your API function for f
 import '../styles/MoviePage.css';
 import SearchResults from '../components/SearchResults';
 import { useNavigate } from 'react-router-dom';
+import RecommendationCarousel from '../components/RecommendationCarousel';
 
 const MoviePage: React.FC = () => {
   // Search state
@@ -13,6 +14,64 @@ const MoviePage: React.FC = () => {
   const [searchResults, setSearchResults] = useState<Movie[]>([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const navigate = useNavigate();
+  const [top10Recs, setTop10Recs] = useState<Movie[]>([]);
+  const [genreRecs, setGenreRecs] = useState<
+    { genre: string; movies: Movie[] }[]
+  >([]);
+
+  const fetchMovieById = async (id: string | number) => {
+    const res = await fetch(
+      `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Movie/GetSingleMovie/${id}`,
+      {
+        credentials: 'include',
+      }
+    );
+    if (!res.ok) throw new Error(`Failed to fetch movie ${id}`);
+    return await res.json();
+  };
+
+  useEffect(() => {
+    const fetchRecommendations = async () => {
+      try {
+        const res = await fetch(
+          'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/personalized',
+          {
+            credentials: 'include',
+          }
+        );
+
+        const data = await res.json();
+
+        // Fetch full movie details for top 10
+        const topMovies = await Promise.all(
+          Object.values(data.top10)
+            .filter((id) => id)
+            .map((id) => fetchMovieById(String(id)))
+        );
+
+        setTop10Recs(topMovies);
+
+        // Fetch genre-based movies
+        const genreMovieGroups = await Promise.all(
+          data.byGenre.map(async (g: any) => {
+            const movies = await Promise.all(
+              g.recs
+                .filter((id: string) => id)
+                .map((id: string) => fetchMovieById(id))
+            );
+
+            return { genre: g.genre, movies };
+          })
+        );
+
+        setGenreRecs(genreMovieGroups);
+      } catch (err) {
+        console.error('Error fetching recommendations:', err);
+      }
+    };
+
+    fetchRecommendations();
+  }, []);
 
   // Debounce search: only search after 300ms of inactivity to minimize API calls.
   useEffect(() => {
@@ -43,10 +102,8 @@ const MoviePage: React.FC = () => {
   // Function to handle clicking a search result
   const handleResultClick = (movie: Movie) => {
     navigate(`/moviedetails/${movie.show_id}`);
-    // At this stage, you might want to navigate to the MovieDetailsPage.
-    // For example, if you are using react-router, you could do:
-    // history.push(`/moviedetails/${movie.show_id}`);
-    console.log('Clicked movie:', movie);
+
+    console.log('Clicked movie:', movie); //debug
   };
 
   return (
@@ -92,7 +149,28 @@ const MoviePage: React.FC = () => {
 
         {/* Main Content - can be used for other information, like featured movies */}
         <div className="main-content">
-          {/* You can later conditionally render additional content here. */}
+          <div className="recommendation-section">
+            {top10Recs.length > 0 && (
+              <RecommendationCarousel
+                title="You’ll Love These"
+                movies={top10Recs}
+                onClickMovie={(movie) =>
+                  navigate(`/moviedetails/${movie.show_id}`)
+                }
+              />
+            )}
+
+            {genreRecs.map((g) => (
+              <RecommendationCarousel
+                key={g.genre}
+                title={`Top ${g.genre}`}
+                movies={g.movies}
+                onClickMovie={(movie) =>
+                  navigate(`/moviedetails/${movie.show_id}`)
+                }
+              />
+            ))}
+          </div>
         </div>
         <Footer />
       </div>

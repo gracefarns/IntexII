@@ -29,6 +29,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDbContext<MovieRecDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("RecommendationConnection")));
 
+builder.Services.AddDbContext<RecommendationDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("UserTop10Connection")));
+
+builder.Services.AddDbContext<GenreRecommendationDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("UserGenreConnection")));
+
+
 
 builder.Services.AddAuthorization();
 
