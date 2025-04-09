@@ -5,12 +5,11 @@ const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="footer-links">
-        <a href="/signup">Sign Up</a>
+        <a href="/register">Sign Up</a>
         <a href="/privacy">Privacy Policy</a>
         <a href="mailto:info@cineniche.com">Email</a>
         <span>Phone: 123-456-7890</span>
-        <span>Address: 123 Movie Lane, Filmtown</span>
-        <a href="/contact">Contact Us</a>
+        <span>1125 Thunder Road, Pacifica CA 94044</span>
       </div>
     </footer>
   );

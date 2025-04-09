@@ -8,7 +8,7 @@ function PrivacyPolicy() {
         <strong>Effective Date:</strong> 04/07/2025
       </p>
       <p>
-        CineNiche (“we,” “us,” “our”) respects your privacy and is committed to
+        CineNiche (“we”, “us”) respects your privacy and is committed to
         protecting it through our compliance with this Privacy Policy. This
         Policy explains how we collect, use, disclose, and safeguard your
         information when you use our services, including our website,

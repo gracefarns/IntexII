@@ -11,14 +11,14 @@ export default defineConfig({
         "default-src 'self'; " +
         "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com; " +
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com; " +
-        "img-src 'self' data:; " +
+        "img-src 'self' data: https://cinenicheblobcontainer.blob.core.windows.net; " +
         "frame-ancestors 'none'; " +
         "font-src 'self' https://fonts.gstatic.com data:; " +
-        "connect-src 'self' https://localhost:5000 https://accounts.google.com https://oauth2.googleapis.com https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net https://localhost:3000; " + // ✅ Allow OAuth token exchange
+        "connect-src 'self' https://localhost:5000 https://accounts.google.com https://oauth2.googleapis.com https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net https://localhost:3000; " +
         "object-src 'none'; " +
         "base-uri 'self'; " +
         "form-action 'self'; " +
-        "frame-src 'self' https://accounts.google.com https://oauth2.googleapis.com;", // ✅ Allow OAuth login popups
+        "frame-src 'self' https://accounts.google.com https://oauth2.googleapis.com;",
     },
     cors: {
       origin: 'http://localhost:3000',
