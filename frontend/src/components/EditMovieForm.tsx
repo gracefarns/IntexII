@@ -23,7 +23,12 @@ const EditMovieForm = ({ movie, onSuccess, onCancel }: EditMovieFormProps) => {
     setIsSubmitting(true);
     try {
       console.log(formData);
-      await updateMovie(formData.show_id, formData);
+      if (formData.show_id !== undefined) {
+        await updateMovie(formData.show_id, formData);
+      } else {
+        console.error('show_id is undefined');
+        alert('Failed to update movie. Missing show ID.');
+      }
       onSuccess();
     } catch (error) {
       console.error('Error updating movie:', error);
