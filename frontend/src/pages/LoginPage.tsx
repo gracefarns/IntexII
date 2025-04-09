@@ -121,7 +121,9 @@ function LoginPage() {
               <button
                 className="btn btn-google btn-login text-uppercase fw-bold"
                 type="button"
-                onClick={() => window.location.href = "/account/externallogin?provider=Google"}
+                onClick={() =>
+                  window.location.href = "https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/account/externallogin?provider=Google&returnUrl=https://ambitious-sky-052f4611e.6.azurestaticapps.net"
+                }
               >
                 <i className="fa-brands fa-google me-2"></i> Sign in with Google
               </button>
