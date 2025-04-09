@@ -9,7 +9,7 @@ const GoogleLoginButton = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          credentials: 'include', // ✅ Important for auth cookies!
+          credentials: 'include', //  Important for auth cookies!
           body: JSON.stringify({ idToken: credentialResponse.credential }),
         })
         .then(res => res.json())

@@ -5,7 +5,7 @@ import App from './App.tsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-const clientId = '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';
+const clientId = '927787589560-ng122o7dcitoj65o59hrg2hpnbl4b1ah.apps.googleusercontent.com';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
