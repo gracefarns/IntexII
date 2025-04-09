@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/identity.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+import GoogleLoginButton from '../components/GoogleLoginButton';
 
 function LoginPage() {
   // state variables for email and passwords
@@ -118,25 +119,7 @@ function LoginPage() {
               </div>
               <hr className="my-4" />
               <div className="d-grid mb-2">
-              <button
-                className="btn btn-google btn-login text-uppercase fw-bold"
-                type="button"
-                onClick={() =>
-                  window.location.href = "https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/account/externallogin?provider=Google&returnUrl=https://ambitious-sky-052f4611e.6.azurestaticapps.net"
-                }
-              >
-                <i className="fa-brands fa-google me-2"></i> Sign in with Google
-              </button>
-
-              </div>
-              <div className="d-grid mb-2">
-                <button
-                  className="btn btn-facebook btn-login text-uppercase fw-bold"
-                  type="button"
-                >
-                  <i className="fa-brands fa-facebook-f me-2"></i> Sign in with
-                  Facebook
-                </button>
+                <GoogleLoginButton />
               </div>
             </form>
             {error && <p className="error">{error}</p>}
