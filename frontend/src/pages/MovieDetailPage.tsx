@@ -51,10 +51,13 @@ const MovieDetailPage: React.FC = () => {
       });
 
     // Fetch movie recommendations
-    fetch(`https://localhost:5000/Recommendation/ForMovie/${id}`, {
-      method: 'GET',
-      credentials: 'include',
-    })
+    fetch(
+      `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${id}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch recommendations');
@@ -65,11 +68,17 @@ const MovieDetailPage: React.FC = () => {
         if (data && data.length > 0) {
           setRecommendations(data);
         } else {
-          // Fallback to recommendations for movie ID 11
-          return fetch(`https://localhost:5000/Recommendation/ForMovie/11`, {
-            method: 'GET',
-            credentials: 'include',
-          })
+          // Fallback to recommendations for a random movie from the list if no recommendations can be found
+          const fallbackIds = [11, 1005, 1006, 1007, 1018, 1028, 1037];
+          const randomFallbackId =
+            fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
+          return fetch(
+            `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
+            {
+              method: 'GET',
+              credentials: 'include',
+            }
+          )
             .then((res) => res.json())
             .then((fallbackData) => {
               setRecommendations(fallbackData);
@@ -78,11 +87,17 @@ const MovieDetailPage: React.FC = () => {
       })
       .catch((err) => {
         console.error('Error fetching recommendations:', err);
-        // Fallback to recommendations for movie ID 11
-        fetch(`https://localhost:5000/Recommendation/ForMovie/11`, {
-          method: 'GET',
-          credentials: 'include',
-        })
+        // Fallback to recommendations for a random movie from the list
+        const fallbackIds = [11, 1005, 1006, 1007, 1018, 1028, 1037];
+        const randomFallbackId =
+          fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
+        fetch(
+          `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
+          {
+            method: 'GET',
+            credentials: 'include',
+          }
+        )
           .then((res) => res.json())
           .then((fallbackData) => {
             setRecommendations(fallbackData);
