@@ -22,7 +22,7 @@ export const fetchMovies = async (
       `pageSize=${pageSize}`,
       `pageNum=${pageNum}`,
       ...(categoryParams ? [categoryParams] : []),
-      ...(searchTerm ? [`search=${encodeURIComponent(searchTerm)}`] : []),
+      ...(searchTerm ? [`searchTerm=${encodeURIComponent(searchTerm)}`] : []),
     ].join('&');
 
     const response = await fetch(`${API_URL}/Movie/GetMovies?${queryParams}`, {
