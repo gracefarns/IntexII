@@ -79,7 +79,8 @@ namespace RootkitAuth.API.Controllers
         [HttpPut("UpdateMovie/{movieId}")]
         public IActionResult UpdateMovie(int movieId, [FromBody] MovieTitle updatedMovie)
         {
-            var existingMovie = _movieDbContext.movies_titles.Find(movieId);
+            Console.WriteLine($"Looking for movie ID: {movieId}");
+            var existingMovie = _movieDbContext.movies_titles.FirstOrDefault(m => m.show_id == movieId);
 
             existingMovie.type = updatedMovie.type;
             existingMovie.title = updatedMovie.title;
