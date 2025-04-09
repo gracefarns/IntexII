@@ -19,8 +19,13 @@ const AdminPage = () => {
   useEffect(() => {
     const loadMovies = async () => {
       try {
-        const data = await fetchMovies(pageSize, pageNum, []);
+        console.log('Searching for:', searchTerm); //debug search
+
+        const data = await fetchMovies(pageSize, pageNum, [], searchTerm);
         setMovies(data.movies);
+
+        console.log('Movies received:', data.movies); //debug
+
         setTotalPages(Math.ceil(data.totalNumMovies / pageSize));
       } catch (error) {
         setError((error as Error).message);
@@ -30,7 +35,7 @@ const AdminPage = () => {
     };
 
     loadMovies();
-  }, [pageSize, pageNum]);
+  }, [pageSize, pageNum, searchTerm]);
 
   const handleDelete = async (show_id: number) => {
     const confirmDelete = window.confirm(
@@ -45,14 +50,6 @@ const AdminPage = () => {
       alert('Failed to delete movie. Please try again.');
     }
   };
-
-  const filteredMovies = searchTerm
-    ? movies.filter(
-        (movie) =>
-          movie.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          movie.director.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : movies;
 
   return (
     <div
@@ -219,7 +216,10 @@ const AdminPage = () => {
                     type="text"
                     placeholder="Search by title or director..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      setPageNum(1); // 🔁 also reset pagination on search
+                    }}
                     style={{
                       padding: '10px 10px 10px 35px',
                       width: '100%',
@@ -246,7 +246,7 @@ const AdminPage = () => {
                     fontSize: '14px',
                   }}
                 >
-                  Showing {filteredMovies.length} of {movies.length} movies
+                  Showing {movies.length} of {totalPages * pageSize} movies
                 </div>
               </div>
 
@@ -307,8 +307,8 @@ const AdminPage = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredMovies.length > 0 ? (
-                      filteredMovies.map((movie, index) => (
+                    {movies.length > 0 ? (
+                      movies.map((movie, index) => (
                         <tr
                           key={movie.show_id}
                           style={{
@@ -385,7 +385,10 @@ const AdminPage = () => {
                                   fontSize: '13px',
                                   flex: '1',
                                 }}
-                                onClick={() => handleDelete(movie.show_id)}
+                                onClick={() =>
+                                  movie.show_id !== undefined &&
+                                  handleDelete(movie.show_id)
+                                }
                               >
                                 Delete
                               </button>

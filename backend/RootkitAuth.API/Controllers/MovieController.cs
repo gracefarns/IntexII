@@ -17,31 +17,46 @@ namespace RootkitAuth.API.Controllers
         {
             _movieDbContext = movieDbContext;
         }
-        [HttpGet("GetMovies")]
 
-        public IActionResult GetMovies(int pageSize = 10, int pageNum = 1, [FromQuery] List<string>? containers = null)
+        [HttpGet("GetMovies")]
+        public IActionResult GetMovies(
+            int pageSize = 10,
+            int pageNum = 1,
+            [FromQuery] List<string>? containers = null,
+            string? searchTerm = null)
         {
             var query = _movieDbContext.movies_titles.AsQueryable();
 
+            // Apply filters BEFORE pagination
             if (containers != null && containers.Any())
             {
                 query = query.Where(c => containers.Contains(c.rating));
             }
 
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(m =>
+                    (m.title ?? "").ToLower().Contains(searchTerm.ToLower()) ||
+                    (m.director ?? "").ToLower().Contains(searchTerm.ToLower()));
+            }
+
+            // Get total AFTER filters, BEFORE pagination
             var totalNumMovies = query.Count();
+
+            // Apply pagination AFTER filtering
             var movies = query
+                .OrderBy(m => m.title)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
-            var returnMovies = new
+            return Ok(new
             {
-                Movies = movies,
-                TotalNumMovies = totalNumMovies
-            };
-            
-            return Ok(returnMovies);
+                movies,
+                totalNumMovies
+            });
         }
+
 
         [HttpGet("GetMovieRatings")]
         public IActionResult GetMovieRatings()

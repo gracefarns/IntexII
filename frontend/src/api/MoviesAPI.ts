@@ -10,19 +10,24 @@ const API_URL = `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.
 export const fetchMovies = async (
   pageSize: number,
   pageNum: number,
-  selectedCategories: string[]
+  selectedCategories: string[],
+  searchTerm: string = ''
 ): Promise<FetchMoviesResponse> => {
   try {
     const categoryParams = selectedCategories
       .map((cat) => `movieCategories=${encodeURIComponent(cat)}`)
       .join('&');
 
-    const response = await fetch(
-      `${API_URL}/Movie/GetMovies?pageSize=${pageSize}&pageNum=${pageNum}${selectedCategories.length ? `&${categoryParams}` : ''}`,
-      {
-        credentials: 'include',
-      }
-    );
+    const queryParams = [
+      `pageSize=${pageSize}`,
+      `pageNum=${pageNum}`,
+      ...(categoryParams ? [categoryParams] : []),
+      ...(searchTerm ? [`search=${encodeURIComponent(searchTerm)}`] : []),
+    ].join('&');
+
+    const response = await fetch(`${API_URL}/Movie/GetMovies?${queryParams}`, {
+      credentials: 'include',
+    });
 
     if (!response.ok) {
       throw new Error('Failed to fetch movies');
