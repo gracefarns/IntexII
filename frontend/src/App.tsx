@@ -19,10 +19,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/admin" element={<AdminPage />} />
-          <Route
-            path="/moviedetails/${recommendation.rec_show_id}"
-            element={<MovieDetailPage />}
-          />
+          <Route path="/moviedetails/:id" element={<MovieDetailPage />} />
           <Route path="/moviepage" element={<MoviePage />} />
         </Routes>
       </Router>
