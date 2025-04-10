@@ -36,8 +36,23 @@ namespace RootkitAuth.API.Controllers
                     .OrderBy(r => r.rec_rank)
                     .Take(10)
                     .ToList();
-                
-                return Ok(recs);
+        
+                if (recs.Any())
+                {
+                    // Assume the rating for the source movie is in the first row.
+                    var sourceShowRating = recs.First().rating;
+                    return Ok(new {
+                        source_show_rating = sourceShowRating,
+                        recommendations = recs
+                    });
+                }
+                else
+                {
+                    return Ok(new {
+                        source_show_rating = (int?)null, // or a default value
+                        recommendations = recs
+                    });
+                }
             }
             catch (Exception ex)
             {
