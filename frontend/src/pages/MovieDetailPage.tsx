@@ -44,7 +44,7 @@ const MovieDetailPage: React.FC = () => {
   ];
 
   const cleanTitleForImageUrl = (title: string): string => {
-    const cleanedTitle = title.replace(/[^a-zA-Z0-9 ]/g, '');
+    const cleanedTitle = title.replace(/[^A-Za-z0-9_\s]/g, '');
     return cleanedTitle.replace(/\s+/g, ' ');
   };
 
@@ -330,7 +330,9 @@ const MovieDetailPage: React.FC = () => {
   // Determine main movie poster URL (using fallback if error occurs).
   const fallbackPosterUrl = '/assets/movies/DefaultMoviePoster.jpg';
   const posterUrl = !posterError
-    ? `https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(cleanTitleForImageUrl(movie.title))}.jpg`
+    ? `https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(
+        movie.title.replace(/[^A-Za-z0-9_\s]/g, '').trim()
+      )}.jpg`
     : mainPosterFallback
       ? `/assets/movies/${mainPosterFallback}`
       : fallbackPosterUrl;

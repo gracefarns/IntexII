@@ -32,7 +32,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                 className="poster-image"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src =
-                    '/placeholder-poster.jpg';
+                    '../public/assets/movies/A Sun.jpg';
                 }}
               />
               <div className="poster-info">
