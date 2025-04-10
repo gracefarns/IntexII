@@ -26,7 +26,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             >
               <img
                 src={`https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(
-                  movie.title.replace(/[^A-Za-z0-9\s]/g, '').trim()
+                  movie.title.replace(/[^A-Za-z0-9_\s]/g, '').trim()
                 )}.jpg`}
                 alt={movie.title}
                 className="poster-image"

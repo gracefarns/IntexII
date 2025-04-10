@@ -16,15 +16,15 @@ const RecommendationCarousel: React.FC<Props> = ({
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const scrollAmount = scrollRef.current.offsetWidth;
-      scrollRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth',
-      });
-    }
-  };
+  //   const scroll = (direction: 'left' | 'right') => {
+  //     if (scrollRef.current) {
+  //       const scrollAmount = scrollRef.current.offsetWidth;
+  //       scrollRef.current.scrollBy({
+  //         left: direction === 'left' ? -scrollAmount : scrollAmount,
+  //         behavior: 'smooth',
+  //       });
+  //     }
+  //   };
 
   return (
     <div className="carousel-section">

@@ -33,12 +33,14 @@ html {
   width: 100%; /* Stretch across the full width */
   z-index: 50; /* High z-index so it stays above everything */
 
-  padding: 1rem 0rem;
+  padding: 1rem 0;
   display: flex;
-  justify-content: space-between;
-  align-items: left !important;
-  border-bottom: 1px solid #27272a; /* zinc-800 */
+  justify-content: flex-start !important;
+  align-items: flex-start;
+  border-bottom: 1px solid #18181b; /* zinc-800 */
   background-color: #18181b; /* Same as your site's background, or slightly transparent */
+  text-align: left !important;
+  padding-left: 25px !important;
 }
 
 main {
@@ -49,17 +51,17 @@ main {
   font-size: 2.25rem;
   font-weight: 700;
   margin-left: 0;
-  align-items: left !important;
+  text-align: left !important;
 }
 
 .brand-cine {
   color: #14b8a6; /* teal-500 */
-  align-items: left !important;
+  text-align: left !important;
 }
 
 .brand-niche {
   color: #d1d5db; /* gray-300 */
-  align-items: left;
+  text-align: left !important;
 }
 
 /* Hero Section */
@@ -68,7 +70,11 @@ main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 70vh; /* Set minimum height for hero section */
+  min-height: 100vh; /* Set minimum height for hero section */
+  font-family: 'Poppins', sans-serif;
+  color: #a3c1ad; /* Soft, earthy text color */
+  padding-top: 70px; /* Space for the fixed navbar */
+  background: linear-gradient(180deg, #011219, #141414 70%, #011218) !important;
 }
 
 @media (min-width: 768px) {
@@ -276,7 +282,7 @@ main {
 .genre-nav-container {
   border-bottom: 1px solid #27272a; /* zinc-800 */
   padding: 1rem 1.5rem 0.5rem;
-  background-color: rgba(24, 24, 27, 0.3); /* Semi-transparent background */
+  background-color: rgba(24, 24, 27, 0); /* Semi-transparent background */
   z-index: 10;
   position: relative;
   border-top-left-radius: 3px;
@@ -423,7 +429,7 @@ main {
 /* FAQ Section */
 .faq-section {
   padding: 4rem 20rem;
-  background-color: #27272a; /* zinc-800 */
+  background-color: #18181b; /* zinc-800 */
   text-align: left;
   color: white;
   line-height: 1.4; /* Optional: helps maintain readability */
