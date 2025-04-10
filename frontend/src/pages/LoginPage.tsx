@@ -110,15 +110,6 @@ function LoginPage() {
               <div className="d-grid mb-2">
                 <GoogleLoginButton />
               </div>
-              <div className="d-grid mb-2">
-                <button
-                  className="btn btn-facebook btn-login text-uppercase fw-bold"
-                  type="button"
-                >
-                  <i className="fa-brands fa-facebook-f me-2"></i> Sign in with
-                  Facebook
-                </button>
-              </div>
             </form>
             {error && <p className="error">{error}</p>}
           </div>
