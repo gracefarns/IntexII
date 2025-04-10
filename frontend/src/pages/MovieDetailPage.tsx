@@ -105,6 +105,7 @@ const MovieDetailPage: React.FC = () => {
 
             return fetch(
               `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
+              `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
               {
                 method: 'GET',
                 credentials: 'include',
@@ -136,6 +137,7 @@ const MovieDetailPage: React.FC = () => {
             fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
           return fetch(
             `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
+            `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
             {
               method: 'GET',
               credentials: 'include',
@@ -159,6 +161,7 @@ const MovieDetailPage: React.FC = () => {
         const randomFallbackId =
           fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
         fetch(
+          `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
           `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
           {
             method: 'GET',
