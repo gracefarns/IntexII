@@ -1,7 +1,7 @@
 /* Main layout */
 .movie-detail-page {
   background-color: #1a1a1a;
-  color: #fff;
+  color: #a3c1ad !important;
   min-height: 80vh;
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   overflow-x: hidden;
@@ -218,8 +218,8 @@
 }
 
 .btn-play {
-  background-color: #02808f;
-  color: #fff;
+  background-color: #14b8a6;
+  color: #000000;
 }
 
 .play-icon {
@@ -228,9 +228,10 @@
 }
 
 .btn-play:hover {
-  background-color: #004a7b;
+  background-color: #15b8a9;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(27, 9, 229, 0.3);
+  box-shadow: 0 5px 15px rgba(82, 74, 174, 0.3);
+  background: linear-gradient(45deg, #14b8a6, #485265) !important;
 }
 
 .btn-watchlist {
@@ -269,7 +270,7 @@
   font-size: 22px !important;
   margin-bottom: 0px;
   font-weight: 700;
-  color: #f2f2f2;
+  color: #ffffff;
 }
 
 /* Updated grid for vertical stacking */
@@ -298,7 +299,7 @@
 
 .details-value {
   font-size: 16px;
-  color: #fff;
+  color: #a3c1ad;
   line-height: 1.5;
 }
 
@@ -325,7 +326,7 @@
   margin-bottom: 5px !important;
   font-weight: 700;
   padding-left: 25px;
-  color: #f2f2f2;
+  color: #a3c1ad;
 }
 
 .recommendation-carousel-wrapper {
@@ -372,27 +373,9 @@
 }
 
 .movie-recommendation-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
   z-index: 10;
-}
-
-.recommendation-rank-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 36px;
-  height: 36px;
-  background-color: rgba(0, 122, 167, 0.9);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: white;
-  font-size: 16px;
-  z-index: 1;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .recommendation-image-container {
@@ -427,7 +410,7 @@
 }
 
 .recommendation-content {
-  padding: 16px;
+  padding: 3px;
   height: 100px; /* Fixed height */
   display: flex;
   flex-direction: column;

@@ -35,3 +35,21 @@
 .sign-in-button:hover {
   background-color: #4a6c6b;
 }
+
+/* Header Styles */
+.header {
+  position: fixed; /* Make it stick to the top */
+  top: 0; /* Stick to top of page */
+  left: 0;
+  width: 100%; /* Stretch across the full width */
+  z-index: 50; /* High z-index so it stays above everything */
+
+  padding: 1rem 0;
+  display: flex;
+  justify-content: flex-start !important;
+  align-items: flex-start;
+  border-bottom: 1px solid #18181b; /* zinc-800 */
+  background-color: #18181b; /* Same as your site's background, or slightly transparent */
+  text-align: left !important;
+  padding-left: 25px !important;
+}
