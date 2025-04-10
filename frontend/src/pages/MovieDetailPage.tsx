@@ -58,7 +58,7 @@ const MovieDetailPage: React.FC = () => {
     window.scrollTo(0, 0);
 
     // Fetch movie details.
-    fetch(`https://localhost:5000/Movie/GetSingleMovie/${id}`, {
+    fetch(`https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Movie/GetSingleMovie/${id}`, {
       method: 'GET',
       credentials: 'include',
     })
@@ -73,7 +73,7 @@ const MovieDetailPage: React.FC = () => {
       });
 
     // Fetch recommendations (which now includes source_show_rating).
-    fetch(`https://localhost:5000/Recommendation/ForMovie/${id}`, {
+    fetch(`https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${id}`, {
       method: 'GET',
       credentials: 'include',
     })
@@ -98,7 +98,7 @@ const MovieDetailPage: React.FC = () => {
               fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
 
             return fetch(
-              `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
+              `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
               {
                 method: 'GET',
                 credentials: 'include',
@@ -129,7 +129,7 @@ const MovieDetailPage: React.FC = () => {
           const randomFallbackId =
             fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
           return fetch(
-            `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
+            `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
             {
               method: 'GET',
               credentials: 'include',
@@ -153,7 +153,7 @@ const MovieDetailPage: React.FC = () => {
         const randomFallbackId =
           fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
         fetch(
-          `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
+          `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/ForMovie/${randomFallbackId}`,
           {
             method: 'GET',
             credentials: 'include',
