@@ -37,17 +37,19 @@ function Register() {
       // clear error message
       setError('');
       // post data to the /register api
-      fetch('https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      })
-      .then(async (response) => {
+      fetch(
+        'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/register',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      ).then(async (response) => {
         if (response.ok) {
           navigate('/login');
         } else {
@@ -59,15 +61,13 @@ function Register() {
           }
           setError(err.message || 'Error registering.');
         }
-        })
-      
-      
+      });
     }
   };
 
   return (
     <div className="container">
-      <div className="row">
+      <div>
         <div className="card border-0 shadow rounded-3 ">
           <div className="card-body p-4 p-sm-5">
             <h5 className="card-title text-center mb-5 fw-light fs-5">
