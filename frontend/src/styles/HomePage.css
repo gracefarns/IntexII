@@ -36,31 +36,35 @@ html {
   padding: 1rem 0rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: left !important;
   border-bottom: 1px solid #27272a; /* zinc-800 */
   background-color: #18181b; /* Same as your site's background, or slightly transparent */
 }
 
 main {
-  padding-top: 1.1rem; /* or 80px depending on your header height */
+  padding-top: 1rem; /* or 80px depending on your header height */
 }
 
 .brand {
   font-size: 2.25rem;
   font-weight: 700;
   margin-left: 0;
+  align-items: left !important;
 }
 
 .brand-cine {
   color: #14b8a6; /* teal-500 */
+  align-items: left !important;
 }
 
 .brand-niche {
   color: #d1d5db; /* gray-300 */
+  align-items: left;
 }
 
 /* Hero Section */
 .hero-section {
+  margin-top: 2rem; /* Adjust as needed */
   display: flex;
   flex-direction: column;
   width: 100%;

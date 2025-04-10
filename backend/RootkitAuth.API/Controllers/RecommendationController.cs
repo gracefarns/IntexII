@@ -7,6 +7,7 @@ namespace RootkitAuth.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    
     public class RecommendationController : ControllerBase
     {
         private readonly MovieRecDbContext _movieRecDbContext;

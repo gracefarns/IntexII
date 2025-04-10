@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Movie } from '../types/Movie';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { fetchMovies } from '../api/MoviesAPI';
 import '../styles/MoviePage.css';
