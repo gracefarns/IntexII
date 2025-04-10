@@ -33,13 +33,10 @@ const MovieDetailPage: React.FC = () => {
     window.scrollTo(0, 0);
 
     // Fetch movie details
-    fetch(
-      `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Movie/GetSingleMovie/${id}`,
-      {
-        method: 'GET',
-        credentials: 'include',
-      }
-    )
+    fetch(`https://localhost:5000/Movie/GetSingleMovie/${id}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
       .then((res) => res.json())
       .then((data) => {
         setMovie(data);

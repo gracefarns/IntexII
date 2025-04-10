@@ -208,7 +208,7 @@
 }
 
 .btn-play {
-  background-color: #e50914;
+  background-color: #02808f;
   color: #fff;
 }
 
@@ -218,7 +218,7 @@
 }
 
 .btn-play:hover {
-  background-color: #f40d18;
+  background-color: #004a7b;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3);
 }
@@ -373,7 +373,7 @@
   left: 10px;
   width: 36px;
   height: 36px;
-  background-color: rgba(229, 9, 20, 0.9);
+  background-color: rgba(0, 122, 167, 0.9);
   border-radius: 50%;
   display: flex;
   align-items: center;
