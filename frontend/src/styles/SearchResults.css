@@ -24,7 +24,7 @@
 }
 
 .results-heading {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: 24px;
   color: var(--light-teal);
   font-weight: 600;
@@ -35,57 +35,63 @@
 
 .poster-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
   justify-items: center;
 }
 
 .poster-tile {
-  width: 140px;
-  height: auto; /* Changed from fixed height to auto */
+  width: 160px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .poster-tile:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
 }
 
 .poster-image {
-  width: 140px;
-  height: 210px;
+  width: 160px;
+  height: 240px;
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
   background-color: #000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .poster-info {
   width: 100%;
   text-align: center;
-  margin-top: 8px;
-  min-height: 40px; /* Changed from fixed height to min-height */
-  padding-bottom: 8px; /* Reduced padding to make better use of space */
+  margin-top: 10px;
+  min-height: 50px;
 }
 
 .movie-title {
-  font-size: 10px; /* Reduced from 12px */
-  line-height: 1.2;
-  color: var(--text-primary);
-  margin-bottom: 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  /* Maybe add a slightly wider width to use more available space */
-  width: 100%;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: var(--text-primary) !important;
+  line-height: 1.2 !important;
+  margin-bottom: 4px !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  word-break: break-word !important;
+  text-align: center !important;
 }
 
 .movie-rating {
-  font-size: 0.65rem;
-  color: green;
-  font-weight: bold; /* Fixed the 'font: bold' syntax to proper 'font-weight: bold' */
-  padding-bottom: 4px; /* Reduced from 20rem which was likely a mistake */
+  font-size: 0.75rem;
+  color: #39ff14;
+  font-weight: bold;
+}
+
+.no-results {
+  font-size: 1rem;
+  color: #888;
+  padding-top: 16px;
+  text-align: center;
 }
