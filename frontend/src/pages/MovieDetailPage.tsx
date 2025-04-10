@@ -13,6 +13,7 @@ const MovieDetailPage: React.FC = () => {
   const [currentMovieRating, setCurrentMovieRating] = useState<
     number | undefined
   >(undefined);
+  const [interactiveRating, setInteractiveRating] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingRecommendations, setLoadingRecommendations] =
     useState<boolean>(true);
@@ -48,7 +49,6 @@ const MovieDetailPage: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log('Current movie id:', id);
     setLoading(true);
     setLoadingRecommendations(true);
     setPosterError(false);
@@ -84,11 +84,9 @@ const MovieDetailPage: React.FC = () => {
         return res.json();
       })
       .then((data) => {
-        // Check if data has a property "recommendations" (i.e. it is an object)
         if (data && data.recommendations) {
           setCurrentMovieRating(data.source_show_rating);
 
-          // If recommendations array is empty, fetch fallback recommendations
           if (data.recommendations.length === 0) {
             const fallbackIds = [
               2, 4, 5, 6, 11, 12, 18, 20, 22, 24, 26, 30, 31, 32, 36, 37, 41,
@@ -117,14 +115,11 @@ const MovieDetailPage: React.FC = () => {
                 }
               });
           } else {
-            // If recommendations exist, use them directly
             setRecommendations(data.recommendations);
           }
         } else if (data && data.length > 0) {
-          // Fallback: if you only have an array, use that
           setRecommendations(data);
         } else {
-          // Fallback logic if no recommendations found...
           const fallbackIds = [
             2, 4, 5, 6, 11, 12, 18, 20, 22, 24, 26, 30, 31, 32, 36, 37, 41, 42,
             43, 46, 57, 58, 59, 61, 62, 64, 73, 88, 90, 92, 98, 115, 116, 119,
@@ -249,17 +244,19 @@ const MovieDetailPage: React.FC = () => {
     }
   };
 
-  // New error handler for the main movie poster.
-  const handleMainPosterError = () => {
+  // Modified main poster error handler: accepts the event and sets the fallback immediately.
+  const handleMainPosterError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    e.currentTarget.onerror = null;
+    const selected =
+      fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
+    e.currentTarget.src = `/assets/movies/${selected}`;
     setPosterError(true);
-    if (!mainPosterFallback) {
-      const selected =
-        fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
-      setMainPosterFallback(selected);
-    }
+    setMainPosterFallback(selected);
   };
 
-  // Function to render numeric (1–5) star ratings.
+  // Function to render static numeric (1–5) star ratings.
   const renderStarRating = (rating: number | undefined) => {
     if (rating == null || isNaN(rating)) {
       return (
@@ -287,8 +284,35 @@ const MovieDetailPage: React.FC = () => {
     );
   };
 
+  // Interactive star rating component for unrated movies.
+  const InteractiveStarRating: React.FC = () => {
+    const [hoverRating, setHoverRating] = useState<number>(0);
+    return (
+      <>
+        {Array.from({ length: 5 }, (_, index) => {
+          const starValue = index + 1;
+          const filled =
+            hoverRating > 0
+              ? starValue <= hoverRating
+              : starValue <= interactiveRating;
+          return (
+            <span
+              key={index}
+              className={`star ${filled ? 'filled' : 'empty'}`}
+              onMouseEnter={() => setHoverRating(starValue)}
+              onMouseLeave={() => setHoverRating(0)}
+              onClick={() => setInteractiveRating(starValue)}
+              style={{ cursor: 'pointer' }}
+            >
+              {filled ? '★' : '☆'}
+            </span>
+          );
+        })}
+      </>
+    );
+  };
+
   const handleRecommendationClick = (recId: string) => {
-    console.log('Navigating to movie id:', recId);
     navigate(`/moviedetails/${recId}`);
   };
 
@@ -333,12 +357,12 @@ const MovieDetailPage: React.FC = () => {
             </div>
             <div className="movie-rating">
               <div className="rating-stars">
-                {/* Render the current movie's star quality from recommendations.
-                    We assume that currentMovieRating (from source_show_rating) is numeric.
-                    If it's undefined, render empty stars. */}
-                {renderStarRating(currentMovieRating)}
+                {currentMovieRating && currentMovieRating > 0 ? (
+                  renderStarRating(currentMovieRating)
+                ) : (
+                  <InteractiveStarRating />
+                )}
               </div>
-              {/* Then display the maturity rating text */}
               <span className="rating-text">{movie.rating}</span>
             </div>
             <div className="movie-buttons">
@@ -435,28 +459,34 @@ const MovieDetailPage: React.FC = () => {
                               }
                               alt={recommendation.rec_title}
                               className="recommendation-image"
-                              onError={() => {
+                              onError={(e) => {
                                 if (!fallbackMapping[recId]) {
-                                  setFallbackMapping((prev) => {
-                                    const used = Object.values(prev);
-                                    const available = fallbackImages.filter(
-                                      (img) => !used.includes(img)
-                                    );
-                                    const selected =
-                                      available.length > 0
-                                        ? available[
-                                            Math.floor(
-                                              Math.random() * available.length
-                                            )
-                                          ]
-                                        : fallbackImages[
-                                            Math.floor(
-                                              Math.random() *
-                                                fallbackImages.length
-                                            )
-                                          ];
-                                    return { ...prev, [recId]: selected };
-                                  });
+                                  const used = Object.values(fallbackMapping);
+                                  const available = fallbackImages.filter(
+                                    (img) => !used.includes(img)
+                                  );
+                                  const selected =
+                                    available.length > 0
+                                      ? available[
+                                          Math.floor(
+                                            Math.random() * available.length
+                                          )
+                                        ]
+                                      : fallbackImages[
+                                          Math.floor(
+                                            Math.random() *
+                                              fallbackImages.length
+                                          )
+                                        ];
+                                  setFallbackMapping((prev) => ({
+                                    ...prev,
+                                    [recId]: selected,
+                                  }));
+                                  e.currentTarget.onerror = null;
+                                  e.currentTarget.src = `/assets/movies/${selected}`;
+                                } else {
+                                  e.currentTarget.onerror = null;
+                                  e.currentTarget.src = `/assets/movies/${fallbackMapping[recId]}`;
                                 }
                               }}
                             />
