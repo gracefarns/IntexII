@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 
 
+// get google client into env
 DotNetEnv.Env.Load();
+var googleClientId = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID");
 
 
 var builder = WebApplication.CreateBuilder(args);

@@ -73,6 +73,7 @@ namespace RootkitAuth.API.Controllers
             var devMap = new Dictionary<string, int>
             {
                 ["5e2e9389-2da7-4cf1-91a2-114063032ca1"] = 1
+                // add the rest of the users
             };
 
             if (!devMap.TryGetValue(azureUserId, out int recUserId))

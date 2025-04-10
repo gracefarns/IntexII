@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Movie } from '../types/Movie'; // Use the centralized Movie type from your database
+import { Movie } from '../types/Movie';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { fetchMovies } from '../api/MoviesAPI'; // Reuse your API function for fetching movies
+import { fetchMovies } from '../api/MoviesAPI';
 import '../styles/MoviePage.css';
 import SearchResults from '../components/SearchResults';
 import { useNavigate } from 'react-router-dom';
 import RecommendationCarousel from '../components/RecommendationCarousel';
 
 const MoviePage: React.FC = () => {
-  // Search state
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Movie[]>([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -18,6 +17,44 @@ const MoviePage: React.FC = () => {
   const [genreRecs, setGenreRecs] = useState<
     { genre: string; movies: Movie[] }[]
   >([]);
+  const [allMovies, setAllMovies] = useState<Movie[]>([]); // 🔥 NEW
+  const [selectedGenre, setSelectedGenre] = useState<string | null>(null); // 🔥 NEW
+
+  const GENRES = [
+    // 🔥 NEW
+    'Action',
+    'Adventure',
+    'Anime',
+    'British_Docuseries',
+    'Children',
+    'Comedies',
+    'Comedies_Dramas',
+    'Comedies_International',
+    'Comedies_Romantic',
+    'Crime_TV',
+    'Documentaries',
+    'Documentaries_International',
+    'Docuseries',
+    'Dramas',
+    'Dramas_International',
+    'Dramas_Romantic',
+    'Family',
+    'Fantasy',
+    'Horror',
+    'International_Thrillers',
+    'International_Romantic_Dramas_TV',
+    'Kids_TV',
+    'Language_TV',
+    'Musicals',
+    'Nature_TV',
+    'Reality_TV',
+    'Spirituality',
+    'TV_Action',
+    'TV_Comedies',
+    'TV_Dramas',
+    'Talk_Shows',
+    'Thrillers',
+  ];
 
   const fetchMovieById = async (id: string | number) => {
     const res = await fetch(
@@ -42,7 +79,6 @@ const MoviePage: React.FC = () => {
 
         const data = await res.json();
 
-        // Fetch full movie details for top 10
         const topMovies = await Promise.all(
           Object.values(data.top10)
             .filter((id) => id)
@@ -51,7 +87,6 @@ const MoviePage: React.FC = () => {
 
         setTop10Recs(topMovies);
 
-        // Fetch genre-based movies
         const genreMovieGroups = await Promise.all(
           data.byGenre.map(async (g: any) => {
             const movies = await Promise.all(
@@ -73,17 +108,22 @@ const MoviePage: React.FC = () => {
     fetchRecommendations();
   }, []);
 
-  // Debounce search: only search after 300ms of inactivity to minimize API calls.
+  // 🔥 NEW: Fetch general movies on load
+  useEffect(() => {
+    fetchMovies(100, 1, [], '') // You can increase page size if needed
+      .then((data) => setAllMovies(data.movies))
+      .catch((err) => console.error('Error fetching all movies:', err));
+  }, []);
+
+  // ✏️ MODIFIED: Search query debounce logic
   useEffect(() => {
     if (searchQuery.trim() === '') {
-      // Clear results and hide popup if the search query is empty.
       setSearchResults([]);
       setShowSearchResults(false);
       return;
     }
 
     const timeoutId = setTimeout(() => {
-      // Assuming your fetchMovies API takes (pageSize, pageNum, containers, searchTerm)
       fetchMovies(10, 1, [], searchQuery)
         .then((data) => {
           setSearchResults(data.movies);
@@ -99,12 +139,14 @@ const MoviePage: React.FC = () => {
     return () => clearTimeout(timeoutId);
   }, [searchQuery]);
 
-  // Function to handle clicking a search result
   const handleResultClick = (movie: Movie) => {
     navigate(`/moviedetails/${movie.show_id}`);
-
-    console.log('Clicked movie:', movie); //debug
+    console.log('Clicked movie:', movie);
   };
+
+  const filteredAllMovies = selectedGenre
+    ? allMovies.filter((movie) => (movie as any)[selectedGenre] === 1)
+    : allMovies; // 🔥 NEW
 
   return (
     <>
@@ -117,6 +159,7 @@ const MoviePage: React.FC = () => {
               Millions of movies to discover. Explore now.
             </p>
           </div>
+
           <div className="search-filter-container">
             <div className="search-box">
               <svg
@@ -137,6 +180,21 @@ const MoviePage: React.FC = () => {
                 className="search-input"
               />
             </div>
+
+            {/* 🔥 NEW: Genre filter chips */}
+            <div className="genre-chips">
+              {GENRES.map((genre) => (
+                <button
+                  key={genre}
+                  className={`genre-chip ${selectedGenre === genre ? 'selected' : ''}`}
+                  onClick={() =>
+                    setSelectedGenre(selectedGenre === genre ? null : genre)
+                  }
+                >
+                  {genre.replace(/_/g, ' ')}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -147,13 +205,27 @@ const MoviePage: React.FC = () => {
           />
         )}
 
-        {/* Main Content - can be used for other information, like featured movies */}
         <div className="main-content">
           <div className="recommendation-section">
             {top10Recs.length > 0 && (
               <RecommendationCarousel
                 title="You’ll Love These"
                 movies={top10Recs}
+                onClickMovie={(movie) =>
+                  navigate(`/moviedetails/${movie.show_id}`)
+                }
+              />
+            )}
+
+            {/* 🔥 NEW: Filtered "All Movies" section */}
+            {filteredAllMovies.length > 0 && (
+              <RecommendationCarousel
+                title={
+                  selectedGenre
+                    ? `Showing ${selectedGenre.replace(/_/g, ' ')}`
+                    : 'All Movies'
+                }
+                movies={filteredAllMovies}
                 onClickMovie={(movie) =>
                   navigate(`/moviedetails/${movie.show_id}`)
                 }

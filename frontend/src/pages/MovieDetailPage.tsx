@@ -101,7 +101,7 @@ const MovieDetailPage: React.FC = () => {
           const randomFallbackId =
             fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
           return fetch(
-            `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
+            `https://ambitious-sky-052f4611e.6.azurestaticapps.net/${randomFallbackId}`,
             {
               method: 'GET',
               credentials: 'include',
@@ -119,7 +119,7 @@ const MovieDetailPage: React.FC = () => {
         const randomFallbackId =
           fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
         fetch(
-          `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
+          `https://ambitious-sky-052f4611e.6.azurestaticapps.net/${randomFallbackId}`,
           {
             method: 'GET',
             credentials: 'include',
