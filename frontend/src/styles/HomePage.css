@@ -26,13 +26,12 @@ html {
 }
 
 /* Header Styles */
-.header {
+.home-container .header {
   position: fixed; /* Make it stick to the top */
   top: 0; /* Stick to top of page */
   left: 0;
   width: 100%; /* Stretch across the full width */
   z-index: 50; /* High z-index so it stays above everything */
-
   padding: 1rem 0;
   display: flex;
   justify-content: flex-start !important;
@@ -43,59 +42,57 @@ html {
   padding-left: 25px !important;
 }
 
-main {
+.home-container main {
   padding-top: 1rem; /* or 80px depending on your header height */
 }
 
-.brand {
+.home-container .brand {
   font-size: 2.25rem;
   font-weight: 700;
   margin-left: 0;
   text-align: left !important;
 }
 
-.brand-cine {
+.home-container .brand-cine {
   color: #14b8a6; /* teal-500 */
   text-align: left !important;
 }
 
-.brand-niche {
+.home-container .brand-niche {
   color: #d1d5db; /* gray-300 */
   text-align: left !important;
 }
 
-/* Hero Section */
-.hero-section {
-  margin-top: 2rem; /* Adjust as needed */
+/* Hero Section - making it more specific to HomePage */
+/* Fix for hero section spacing and height */
+.home-container .hero-section {
+  margin: 3rem auto; /* Add space above and below */
+  min-height: auto; /* Remove the fixed height constraint */
+  padding: 2rem 0; /* Add padding all around */
+  background-color: #18181b;
+  border-radius: 10px;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 100vh; /* Set minimum height for hero section */
-  font-family: 'Poppins', sans-serif;
-  color: #a3c1ad; /* Soft, earthy text color */
-  padding-top: 70px; /* Space for the fixed navbar */
-  background: linear-gradient(180deg, #011219, #141414 70%, #011218) !important;
+  align-items: stretch; /* Ensure children stretch to same height */
+  max-height: 80vh; /* Limit maximum height */
 }
 
-@media (min-width: 768px) {
-  .hero-section {
-    flex-direction: row;
-    min-height: 80vh; /* Taller on larger screens */
+/* Media query for mobile - stack vertically on small screens */
+@media (max-width: 767px) {
+  .home-container .hero-section {
+    flex-direction: column;
   }
 }
 
-.hero-left {
-  width: 100%;
-  /* Remove the old background-color, or keep it as fallback: */
-  background: #e5e7eb; /* fallback for older browsers */
-
+.home-container .hero-left {
+  width: 35%; /* Fixed width for large screens */
+  margin-left: 2rem;
+  max-height: 70vh;
   /* Vibrant teal-blue gradient from left to right */
   background: linear-gradient(
     to right,
     #abd3ce,
     /* teal-400 */ #e5eaf2 /* blue-500 */
   );
-
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -108,60 +105,61 @@ main {
   transition: box-shadow 0.3s ease;
 }
 
+/* Mobile adjustment */
+@media (max-width: 767px) {
+  .home-container .hero-left {
+    width: 100%;
+  }
+}
+
 /* Box Shadows for Different Genres */
-.hero-left.action {
+.home-container .hero-left.action {
   box-shadow:
     rgb(204, 219, 232) 3px 3px 6px 0px inset,
     rgba(255, 0, 0, 0.5) -3px -3px 6px 1px inset; /* Red Shadow for Action */
 }
 
-.hero-left.drama {
+.home-container .hero-left.drama {
   box-shadow:
     rgb(204, 219, 232) 3px 3px 6px 0px inset,
     rgba(10, 218, 233, 0.5) -3px -3px 6px 1px inset; /* Blue Shadow for Drama */
 }
 
-.hero-left.comedy {
+.home-container .hero-left.comedy {
   box-shadow:
     rgb(204, 219, 232) 3px 3px 6px 0px inset,
     rgba(181, 157, 20, 0.74) -3px -3px 6px 1px inset; /* Green Shadow for Comedy */
 }
 
-.hero-left.horror {
+.home-container .hero-left.horror {
   box-shadow:
     rgb(204, 219, 232) 3px 3px 6px 0px inset,
     rgba(77, 54, 6, 0.976) -3px -3px 10px 1px inset; /* Purple Shadow for Horror */
 }
 
-.hero-left.sci-fi {
+.home-container .hero-left.sci-fi {
   box-shadow:
     rgb(204, 219, 232) 3px 3px 6px 0px inset,
     rgba(208, 157, 4, 0.921) -3px -3px 10px 1px inset; /* Orange Shadow for Sci-Fi */
 }
 
-.hero-left.thriller {
+.home-container .hero-left.thriller {
   box-shadow:
     rgb(204, 219, 232) 3px 3px 6px 0px inset,
     rgba(67, 67, 60, 0.5) -3px -3px 10px 1px inset; /* Yellow Shadow for Thriller */
 }
 
-.hero-left.anime {
+.home-container .hero-left.anime {
   box-shadow:
     rgb(204, 219, 232) 3px 3px 6px 0px inset,
     rgba(255, 20, 147, 0.5) -3px -3px 6px 1px inset; /* Deep Pink Shadow for Anime */
 }
 
-@media (min-width: 768px) {
-  .hero-left {
-    width: 40%;
-  }
-}
-
-.hero-content {
+.home-container .hero-content {
   margin-top: 4rem;
 }
 
-.hero-title {
+.home-container .hero-title {
   font-size: 2.25rem;
   line-height: 1.2;
   font-weight: 700;
@@ -171,33 +169,32 @@ main {
 }
 
 @media (min-width: 768px) {
-  .hero-title {
+  .home-container .hero-title {
     font-size: 3rem;
   }
 }
 
-.hero-subtitle {
+.home-container .hero-subtitle {
   font-size: 1.5rem;
   color: #3f3f46; /* zinc-700 */
   margin-bottom: 1.5rem;
 }
 
-.hero-divider {
+.home-container .hero-divider {
   display: block;
   width: 100%;
   border-top: 2px solid #9ca3af; /* gray-400 */
   margin: 0.35rem 0;
 }
 
-.hero-buttons {
+.home-container .hero-buttons {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
 }
 
-.btn-signin {
+.home-container .btn-signin {
   padding: 0.5rem 1.5rem;
-  /* border: 1px solid #6b7280;  gray-500 */
   border-radius: 0.375rem;
   background: transparent;
   cursor: pointer;
@@ -207,15 +204,16 @@ main {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); /* brief shadow under the button */
 }
 
-.btn-signin:hover {
+.home-container .btn-signin:hover {
   background: linear-gradient(
     45deg,
     #14b8a6,
     #485265
   ); /* gray-300 to gray-500 gradient */
+  border: none;
 }
 
-.btn-register {
+.home-container .btn-register {
   padding: 0.5rem 1.5rem;
   background-color: #27272a; /* zinc-800 */
   color: white;
@@ -226,7 +224,7 @@ main {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6); /* brief shadow under the button */
 }
 
-.btn-register:hover {
+.home-container .btn-register:hover {
   background: linear-gradient(
     45deg,
     #3f3f46,
@@ -234,52 +232,53 @@ main {
   ); /* zinc-700 to gray-500 gradient */
 }
 
-.hero-footer {
+.home-container .hero-footer {
   margin-top: 4rem;
 }
 
-.hero-links {
+.home-container .hero-links {
   display: flex;
   font-size: 0.875rem;
   color: #3f3f46; /* zinc-700 */
 }
 
-.footer-link {
+.home-container .footer-link {
   color: #3f3f46; /* zinc-700 */
   text-decoration: none;
 }
 
-.footer-link:hover {
+.home-container .footer-link:hover {
   text-decoration: underline;
 }
 
-.hero-links span {
+.home-container .hero-links span {
   margin: 0 0.5rem;
 }
 
-.copyright {
+.home-container .copyright {
   font-size: 0.875rem;
   color: #3f3f46; /* zinc-700 */
   margin-top: 0.5rem;
 }
 
 /* Hero Right - Hero Image */
-.hero-right {
-  width: 100%;
+.home-container .hero-right {
+  width: 65%; /* Complementary to hero-left */
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: relative;
 }
 
-@media (min-width: 768px) {
-  .hero-right {
-    width: 70%;
+/* Mobile adjustment */
+@media (max-width: 767px) {
+  .home-container .hero-right {
+    width: 100%;
   }
 }
 
 /* Genre Navigation */
-.genre-nav-container {
+.home-container .genre-nav-container {
   border-bottom: 1px solid #27272a; /* zinc-800 */
   padding: 1rem 1.5rem 0.5rem;
   background-color: rgba(24, 24, 27, 0); /* Semi-transparent background */
@@ -291,7 +290,7 @@ main {
   border-bottom-right-radius: 0;
 }
 
-.genre-nav {
+.home-container .genre-nav {
   display: flex;
   overflow-x: auto;
   padding-bottom: 0.7rem;
@@ -300,11 +299,11 @@ main {
   -ms-overflow-style: none; /* IE and Edge */
 }
 
-.genre-nav::-webkit-scrollbar {
+.home-container .genre-nav::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
 
-.genre-btn {
+.home-container .genre-btn {
   position: relative; /* Add this so the ::after is positioned relative to the button */
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
@@ -312,23 +311,22 @@ main {
   white-space: nowrap;
   background: transparent;
   border: none;
-  /* color: #9ca3af;  gray-400 */
+  color: #e5e7eb; /* Light color for visibility */
   cursor: pointer;
   transition: color 0.3s;
 }
 
-.genre-btn:hover {
-  /* color: #e5e7eb;  gray-200 */
+.home-container .genre-btn:hover {
   transform: scale(1.1); /* Grow text on hover */
   background-color: transparent; /* NEW: force transparent background */
 }
 
-.genre-btn.active {
+.home-container .genre-btn.active {
   color: #14b8a6; /* teal-500 */
 }
 
 /* NEW: glowing highlight bar when active */
-.genre-btn.active::after {
+.home-container .genre-btn.active::after {
   content: '';
   position: absolute;
   left: 25%;
@@ -340,7 +338,7 @@ main {
 }
 
 /* Hero Image Container */
-.hero-image-container {
+.home-container .hero-image-container {
   flex: 1;
   position: relative;
   overflow: hidden;
@@ -354,21 +352,21 @@ main {
   border-bottom-left-radius: 0;
 }
 
-.hero-image {
+.home-container .hero-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   transition: transform 0.5s ease;
 }
 
 /* Add a subtle zoom effect when changing images */
-.hero-image:hover {
+.home-container .hero-image:hover {
   transform: scale(1.02);
 }
 
 /* Overlay with text on the hero image */
-.genre-overlay {
+.home-container .genre-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -380,8 +378,6 @@ main {
     rgba(0, 0, 0, 0) 100%
   );
   z-index: 5;
-  /* Added border-radius for rounded edges */
-
   /* Rounded on the right only */
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -391,7 +387,7 @@ main {
   border-bottom-left-radius: 0;
 }
 
-.genre-title {
+.home-container .genre-title {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
@@ -399,90 +395,60 @@ main {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.genre-description {
+.home-container .genre-description {
   font-size: 1rem;
   color: #d1d5db; /* gray-300 */
   max-width: 80%;
 }
 
-.movie-poster {
-  aspect-ratio: 2/3;
-  border-radius: 0.25rem;
-  overflow: hidden;
-  transition: all 0.3s;
-  transform-origin: center;
-  background-color: #3f3f46; /* zinc-700 */
-  cursor: pointer;
-}
-
-.movie-poster:hover {
-  transform: scale(1.1);
-  z-index: 10;
-}
-
-.movie-poster img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 /* FAQ Section */
-.faq-section {
-  padding: 4rem 20rem;
+.home-container .faq-section {
+  padding: 4rem 2rem;
   background-color: #18181b; /* zinc-800 */
   text-align: left;
   color: white;
   line-height: 1.4; /* Optional: helps maintain readability */
 }
 
-.faq-section h2 {
+/* Responsive padding for larger screens */
+@media (min-width: 768px) {
+  .home-container .faq-section {
+    padding: 4rem 10rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .home-container .faq-section {
+    padding: 4rem 20rem;
+  }
+}
+
+.home-container .faq-section h2 {
   font-size: 1.5rem; /* Adjust heading size */
   text-align: center;
   margin-bottom: 2rem; /* Adjust the rem value as needed */
 }
 
-.italic-part {
+.home-container .italic-part {
   font-style: italic;
   font-weight: 200;
 }
 
-.faq-container {
-  max-width: 45rem;
-  margin: 0 auto;
-  max-width: 600px; /* Adjust as needed for desired width */
-  width: 100%;
-}
-
-.faq-title {
-  font-size: 1.875rem;
-  font-weight: 600;
-  margin-bottom: 10rem;
-  color: white;
-  text-align: center;
-}
-
-.faq-items {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 10rem 1rem;
-  gap: 1rem;
-}
-
-.faq-item {
+.home-container .faq-item {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid #3f3f46; /* zinc-700 */
   padding-bottom: 0.25rem;
   padding-top: 0.25rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   border-radius: 0.375rem; /* Subtle border-radius (rounded corners) */
+  margin-bottom: 0.5rem;
 }
 
-.faq-item:hover {
+.home-container .faq-item:hover {
   box-shadow: rgb(38, 57, 77) 0px 10px 15px -5px;
 }
 
-.faq-question {
+.home-container .faq-question {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -498,32 +464,16 @@ main {
   transition: color 0.3s;
 }
 
-.faq-question:hover {
+.home-container .faq-question:hover {
   color: #14b8a6; /* teal-400 */
   background: transparent;
 }
 
-.faq-toggle {
-  font-size: 1.5rem;
-}
-
-.faq-answer {
+.home-container .faq-answer {
   padding-bottom: 1rem;
   color: #d1d5db; /* gray-300 */
   width: 95%; /* Retaining width but ensuring padding for spacing */
   padding: 0.75rem 1rem; /* Decrease top/bottom padding, increase left/right */
-}
-
-/* The symbol (+ or –) */
-.faq-toggle {
-  margin-left: 0.5rem;
-  font-size: 1.5rem;
-  transition: color 0.3s;
-}
-
-/* Optionally change the symbol’s color on hover */
-.faq-question:hover .faq-toggle {
-  color: #14b8a6; /* teal-400 */
 }
 
 /* Footer */

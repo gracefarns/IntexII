@@ -94,7 +94,7 @@ export default function HomePage() {
       mockGenreHeroImages[selectedGenre] || mockGenreHeroImages[mockGenres[0]]
     );
   }, [selectedGenre]);
-  const toggleFaq = (index: number ) => {
+  const toggleFaq = (index: number) => {
     setExpandedFaq(expandedFaq === index ? null : index);
   };
   const navigate = useNavigate();
@@ -106,6 +106,8 @@ export default function HomePage() {
           <span className="brand-niche">Niche</span>
         </div>
       </header>
+      <br />
+      <br />
       <main>
         {/* Hero Section */}
         <div className="hero-section">
