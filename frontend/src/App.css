@@ -4,7 +4,7 @@
   background: 
     /* Overlay with 50% opacity white; adjust the rgba as desired */
     linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-    url('assets/movies/Sundance.jpg');
+    url('/assets/movies/Sundance.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
