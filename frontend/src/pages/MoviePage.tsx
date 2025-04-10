@@ -70,7 +70,7 @@ const MoviePage: React.FC = () => {
     const fetchRecommendations = async () => {
       try {
         const res = await fetch(
-          'https://localhost:5000/Recommendation/personalized',
+          'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Recommendation/personalized',
           {
             credentials: 'include',
           }
@@ -200,7 +200,7 @@ const MoviePage: React.FC = () => {
           <div className="recommendation-section">
             {top10Recs.length > 0 && (
               <RecommendationCarousel
-                title="You’ll Love These"
+                title="Top 10 Picks For You"
                 movies={top10Recs}
                 onClickMovie={(movie) =>
                   navigate(`/moviedetails/${movie.show_id}`)
