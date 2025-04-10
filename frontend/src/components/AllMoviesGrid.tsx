@@ -21,7 +21,8 @@ const AllMoviesGrid: React.FC<Props> = ({
   const [isLoading, setIsLoading] = useState(false);
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
-  const genreFilter = selectedGenre ? genreMap[selectedGenre] : null;
+  // commented out code below temporarily to run build -grace
+  //const genreFilter = selectedGenre ? genreMap[selectedGenre] : null;
 
   const loadMovies = useCallback(
     async (reset = false) => {
@@ -55,7 +56,7 @@ const AllMoviesGrid: React.FC<Props> = ({
     [page, selectedGenre, genreMap, isLoading, hasMore]
   );
 
-  // 🔁 On genre change, reset everything and fetch new
+  //  On genre change, reset everything and fetch new
   useEffect(() => {
     console.log('GENRE CHANGED:', selectedGenre);
     setMovies([]);
@@ -64,14 +65,14 @@ const AllMoviesGrid: React.FC<Props> = ({
     loadMovies(true); // fetch fresh page 1
   }, [selectedGenre]);
 
-  // 🔁 Load next page if page increases
+  //  Load next page if page increases
   useEffect(() => {
     if (page > 1) {
       loadMovies();
     }
   }, [page]);
 
-  // 👀 Infinite scroll
+  //  Infinite scroll
   useEffect(() => {
     if (!loaderRef.current || !hasMore) return;
 
