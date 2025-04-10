@@ -6,7 +6,7 @@ interface FaqItem {
   question: string;
   answer: string;
 }
-const mockGenres = [
+const mockGenres: (keyof typeof mockGenreHeroImages)[] = [
   'Action',
   'Drama',
   'Comedy',
