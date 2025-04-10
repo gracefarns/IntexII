@@ -9,7 +9,7 @@ export default defineConfig({
     headers: {
       'Content-Security-Policy':
         "default-src 'self'; " +
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com; " +
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://apis.google.com; " +
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com; " +
         "img-src 'self' data: https://cinenicheblobcontainer.blob.core.windows.net; " +
         "frame-ancestors 'none'; " +
@@ -21,8 +21,8 @@ export default defineConfig({
         "frame-src 'self' https://accounts.google.com https://oauth2.googleapis.com;",
     },
     cors: {
-      origin: 'http://localhost:3000',
-      credentials: true, // ✅ Allow cookies for authentication
+      origin: ['http://localhost:3000', 'https://your-frontend.azurestaticapps.net'],
+      credentials: true,
     },
   },
 });
