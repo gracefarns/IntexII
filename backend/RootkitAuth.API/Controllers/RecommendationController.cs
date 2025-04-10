@@ -20,12 +20,14 @@ namespace RootkitAuth.API.Controllers
             _genreDbContext = genreDbContext;
         }
 
+        [Authorize]
         [HttpGet("Test")]
         public IActionResult Test()
         {
             return Ok(new { message = "Recommendation controller is working!" });
         }
 
+        [Authorize]
         [HttpGet("ForMovie/{sourceId}")]
         public IActionResult GetForMovie(int sourceId)
         {
