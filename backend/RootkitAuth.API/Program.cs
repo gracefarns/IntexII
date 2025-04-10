@@ -73,8 +73,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.Name = ".AspNetCore.Identity.Application";
     options.LoginPath = "/login";
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    options.ExpireTimeSpan = TimeSpan.FromDays(30); // Cookie lasts 30 days
-    options.SlidingExpiration = true; // Resets expiration on activity
 });
 
 builder.Services.AddCors(options =>
@@ -94,8 +92,6 @@ builder.Services.AddSingleton<IEmailSender<IdentityUser>, NoOpEmailSender<Identi
 
 
 var app = builder.Build();
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -129,10 +125,11 @@ app.MapPost("/logout", async (HttpContext context, SignInManager<IdentityUser> s
 }).RequireAuthorization()
 .RequireCors("AllowFrontend");;
 
+// return security and authentication
 app.MapGet("/pingauth", (HttpContext context, ClaimsPrincipal user) =>
 {
     Console.WriteLine($"User authenticated? {user.Identity?.IsAuthenticated}");
-    
+
     if (!user.Identity?.IsAuthenticated ?? false)
     {
         Console.WriteLine("Unauthorized request to /pingauth");
@@ -140,11 +137,16 @@ app.MapGet("/pingauth", (HttpContext context, ClaimsPrincipal user) =>
     }
 
     var email = user.FindFirstValue(ClaimTypes.Email) ?? "unknown@example.com";
-    Console.WriteLine($"Authenticated User Email: {email}");
+    var roles = user.FindAll(ClaimTypes.Role).Select(c => c.Value).ToList();
 
-    return Results.Json(new { email = email });
-}).RequireAuthorization()
+    Console.WriteLine($"Authenticated User Email: {email}");
+    Console.WriteLine($"Roles: {string.Join(", ", roles)}");
+
+    return Results.Json(new { email, roles });
+})
+.RequireAuthorization()
 .RequireCors("AllowFrontend");
+
 
 app.Run();
 

@@ -1,16 +1,26 @@
-import { Navigate, Outlet } from 'react-router-dom';
+// src/components/ProtectedRoute.tsx
+import React, { ReactNode } from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // or wherever you store auth state
 
 interface ProtectedRouteProps {
-  requiredRole: string;
+  requiredRole?: string;
+  children: ReactNode;
 }
 
-const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-  const roles: string[] = user.roles || [];
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ requiredRole, children }) => {
+  const { user, loading } = useAuth();
 
-  const hasAccess = roles.includes(requiredRole);
+  if (loading) return <div>Loading authentication...</div>;
 
-  return hasAccess ? <Outlet /> : <Navigate to="/unauthorized" replace />;
+  if (!user) return <Navigate to="/login" replace />;
+
+  if (requiredRole && !user?.roles?.includes(requiredRole)) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+  
+
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;

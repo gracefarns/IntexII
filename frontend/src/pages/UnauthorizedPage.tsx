@@ -5,7 +5,7 @@ function UnauthorizedPage() {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
-    navigate('/moviepage');
+    navigate('/');
   };
 
   return (
@@ -31,7 +31,7 @@ function UnauthorizedPage() {
                   onClick={handleRedirect}
                   className="btn btn-primary"
                 >
-                  Return to Main Page
+                  Return to home page
                 </button>
               </div>
             </div>
