@@ -4,8 +4,8 @@
   right: 0;
   width: 50%;
   height: 100%;
-  background-color: #141414;
-  color: #f2f2f2;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   padding: 24px;
   overflow-y: auto;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.6);
@@ -26,10 +26,10 @@
 .results-heading {
   font-size: 1.2rem;
   margin-bottom: 24px;
-  color: #fff;
+  color: var(--light-teal);
   font-weight: 600;
   letter-spacing: 0.5px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 12px;
 }
 
@@ -72,9 +72,9 @@
 }
 
 .movie-title {
-  font-size: 0.7rem; /* Reduced from 0.85rem to about half the previous size */
+  font-size: 0.75rem; /* Reduced from 0.85rem to about half the previous size */
   line-height: 1.2;
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 500;
   margin-bottom: 2px;
   overflow: hidden;
@@ -84,13 +84,13 @@
 
 .movie-rating {
   font-size: 0.65rem; /* Reduced from 0.75rem to maintain proportion */
-  color: #aaa;
+  color: var(--text-muted);
 }
 
-/* You could also add this to make the margin between title and poster smaller */
+/* You could also add this to make the margin between title and poster smaller
 .poster-info {
   margin-top: 6px;
-}
+} */
 
 /* Optional: add this to handle titles that are now too small to read easily */
 .poster-tile:hover .movie-title {

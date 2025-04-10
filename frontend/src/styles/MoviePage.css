@@ -1,34 +1,35 @@
 /* HomePage.css with Indie Color Scheme */
 
 :root {
-  /* Base Colors */
-  --dark-base: rgb(0, 18, 25);
-  --dark-accent: rgb(0, 95, 115);
-  --medium-teal: rgb(10, 147, 150);
-  --light-teal: rgb(148, 210, 189);
-  --cream: rgb(233, 216, 166);
+  /* Core Theme Colors */
+  --teal: #14b8a6;
+  --teal-light: #5eead4; /* Lighter shade for hover */
+  --teal-dark: #0f766e; /* Darker shade for buttons or accents */
 
-  /* Accent Colors */
-  --vibrant-yellow: rgb(238, 155, 0);
-  --vibrant-orange: rgb(202, 103, 2);
-  --burnt-orange: rgb(187, 62, 3);
-  --vibrant-red: rgb(18, 171, 174);
-  --deep-red: rgb(34, 155, 149);
+  --black: #1c1e1f;
+  --white: #ffffff;
+  --gray: #cbd5e1; /* Muted text */
 
-  /* UI Colors */
-  --bg-primary: var(--dark-base);
-  --bg-secondary: rgba(0, 18, 25, 0.8);
-  --bg-card: rgba(0, 95, 115, 0.25);
-  --bg-card-hover: rgba(10, 147, 150, 0.1);
-  --text-primary: var(--cream);
-  --text-secondary: rgba(233, 216, 166, 0.8);
-  --text-muted: rgba(148, 210, 189, 0.7);
-  --accent-primary: var(--vibrant-yellow);
-  --accent-secondary: var(--vibrant-orange);
-  --button-primary: var(--burnt-orange);
-  --button-hover: var(--vibrant-red);
-  --button-active: var(--deep-red);
-  --border-light: rgba(148, 210, 189, 0.3);
+  /* Base Application Colors */
+  --bg-primary: var(--black);
+  --bg-secondary: #2a2e2f;
+  --bg-card: rgba(20, 184, 166, 0.1);
+  --bg-card-hover: rgba(20, 184, 166, 0.2);
+
+  --text-primary: var(--white);
+  --text-secondary: var(--gray);
+  --text-muted: rgba(255, 255, 255, 0.6);
+
+  --accent-primary: var(--teal);
+  --accent-secondary: var(--teal-light);
+
+  --button-primary: var(--teal-dark);
+  --button-hover: var(--teal);
+  --button-active: var(--teal-light);
+
+  --border-light: rgba(20, 184, 166, 0.3);
+
+  --font-heading: 'Poppins', 'Montserrat', sans-serif;
 }
 
 * {
@@ -54,7 +55,7 @@ body {
 .hero-section {
   padding: 60px 4% 30px;
   background:
-    linear-gradient(to bottom, rgba(0, 18, 25, 0.9) 0%, var(--bg-primary) 100%),
+    linear-gradient(to bottom, #14b8a6 0%, var(--bg-primary) 80%),
     url('/api/placeholder/1920/600') center/cover no-repeat;
   position: relative;
 }
@@ -65,11 +66,11 @@ body {
 }
 
 .featured-title {
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight: 700;
   margin-bottom: 16px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  color: var(--accent-primary);
+  text-shadow: 2px 2px 4px rgba(44, 126, 181, 0.5);
+  color: white;
 }
 
 .featured-description {
@@ -77,7 +78,7 @@ body {
   font-weight: 400;
   margin-bottom: 24px;
   line-height: 1.5;
-  color: var(--text-secondary);
+  color: white;
 }
 
 /* Search and Filters */
@@ -126,7 +127,7 @@ body {
   color: var(--text-muted);
 }
 
-.genre-filters {
+/* .genre-filters {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -153,31 +154,32 @@ body {
   background-color: var(--button-primary);
   color: var(--text-primary);
   border-color: var(--button-primary);
-}
+} */
 
 /* Main Content */
 .main-content {
-  padding: 20px 4%;
+  padding: 10px;
+  background-color: rgba(28, 30, 31);
 }
 
 /* Category Layout */
 .movie-category {
-  margin-bottom: 48px;
+  margin-bottom: 10px;
 }
 
 .category-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   padding: 0 4px;
 }
 
 .category-title {
   font-size: 24px;
+  font-family: var(--font-heading);
   font-weight: 700;
-  color: var(--medium-teal);
-  margin-bottom: 12px;
+  color: var(--teal) !important;
 }
 
 .category-controls {
@@ -206,13 +208,8 @@ body {
 }
 
 .movie-carousel {
-  display: flex;
-  overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 20px 4px;
-  margin: 0 -4px;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  padding: 10px 4px 4px;
 }
 
 .movie-carousel::-webkit-scrollbar {
@@ -478,56 +475,34 @@ body {
   }
 }
 
-@media (max-width: 576px) {
-  .movie-card {
-    width: 140px;
-  }
+.genre-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1rem;
+  padding: 0 1rem;
+}
 
-  .movie-poster {
-    height: 80px;
-  }
+.genre-chip {
+  padding: 8px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  background-color: rgba(0, 95, 115, 0.3); /* match top bar */
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
-  .movie-title {
-    font-size: 12px;
-  }
+.genre-chip:hover {
+  background-color: var(--light-teal);
+  color: var(--text-primary);
+  border-color: white;
+}
 
-  .movie-meta {
-    font-size: 10px;
-  }
-
-  .featured-title {
-    font-size: 1.5rem;
-  }
-
-  .genre-filters {
-    gap: 6px;
-  }
-
-  .genre-button {
-    padding: 8px 12px;
-    font-size: 12px;
-  }
-  .genre-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 1rem;
-    padding: 0 1rem;
-  }
-
-  .genre-chip {
-    padding: 6px 12px;
-    border: 1px solid #aaa;
-    border-radius: 20px;
-    background-color: white;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
-  }
-
-  .genre-chip.selected {
-    background-color: #444;
-    color: white;
-    border-color: #444;
-  }
+.genre-chip.selected {
+  background-color: var(--button-primary); /* vibrant orange */
+  color: var(--text-primary);
+  border-color: var(--button-primary);
 }

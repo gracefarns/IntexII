@@ -7,7 +7,8 @@ import '../styles/MoviePage.css';
 import SearchResults from '../components/SearchResults';
 import { useNavigate } from 'react-router-dom';
 import RecommendationCarousel from '../components/RecommendationCarousel';
-import AllMoviesGrid from '../components/AllMoviesGrid'; // 🔥 New import
+import AllMoviesGrid from '../components/AllMoviesGrid';
+import '../styles/RecommendationCarousel.css';
 
 const MoviePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -142,7 +143,6 @@ const MoviePage: React.FC = () => {
 
   return (
     <>
-      <Navbar />
       <div className="movie-page">
         <div className="hero-section">
           <div className="featured-content">
@@ -197,10 +197,10 @@ const MoviePage: React.FC = () => {
         )}
 
         <div className="main-content">
-          <div className="recommendation-section">
+          <div className="carousel-section">
             {top10Recs.length > 0 && (
               <RecommendationCarousel
-                title="Top 10 Picks For You"
+                title="Your next watch"
                 movies={top10Recs}
                 onClickMovie={(movie) =>
                   navigate(`/moviedetails/${movie.show_id}`)
@@ -211,7 +211,7 @@ const MoviePage: React.FC = () => {
             {genreRecs.map((g) => (
               <RecommendationCarousel
                 key={g.genre}
-                title={`Top ${g.genre}`}
+                title={`Just For You: Recommended ${g.genre}`}
                 movies={g.movies}
                 onClickMovie={(movie) =>
                   navigate(`/moviedetails/${movie.show_id}`)
