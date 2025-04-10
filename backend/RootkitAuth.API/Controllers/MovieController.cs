@@ -20,42 +20,161 @@ namespace RootkitAuth.API.Controllers
 
         [HttpGet("GetMovies")]
         public IActionResult GetMovies(
-            int pageSize = 10,
-            int pageNum = 1,
-            [FromQuery] List<string>? containers = null,
-            string? searchTerm = null)
-        {
-            var query = _movieDbContext.movies_titles.AsQueryable();
-
-            // Apply filters BEFORE pagination
-            if (containers != null && containers.Any())
+        int pageSize = 10,
+        int pageNum = 1,
+        [FromQuery(Name = "selectedCategories")] List<string>? selectedCategories = null,
+        string? searchTerm = null)
             {
-                query = query.Where(c => containers.Contains(c.rating));
+                Console.WriteLine("Received GetMovies request");
+
+                var query = _movieDbContext.movies_titles.AsQueryable();
+
+                //Log selected categories
+                Console.WriteLine("Selected Categories:");
+                if (selectedCategories != null && selectedCategories.Any())
+                {
+                    foreach (var category in selectedCategories)
+                    {
+                        Console.WriteLine($" - {category}");
+
+                        switch (category)
+                        {
+                            case "Action":
+                                query = query.Where(m => m.Action == 1);
+                                break;
+                            case "Adventure":
+                                query = query.Where(m => m.Adventure == 1);
+                                break;
+                            case "Anime":
+                                query = query.Where(m => m.Anime == 1);
+                                break;
+                            case "British_Docuseries":
+                                query = query.Where(m => m.British_Docuseries == 1);
+                                break;
+                            case "Children":
+                                query = query.Where(m => m.Children == 1);
+                                break;
+                            case "Comedies":
+                                query = query.Where(m => m.Comedies == 1);
+                                break;
+                            case "Comedies_Dramas":
+                                query = query.Where(m => m.Comedies_Dramas == 1);
+                                break;
+                            case "Comedies_International":
+                                query = query.Where(m => m.Comedies_International == 1);
+                                break;
+                            case "Comedies_Romantic":
+                                query = query.Where(m => m.Comedies_Romantic == 1);
+                                break;
+                            case "Crime_TV":
+                                query = query.Where(m => m.Crime_TV == 1);
+                                break;
+                            case "Documentaries":
+                                query = query.Where(m => m.Documentaries == 1);
+                                break;
+                            case "Documentaries_International":
+                                query = query.Where(m => m.Documentaries_International == 1);
+                                break;
+                            case "Docuseries":
+                                query = query.Where(m => m.Docuseries == 1);
+                                break;
+                            case "Dramas":
+                                query = query.Where(m => m.Dramas == 1);
+                                break;
+                            case "Dramas_International":
+                                query = query.Where(m => m.Dramas_International == 1);
+                                break;
+                            case "Dramas_Romantic":
+                                query = query.Where(m => m.Dramas_Romantic == 1);
+                                break;
+                            case "Family":
+                                query = query.Where(m => m.Family == 1);
+                                break;
+                            case "Fantasy":
+                                query = query.Where(m => m.Fantasy == 1);
+                                break;
+                            case "Horror":
+                                query = query.Where(m => m.Horror == 1);
+                                break;
+                            case "International_Thrillers":
+                                query = query.Where(m => m.International_Thrillers == 1);
+                                break;
+                            case "International_Romantic_Dramas_TV":
+                                query = query.Where(m => m.International_Romantic_Dramas_TV == 1);
+                                break;
+                            case "Kids_TV":
+                                query = query.Where(m => m.Kids_TV == 1);
+                                break;
+                            case "Language_TV":
+                                query = query.Where(m => m.Language_TV == 1);
+                                break;
+                            case "Musicals":
+                                query = query.Where(m => m.Musicals == 1);
+                                break;
+                            case "Nature_TV":
+                                query = query.Where(m => m.Nature_TV == 1);
+                                break;
+                            case "Reality_TV":
+                                query = query.Where(m => m.Reality_TV == 1);
+                                break;
+                            case "Spirituality":
+                                query = query.Where(m => m.Spirituality == 1);
+                                break;
+                            case "TV_Action":
+                                query = query.Where(m => m.TV_Action == 1);
+                                break;
+                            case "TV_Comedies":
+                                query = query.Where(m => m.TV_Comedies == 1);
+                                break;
+                            case "TV_Dramas":
+                                query = query.Where(m => m.TV_Dramas == 1);
+                                break;
+                            case "Talk_Shows":
+                                query = query.Where(m => m.Talk_Shows == 1);
+                                break;
+                            case "Thrillers":
+                                query = query.Where(m => m.Thrillers == 1);
+                                break;
+                            default:
+                                Console.WriteLine($" Unknown category: {category}");
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(" - (none)");
+                }
+
+                //  Log searchTerm
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    Console.WriteLine($"Applying searchTerm: {searchTerm}");
+                    query = query.Where(m =>
+                        (m.title ?? "").ToLower().Contains(searchTerm.ToLower()) ||
+                        (m.director ?? "").ToLower().Contains(searchTerm.ToLower()));
+                }
+
+                //  Log total before paging
+                var totalNumMovies = query.Count();
+                Console.WriteLine($"Total matching movies: {totalNumMovies}");
+
+                //  Apply pagination
+                var movies = query
+                    .OrderBy(m => m.title)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                Console.WriteLine($"Returning {movies.Count} movies on page {pageNum}");
+
+                return Ok(new
+                {
+                    movies,
+                    totalNumMovies
+                });
             }
 
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                query = query.Where(m =>
-                    (m.title ?? "").ToLower().Contains(searchTerm.ToLower()) ||
-                    (m.director ?? "").ToLower().Contains(searchTerm.ToLower()));
-            }
-
-            // Get total AFTER filters, BEFORE pagination
-            var totalNumMovies = query.Count();
-
-            // Apply pagination AFTER filtering
-            var movies = query
-                .OrderBy(m => m.title)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-
-            return Ok(new
-            {
-                movies,
-                totalNumMovies
-            });
-        }
 
 
         [HttpGet("GetMovieRatings")]

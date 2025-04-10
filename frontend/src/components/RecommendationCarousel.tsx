@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Movie } from '../types/Movie';
 import '../styles/RecommendationCarousel.css';
+import MovieCard from './MovieCard';
 
 interface Props {
   title: string;
@@ -27,36 +28,20 @@ const RecommendationCarousel: React.FC<Props> = ({
 
   return (
     <div className="carousel-section">
-      <h2 className="carousel-title">
-        <span className="carousel-title-glow">{title}</span>
-      </h2>
+      <h2 className="category-title">{title}</h2>
 
       <div className="carousel-wrapper">
         <button className="scroll-button left" onClick={() => scroll('left')}>
           &#10094;
         </button>
 
-        <div className="carousel-row" ref={scrollRef}>
-          {movies.map((movie) => (
+        <div className="carousel-scroll-row" ref={scrollRef}>
+          {movies.map((movie, index) => (
             <div
-              key={movie.show_id}
-              className="carousel-tile"
-              onClick={() => onClickMovie(movie)}
+              key={`${movie.show_id}-${index}`}
+              className="carousel-card-wrapper"
             >
-              <img
-                src={`https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(
-                  movie.title.replace(/[^A-Za-z0-9\s]/g, '').trim()
-                )}.jpg`}
-                alt={movie.title}
-                className="carousel-image"
-                onError={(e) => {
-                  e.currentTarget.src = '/fallback.jpg';
-                }}
-              />
-              <div className="carousel-info">
-                <div className="carousel-title-text">{movie.title}</div>
-                <div className="carousel-rating">{movie.rating}</div>
-              </div>
+              <MovieCard movie={movie} onClick={() => onClickMovie(movie)} />
             </div>
           ))}
         </div>

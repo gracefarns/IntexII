@@ -15,7 +15,7 @@ export const fetchMovies = async (
 ): Promise<FetchMoviesResponse> => {
   try {
     const categoryParams = selectedCategories
-      .map((cat) => `movieCategories=${encodeURIComponent(cat)}`)
+      .map((cat) => `selectedCategories=${encodeURIComponent(cat)}`)
       .join('&');
 
     const queryParams = [
@@ -24,6 +24,9 @@ export const fetchMovies = async (
       ...(categoryParams ? [categoryParams] : []),
       ...(searchTerm ? [`searchTerm=${encodeURIComponent(searchTerm)}`] : []),
     ].join('&');
+
+    const fullUrl = `${API_URL}/Movie/GetMovies?${queryParams}`;
+    console.log('🔍 Final fetch URL:', fullUrl); // debugging
 
     const response = await fetch(`${API_URL}/Movie/GetMovies?${queryParams}`, {
       credentials: 'include',

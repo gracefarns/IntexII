@@ -4,14 +4,14 @@
   right: 0;
   width: 50%;
   height: 100%;
-  background-color: #1b1b1b;
+  background-color: #141414;
   color: #f2f2f2;
-  padding: 20px;
+  padding: 24px;
   overflow-y: auto;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.6);
   z-index: 999;
   animation: slideIn 0.4s ease-out;
-  font-family: 'Courier New', monospace;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
 }
 
 @keyframes slideIn {
@@ -24,57 +24,75 @@
 }
 
 .results-heading {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
-  color: #ffd700;
-  border-bottom: 1px solid #444;
-  padding-bottom: 8px;
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 12px;
 }
 
 .poster-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 20px;
   justify-items: center;
 }
 
 .poster-tile {
-  width: 160px;
-  height: 280px;
+  width: 140px;
+  height: 260px;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .poster-tile:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
 }
 
 .poster-image {
-  width: 160px;
-  height: 240px;
+  width: 140px;
+  height: 210px;
   object-fit: cover;
-  border-radius: 6px;
-  border: 2px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   background-color: #000;
 }
 
 .poster-info {
-  text-align: center;
-  margin-top: 6px;
-  height: 34px; /* optional, keeps all tiles even if title wraps */
+  width: 100%;
+  text-align: left;
+  margin-top: 8px;
+  height: 40px;
   overflow: hidden;
 }
 
 .movie-title {
-  font-size: 0.95rem;
-  color: #ffd700;
-  font-weight: bold;
+  font-size: 0.7rem; /* Reduced from 0.85rem to about half the previous size */
+  line-height: 1.2;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .movie-rating {
-  font-size: 0.85rem;
+  font-size: 0.65rem; /* Reduced from 0.75rem to maintain proportion */
   color: #aaa;
+}
+
+/* You could also add this to make the margin between title and poster smaller */
+.poster-info {
+  margin-top: 6px;
+}
+
+/* Optional: add this to handle titles that are now too small to read easily */
+.poster-tile:hover .movie-title {
+  text-decoration: underline;
 }

@@ -1,0 +1,27 @@
+/* src/styles/AllMoviesGrid.css */
+
+.all-movies-section {
+  padding: 20px 4%;
+}
+
+.category-title {
+  font-size: 2rem;
+  color: var(--medium-teal);
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 16px;
+  border-left: 4px solid var(--medium-teal);
+  padding-left: 10px;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 40px;
+}
+
+.loader-trigger {
+  text-align: center;
+  margin: 24px 0;
+  color: var(--text-muted);
+}

@@ -7,6 +7,7 @@ import '../styles/MoviePage.css';
 import SearchResults from '../components/SearchResults';
 import { useNavigate } from 'react-router-dom';
 import RecommendationCarousel from '../components/RecommendationCarousel';
+import AllMoviesGrid from '../components/AllMoviesGrid'; // 🔥 New import
 
 const MoviePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -17,51 +18,49 @@ const MoviePage: React.FC = () => {
   const [genreRecs, setGenreRecs] = useState<
     { genre: string; movies: Movie[] }[]
   >([]);
-  const [allMovies, setAllMovies] = useState<Movie[]>([]); // 🔥 NEW
-  const [selectedGenre, setSelectedGenre] = useState<string | null>(null); // 🔥 NEW
+  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
 
-  const GENRES = [
-    // 🔥 NEW
-    'Action',
-    'Adventure',
-    'Anime',
-    'British_Docuseries',
-    'Children',
-    'Comedies',
-    'Comedies_Dramas',
-    'Comedies_International',
-    'Comedies_Romantic',
-    'Crime_TV',
-    'Documentaries',
-    'Documentaries_International',
-    'Docuseries',
-    'Dramas',
-    'Dramas_International',
-    'Dramas_Romantic',
-    'Family',
-    'Fantasy',
-    'Horror',
-    'International_Thrillers',
-    'International_Romantic_Dramas_TV',
-    'Kids_TV',
-    'Language_TV',
-    'Musicals',
-    'Nature_TV',
-    'Reality_TV',
-    'Spirituality',
-    'TV_Action',
-    'TV_Comedies',
-    'TV_Dramas',
-    'Talk_Shows',
-    'Thrillers',
-  ];
+  const GENRE_MAP: { [label: string]: keyof Movie } = {
+    Action: 'action',
+    Adventure: 'adventure',
+    Anime: 'anime',
+    British_Docuseries: 'british_Docuseries',
+    Children: 'children',
+    Comedies: 'comedies',
+    Comedies_Dramas: 'comedies_Dramas',
+    Comedies_International: 'comedies_International',
+    Comedies_Romantic: 'comedies_Romantic',
+    Crime_TV: 'crime_TV',
+    Documentaries: 'documentaries',
+    Documentaries_International: 'documentaries_International',
+    Docuseries: 'docuseries',
+    Dramas: 'dramas',
+    Dramas_International: 'dramas_International',
+    Dramas_Romantic: 'dramas_Romantic',
+    Family: 'family',
+    Fantasy: 'fantasy',
+    Horror: 'horror',
+    International_Thrillers: 'international_Thrillers',
+    International_Romantic_Dramas_TV: 'international_Romantic_Dramas_TV',
+    Kids_TV: 'kids_TV',
+    Language_TV: 'language_TV',
+    Musicals: 'musicals',
+    Nature_TV: 'nature_TV',
+    Reality_TV: 'reality_TV',
+    Spirituality: 'spirituality',
+    TV_Action: 'tV_Action',
+    TV_Comedies: 'tV_Comedies',
+    TV_Dramas: 'tV_Dramas',
+    Talk_Shows: 'talk_Shows',
+    Thrillers: 'thrillers',
+  };
+
+  const GENRES = Object.keys(GENRE_MAP);
 
   const fetchMovieById = async (id: string | number) => {
     const res = await fetch(
       `https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/Movie/GetSingleMovie/${id}`,
-      {
-        credentials: 'include',
-      }
+      { credentials: 'include' }
     );
     if (!res.ok) throw new Error(`Failed to fetch movie ${id}`);
     return await res.json();
@@ -84,21 +83,27 @@ const MoviePage: React.FC = () => {
             .filter((id) => id)
             .map((id) => fetchMovieById(String(id)))
         );
-
         setTop10Recs(topMovies);
 
+        const allowedGenres = [
+          'Action',
+          'Adventure',
+          'Comedies',
+          'Children',
+          'Horror',
+        ];
         const genreMovieGroups = await Promise.all(
-          data.byGenre.map(async (g: any) => {
-            const movies = await Promise.all(
-              g.recs
-                .filter((id: string) => id)
-                .map((id: string) => fetchMovieById(id))
-            );
-
-            return { genre: g.genre, movies };
-          })
+          data.byGenre
+            .filter((g: any) => allowedGenres.includes(g.genre))
+            .map(async (g: any) => {
+              const movies = await Promise.all(
+                g.recs
+                  .filter((id: string) => id)
+                  .map((id: string) => fetchMovieById(id))
+              );
+              return { genre: g.genre, movies };
+            })
         );
-
         setGenreRecs(genreMovieGroups);
       } catch (err) {
         console.error('Error fetching recommendations:', err);
@@ -108,14 +113,6 @@ const MoviePage: React.FC = () => {
     fetchRecommendations();
   }, []);
 
-  // 🔥 NEW: Fetch general movies on load
-  useEffect(() => {
-    fetchMovies(100, 1, [], '') // You can increase page size if needed
-      .then((data) => setAllMovies(data.movies))
-      .catch((err) => console.error('Error fetching all movies:', err));
-  }, []);
-
-  // ✏️ MODIFIED: Search query debounce logic
   useEffect(() => {
     if (searchQuery.trim() === '') {
       setSearchResults([]);
@@ -141,12 +138,7 @@ const MoviePage: React.FC = () => {
 
   const handleResultClick = (movie: Movie) => {
     navigate(`/moviedetails/${movie.show_id}`);
-    console.log('Clicked movie:', movie);
   };
-
-  const filteredAllMovies = selectedGenre
-    ? allMovies.filter((movie) => (movie as any)[selectedGenre] === 1)
-    : allMovies; // 🔥 NEW
 
   return (
     <>
@@ -181,7 +173,6 @@ const MoviePage: React.FC = () => {
               />
             </div>
 
-            {/* 🔥 NEW: Genre filter chips */}
             <div className="genre-chips">
               {GENRES.map((genre) => (
                 <button
@@ -217,21 +208,6 @@ const MoviePage: React.FC = () => {
               />
             )}
 
-            {/* 🔥 NEW: Filtered "All Movies" section */}
-            {filteredAllMovies.length > 0 && (
-              <RecommendationCarousel
-                title={
-                  selectedGenre
-                    ? `Showing ${selectedGenre.replace(/_/g, ' ')}`
-                    : 'All Movies'
-                }
-                movies={filteredAllMovies}
-                onClickMovie={(movie) =>
-                  navigate(`/moviedetails/${movie.show_id}`)
-                }
-              />
-            )}
-
             {genreRecs.map((g) => (
               <RecommendationCarousel
                 key={g.genre}
@@ -242,6 +218,13 @@ const MoviePage: React.FC = () => {
                 }
               />
             ))}
+
+            {/* 🔥 All Movies Infinite Scroll */}
+            <AllMoviesGrid
+              selectedGenre={selectedGenre}
+              genreMap={GENRE_MAP}
+              onMovieClick={handleResultClick}
+            />
           </div>
         </div>
         <Footer />
