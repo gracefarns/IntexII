@@ -80,15 +80,15 @@
 /* Fixed poster sizing and alignment */
 .movie-poster {
   /* Force a fixed size */
-  width: 750px;
+  width: 700px;
   height: 1050px;
-  min-width: 750px;
+  min-width: 700px;
   min-height: 1050px;
-  max-width: 750px;
+  max-width: 700px;
   max-height: 1050px;
 
   /* Tell flexbox not to allow it to grow or shrink */
-  flex: 0 0 750px;
+  flex: 0 0 700px;
 
   background-color: #252525;
   border-radius: 12px;
@@ -101,11 +101,19 @@
   position: relative;
 }
 
+.movie-poster,
+.movie-poster:focus,
+.movie-poster:active {
+  border: none;
+  outline: none;
+}
+
 .poster-image {
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover;
+  object-fit: contain !important;
   object-position: center;
+  border: none !important;
 }
 
 .poster-initial {
@@ -220,7 +228,7 @@
 .btn-play:hover {
   background-color: #004a7b;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3);
+  box-shadow: 0 5px 15px rgba(27, 9, 229, 0.3);
 }
 
 .btn-watchlist {

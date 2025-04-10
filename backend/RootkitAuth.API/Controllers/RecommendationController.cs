@@ -69,7 +69,7 @@ namespace RootkitAuth.API.Controllers
             if (azureUserId == null)
                 return BadRequest("Azure user ID not found.");
 
-            // TEMPORARY mapping for dev — replace with a table later
+            // TEMPORARY mapping for dev replace with a table later
             var devMap = new Dictionary<string, int>
             {
                 ["5e2e9389-2da7-4cf1-91a2-114063032ca1"] = 1
