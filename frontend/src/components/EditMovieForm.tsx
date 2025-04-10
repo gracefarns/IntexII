@@ -353,7 +353,7 @@ const EditMovieForm = ({ movie, onSuccess, onCancel }: EditMovieFormProps) => {
               paddingTop: '20px',
             }}
           >
-            <button
+            {/* <button
               type="button"
               onClick={onCancel}
               style={{
@@ -368,14 +368,14 @@ const EditMovieForm = ({ movie, onSuccess, onCancel }: EditMovieFormProps) => {
               disabled={isSubmitting}
             >
               Cancel
-            </button>
+            </button> */}
             <button
               type="submit"
               style={{
                 padding: '10px 16px',
                 borderRadius: '4px',
                 border: 'none',
-                backgroundColor: '#007bff',
+                backgroundColor: 'teal',
                 color: 'white',
                 cursor: 'pointer',
                 fontSize: '14px',
