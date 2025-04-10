@@ -1,4 +1,4 @@
-import { useState, useEffect, SetStateAction } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/HomePage.css';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
