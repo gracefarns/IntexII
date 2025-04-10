@@ -87,7 +87,39 @@ const MovieDetailPage: React.FC = () => {
         // Check if data has a property "recommendations" (i.e. it is an object)
         if (data && data.recommendations) {
           setCurrentMovieRating(data.source_show_rating);
-          setRecommendations(data.recommendations);
+
+          // If recommendations array is empty, fetch fallback recommendations
+          if (data.recommendations.length === 0) {
+            const fallbackIds = [
+              2, 4, 5, 6, 11, 12, 18, 20, 22, 24, 26, 30, 31, 32, 36, 37, 41,
+              42, 43, 46, 57, 58, 59, 61, 62, 64, 73, 88, 90, 92, 98, 115, 116,
+              119, 120, 124, 127, 131, 146, 155, 162, 166, 167, 169, 175, 1005,
+              1006, 1007, 1018, 1028, 1037,
+            ];
+            const randomFallbackId =
+              fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
+
+            return fetch(
+              `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
+              {
+                method: 'GET',
+                credentials: 'include',
+              }
+            )
+              .then((res) => res.json())
+              .then((fallbackData) => {
+                if (fallbackData && fallbackData.recommendations) {
+                  setRecommendations(fallbackData.recommendations);
+                } else if (fallbackData && fallbackData.length > 0) {
+                  setRecommendations(fallbackData);
+                } else {
+                  setRecommendations([]);
+                }
+              });
+          } else {
+            // If recommendations exist, use them directly
+            setRecommendations(data.recommendations);
+          }
         } else if (data && data.length > 0) {
           // Fallback: if you only have an array, use that
           setRecommendations(data);
@@ -102,7 +134,7 @@ const MovieDetailPage: React.FC = () => {
           const randomFallbackId =
             fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
           return fetch(
-            `https://ambitious-sky-052f4611e.6.azurestaticapps.net/${randomFallbackId}`,
+            `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
             {
               method: 'GET',
               credentials: 'include',
@@ -110,7 +142,13 @@ const MovieDetailPage: React.FC = () => {
           )
             .then((res) => res.json())
             .then((fallbackData) => {
-              setRecommendations(fallbackData);
+              if (fallbackData && fallbackData.recommendations) {
+                setRecommendations(fallbackData.recommendations);
+              } else if (fallbackData && fallbackData.length > 0) {
+                setRecommendations(fallbackData);
+              } else {
+                setRecommendations([]);
+              }
             });
         }
       })
@@ -120,7 +158,7 @@ const MovieDetailPage: React.FC = () => {
         const randomFallbackId =
           fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
         fetch(
-          `https://ambitious-sky-052f4611e.6.azurestaticapps.net/${randomFallbackId}`,
+          `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
           {
             method: 'GET',
             credentials: 'include',
@@ -128,7 +166,13 @@ const MovieDetailPage: React.FC = () => {
         )
           .then((res) => res.json())
           .then((fallbackData) => {
-            setRecommendations(fallbackData);
+            if (fallbackData && fallbackData.recommendations) {
+              setRecommendations(fallbackData.recommendations);
+            } else if (fallbackData && fallbackData.length > 0) {
+              setRecommendations(fallbackData);
+            } else {
+              setRecommendations([]);
+            }
           })
           .catch((fallbackErr) => {
             console.error(
@@ -289,9 +333,9 @@ const MovieDetailPage: React.FC = () => {
             </div>
             <div className="movie-rating">
               <div className="rating-stars">
-                {/* Render the current movie’s star quality from recommendations.
+                {/* Render the current movie's star quality from recommendations.
                     We assume that currentMovieRating (from source_show_rating) is numeric.
-                    If it’s undefined, render empty stars. */}
+                    If it's undefined, render empty stars. */}
                 {renderStarRating(currentMovieRating)}
               </div>
               {/* Then display the maturity rating text */}
