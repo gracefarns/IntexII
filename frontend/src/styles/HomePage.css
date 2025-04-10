@@ -42,7 +42,7 @@ html {
 }
 
 main {
-  padding-top: 5rem; /* or 80px depending on your header height */
+  padding-top: 1.1rem; /* or 80px depending on your header height */
 }
 
 .brand {
@@ -86,7 +86,7 @@ main {
     /* teal-400 */ #e5eaf2 /* blue-500 */
   );
 
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -156,7 +156,7 @@ main {
   line-height: 1.2;
   font-weight: 700;
   color: #27272a; /* zinc-800 */
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.3rem;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Add shadow for readability over any background */
 }
 
