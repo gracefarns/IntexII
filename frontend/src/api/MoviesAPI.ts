@@ -49,8 +49,8 @@ export const addMovie = async (newMovie: Movie): Promise<Movie> => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        credentials: 'include',
       },
+      credentials: 'include',
       body: JSON.stringify(newMovie),
     });
 
@@ -72,14 +72,20 @@ export const updateMovie = async (
   updatedMovie: Movie
 ): Promise<Movie> => {
   try {
+    console.log('Update URL:', `${API_URL}/Movie/UpdateMovie/${movieId}`);
+    console.log('Sent movie:', updatedMovie);
+
     const response = await fetch(`${API_URL}/Movie/UpdateMovie/${movieId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        credentials: 'include',
       },
+      credentials: 'include',
       body: JSON.stringify(updatedMovie),
     });
+
+    console.log('Actual Response URL:', response.url);
+    console.log('Status Code:', response.status);
 
     if (!response.ok) {
       const errorText = await response.text(); // debugging
@@ -109,5 +115,3 @@ export const deleteMovie = async (movieId: number): Promise<void> => {
     throw error;
   }
 };
-
-
