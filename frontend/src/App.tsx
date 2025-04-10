@@ -21,9 +21,14 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/unauthorized" element={<UnauthorizedPage />} />
-          <Route element={<ProtectedRoute requiredRole="Administrator" />}>
-            <Route path="/admin" element={<AdminPage />} />
-          </Route>
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute requiredRole="Administrator">
+                <AdminPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/moviedetails/:id" element={<MovieDetailPage />} />
           <Route path="/moviepage" element={<MoviePage />} />
         </Routes>

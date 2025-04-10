@@ -11,5 +11,6 @@ namespace RootkitAuth.API.Data
         public int rec_show_id { get; set; }
         public string? rec_title { get; set; }
         public string? rec_genre { get; set; }
+        public int? rating { get; set; }
     }
 }

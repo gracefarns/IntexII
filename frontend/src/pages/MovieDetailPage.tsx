@@ -3,36 +3,61 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Movie } from '../types/Movie';
 import { SimilarMovies } from '../types/SimilarMovies';
 import '../styles/MovieDetailPage.css';
+import Footer from '../components/Footer';
 
 const MovieDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [movie, setMovie] = useState<Movie | null>(null);
   const [recommendations, setRecommendations] = useState<SimilarMovies[]>([]);
+  const [currentMovieRating, setCurrentMovieRating] = useState<
+    number | undefined
+  >(undefined);
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingRecommendations, setLoadingRecommendations] =
     useState<boolean>(true);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [posterError, setPosterError] = useState<boolean>(false);
+  const [mainPosterFallback, setMainPosterFallback] = useState<string>('');
+  const [fallbackMapping, setFallbackMapping] = useState<{
+    [key: string]: string;
+  }>({});
 
-  // Function to clean movie titles for image URLs
+  const fallbackImages = [
+    'A Monster Calls.jpg',
+    'A Sun.jpg',
+    'A Taiwanese Tale of Two Cities.jpg',
+    'A Thousand Goodnights.jpg',
+    'A Touch of Green.jpg',
+    'Alone.jpg',
+    'American Outlaws.jpg',
+    'Arrow.jpg',
+    'Arthur.jpg',
+    'At All Costs.jpg',
+    'At Eternitys Gate.jpg',
+    'Athlete A.jpg',
+    'Attack on Titan.jpg',
+    'Beat Bugs.jpg',
+    'Becoming Champions.jpg',
+    'DefaultMoviePoster.jpg',
+  ];
+
   const cleanTitleForImageUrl = (title: string): string => {
-    // Remove all special characters (keeping only letters, numbers, and spaces)
     const cleanedTitle = title.replace(/[^a-zA-Z0-9 ]/g, '');
-    // Replace multiple spaces with single space
     return cleanedTitle.replace(/\s+/g, ' ');
   };
 
-  // Reset states when ID changes and fetch data
   useEffect(() => {
+    console.log('Current movie id:', id);
     setLoading(true);
     setLoadingRecommendations(true);
     setPosterError(false);
+    setFallbackMapping({});
+    setMainPosterFallback('');
 
-    // Scroll to top when navigating to a new movie
     window.scrollTo(0, 0);
 
-    // Fetch movie details
+    // Fetch movie details.
     fetch(`https://localhost:5000/Movie/GetSingleMovie/${id}`, {
       method: 'GET',
       credentials: 'include',
@@ -47,7 +72,7 @@ const MovieDetailPage: React.FC = () => {
         setLoading(false);
       });
 
-    // Fetch movie recommendations
+    // Fetch recommendations (which now includes source_show_rating).
     fetch(`https://localhost:5000/Recommendation/ForMovie/${id}`, {
       method: 'GET',
       credentials: 'include',
@@ -59,15 +84,25 @@ const MovieDetailPage: React.FC = () => {
         return res.json();
       })
       .then((data) => {
-        if (data && data.length > 0) {
+        // Check if data has a property "recommendations" (i.e. it is an object)
+        if (data && data.recommendations) {
+          setCurrentMovieRating(data.source_show_rating);
+          setRecommendations(data.recommendations);
+        } else if (data && data.length > 0) {
+          // Fallback: if you only have an array, use that
           setRecommendations(data);
         } else {
-          // Fallback to recommendations for a random movie from the list if no recommendations can be found
-          const fallbackIds = [11, 1005, 1006, 1007, 1018, 1028, 1037];
+          // Fallback logic if no recommendations found...
+          const fallbackIds = [
+            2, 4, 5, 6, 11, 12, 18, 20, 22, 24, 26, 30, 31, 32, 36, 37, 41, 42,
+            43, 46, 57, 58, 59, 61, 62, 64, 73, 88, 90, 92, 98, 115, 116, 119,
+            120, 124, 127, 131, 146, 155, 162, 166, 167, 169, 175, 1005, 1006,
+            1007, 1018, 1028, 1037,
+          ];
           const randomFallbackId =
             fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
           return fetch(
-            `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
+            `https://ambitious-sky-052f4611e.6.azurestaticapps.net/${randomFallbackId}`,
             {
               method: 'GET',
               credentials: 'include',
@@ -81,12 +116,11 @@ const MovieDetailPage: React.FC = () => {
       })
       .catch((err) => {
         console.error('Error fetching recommendations:', err);
-        // Fallback to recommendations for a random movie from the list
         const fallbackIds = [11, 1005, 1006, 1007, 1018, 1028, 1037];
         const randomFallbackId =
           fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
         fetch(
-          `https://localhost:5000/Recommendation/ForMovie/${randomFallbackId}`,
+          `https://ambitious-sky-052f4611e.6.azurestaticapps.net/${randomFallbackId}`,
           {
             method: 'GET',
             credentials: 'include',
@@ -109,7 +143,7 @@ const MovieDetailPage: React.FC = () => {
       .finally(() => {
         setLoadingRecommendations(false);
       });
-  }, [id]); // This ensures the effect runs when the ID changes
+  }, [id]);
 
   const getPrimaryGenre = (movie: Movie): string => {
     const genreMap: Record<string, number> = {
@@ -150,14 +184,12 @@ const MovieDetailPage: React.FC = () => {
 
     let maxGenre = 'Unknown';
     let maxValue = 0;
-
     for (const [genre, value] of Object.entries(genreMap)) {
       if (value > maxValue) {
         maxValue = value;
         maxGenre = genre;
       }
     }
-
     return maxGenre;
   };
 
@@ -173,17 +205,30 @@ const MovieDetailPage: React.FC = () => {
     }
   };
 
-  // Image error handling for movie poster
-  const handlePosterError = () => {
+  // New error handler for the main movie poster.
+  const handleMainPosterError = () => {
     setPosterError(true);
+    if (!mainPosterFallback) {
+      const selected =
+        fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
+      setMainPosterFallback(selected);
+    }
   };
 
-  // Render star rating based on movie rating
-  const renderStarRating = (rating: string) => {
-    // Convert rating to a number between 0-5
-    const numericRating = parseFloat(rating) || 0;
-    const starRating = Math.min(5, Math.max(0, Math.round(numericRating)));
-
+  // Function to render numeric (1–5) star ratings.
+  const renderStarRating = (rating: number | undefined) => {
+    if (rating == null || isNaN(rating)) {
+      return (
+        <>
+          {Array.from({ length: 5 }, (_, index) => (
+            <span key={index} className="star empty">
+              ☆
+            </span>
+          ))}
+        </>
+      );
+    }
+    const starRating = Math.round(rating);
     return (
       <>
         {Array.from({ length: 5 }, (_, index) => (
@@ -198,8 +243,8 @@ const MovieDetailPage: React.FC = () => {
     );
   };
 
-  // Handle recommendation click to refresh the entire page with new movie data
   const handleRecommendationClick = (recId: string) => {
+    console.log('Navigating to movie id:', recId);
     navigate(`/moviedetails/${recId}`);
   };
 
@@ -208,13 +253,13 @@ const MovieDetailPage: React.FC = () => {
 
   const primaryGenre = getPrimaryGenre(movie);
 
-  // Use a default poster URL if the image doesn't exist
+  // Determine main movie poster URL (using fallback if error occurs).
   const fallbackPosterUrl = '/assets/movies/DefaultMoviePoster.jpg';
   const posterUrl = !posterError
-    ? `https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(
-        cleanTitleForImageUrl(movie.title)
-      )}.jpg`
-    : fallbackPosterUrl;
+    ? `https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(cleanTitleForImageUrl(movie.title))}.jpg`
+    : mainPosterFallback
+      ? `/assets/movies/${mainPosterFallback}`
+      : fallbackPosterUrl;
 
   return (
     <div className="movie-detail-page">
@@ -227,49 +272,37 @@ const MovieDetailPage: React.FC = () => {
         <div className="hero-gradient"></div>
         <div className="hero-content">
           <div className="movie-poster">
-            {!posterError ? (
-              <img
-                src={posterUrl}
-                alt={movie.title}
-                onError={handlePosterError}
-                className="poster-image"
-              />
-            ) : (
-              <img
-                src={fallbackPosterUrl}
-                alt="Default Poster"
-                className="poster-image"
-              />
-            )}
+            <img
+              src={posterUrl}
+              alt={movie.title}
+              onError={handleMainPosterError}
+              className="poster-image"
+            />
           </div>
 
           <div className="movie-info">
             <h1 className="movie-title">{movie.title}</h1>
-
-            {/* Condensed metadata (year, genre, duration) */}
             <div className="movie-meta">
               <span className="meta-item">
                 {movie.release_year} — {primaryGenre} — {movie.duration}
               </span>
             </div>
-
-            {/* Rating row */}
             <div className="movie-rating">
               <div className="rating-stars">
-                {renderStarRating(movie.rating)}
+                {/* Render the current movie’s star quality from recommendations.
+                    We assume that currentMovieRating (from source_show_rating) is numeric.
+                    If it’s undefined, render empty stars. */}
+                {renderStarRating(currentMovieRating)}
               </div>
+              {/* Then display the maturity rating text */}
               <span className="rating-text">{movie.rating}</span>
             </div>
-
-            {/* Buttons and description */}
             <div className="movie-buttons">
               <button className="btn-play">
                 <span className="play-icon">▶</span> Play
               </button>
               <button className="btn-watchlist">+ My List</button>
             </div>
-
-            {/* Additional details merged below the description */}
             <div className="movie-additional-details">
               <h2 className="details-title">About {movie.title}</h2>
               <div className="movie-description">
@@ -316,7 +349,6 @@ const MovieDetailPage: React.FC = () => {
           <div className="recommendation-carousel-container">
             <h2 className="sigma-title">More Like This...</h2>
             <div className="recommendation-carousel-wrapper">
-              {/* Left arrow */}
               <button
                 onClick={scrollLeft}
                 className="carousel-arrow carousel-arrow-left"
@@ -338,16 +370,11 @@ const MovieDetailPage: React.FC = () => {
                 </svg>
               </button>
 
-              {/* Carousel container */}
               <div className="carousel-overflow-container" ref={carouselRef}>
                 <div className="carousel-items-container">
                   {recommendations.map((recommendation) => {
-                    // Fixed TypeScript error by converting rec_show_id to string
                     const recId = String(recommendation.rec_show_id);
-                    // Update the recPosterUrl to use the cleaned recommendation title
-                    const recPosterUrl = `https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(
-                      cleanTitleForImageUrl(recommendation.rec_title)
-                    )}.jpg`;
+                    const recPosterUrl = `https://cinenicheblobcontainer.blob.core.windows.net/posters/resized_images/${encodeURIComponent(cleanTitleForImageUrl(recommendation.rec_title))}.jpg`;
                     return (
                       <div
                         key={`${recommendation.source_show_id}-${recommendation.rec_show_id}`}
@@ -355,19 +382,38 @@ const MovieDetailPage: React.FC = () => {
                         onClick={() => handleRecommendationClick(recId)}
                       >
                         <div className="movie-recommendation-card">
-                          <div className="recommendation-rank-badge">
-                            {recommendation.rec_rank}
-                          </div>
                           <div className="recommendation-image-container">
                             <img
-                              src={recPosterUrl}
+                              src={
+                                fallbackMapping[recId]
+                                  ? `/assets/movies/${fallbackMapping[recId]}`
+                                  : recPosterUrl
+                              }
                               alt={recommendation.rec_title}
                               className="recommendation-image"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.onerror = null; // Prevent infinite loop
-                                target.src =
-                                  '/assets/movies/DefaultMoviePoster.jpg';
+                              onError={() => {
+                                if (!fallbackMapping[recId]) {
+                                  setFallbackMapping((prev) => {
+                                    const used = Object.values(prev);
+                                    const available = fallbackImages.filter(
+                                      (img) => !used.includes(img)
+                                    );
+                                    const selected =
+                                      available.length > 0
+                                        ? available[
+                                            Math.floor(
+                                              Math.random() * available.length
+                                            )
+                                          ]
+                                        : fallbackImages[
+                                            Math.floor(
+                                              Math.random() *
+                                                fallbackImages.length
+                                            )
+                                          ];
+                                    return { ...prev, [recId]: selected };
+                                  });
+                                }
                               }}
                             />
                             <div className="recommendation-image-fallback">
@@ -383,6 +429,9 @@ const MovieDetailPage: React.FC = () => {
                             <div className="recommendation-genre">
                               {recommendation.rec_genre || 'Unknown Genre'}
                             </div>
+                            <div className="recommendation-rating">
+                              {renderStarRating(recommendation.rating)}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -391,7 +440,6 @@ const MovieDetailPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Right arrow */}
               <button
                 onClick={scrollRight}
                 className="carousel-arrow carousel-arrow-right"
@@ -420,6 +468,7 @@ const MovieDetailPage: React.FC = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };
