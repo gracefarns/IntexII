@@ -4,6 +4,8 @@ import '../styles/identity.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '../styles/LoginPage.css';
 import GoogleLoginButton from '../components/GoogleLoginButton';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 function LoginPage() {
   // state variables for email and passwords
   const [email, setEmail] = useState<string>('');
@@ -60,61 +62,67 @@ function LoginPage() {
     }
   };
   return (
-    <div className="container">
-      <div>
-        <div className="card border-0 shadow rounded-3 ">
-          <div className="card-body p-4 p-sm-5">
-            <h5 className="card-title text-center mb-5 fw-light fs-5">
-              Sign In
-            </h5>
-            <form onSubmit={handleSubmit}>
-              <div className="form-floating mb-3">
-                <input
-                  className="form-control"
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={email}
-                  onChange={handleChange}
-                />
-                <label htmlFor="email">Email address</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  className="form-control"
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={password}
-                  onChange={handleChange}
-                />
-                <label htmlFor="password">Password</label>
-              </div>
-              <div className="d-grid mb-2">
-                <button
-                  className="btn btn-primary btn-login text-uppercase fw-bold"
-                  type="submit"
-                >
-                  Sign in
-                </button>
-              </div>
-              <div className="d-grid mb-2">
-                <button
-                  className="btn btn-primary btn-login text-uppercase fw-bold"
-                  onClick={handleRegisterClick}
-                >
-                  Register
-                </button>
-              </div>
-              <hr className="my-4" />
-              <div className="d-grid mb-2">
-                <GoogleLoginButton />
-              </div>
-            </form>
-            {error && <p className="error">{error}</p>}
+    <div>
+      <div className="container">
+        <div>
+          <Navbar />
+          <br />
+          <br />
+          <div className="card border-0 shadow rounded-3 ">
+            <div className="card-body p-4 p-sm-5">
+              <h5 className="card-title text-center mb-5 fw-light fs-5">
+                Sign In
+              </h5>
+              <form onSubmit={handleSubmit}>
+                <div className="form-floating mb-3">
+                  <input
+                    className="form-control"
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={email}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="email">Email address</label>
+                </div>
+                <div className="form-floating mb-3">
+                  <input
+                    className="form-control"
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={password}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="password">Password</label>
+                </div>
+                <div className="d-grid mb-2">
+                  <button
+                    className="btn btn-primary btn-login text-uppercase fw-bold"
+                    type="submit"
+                  >
+                    Sign in
+                  </button>
+                </div>
+                <div className="d-grid mb-2">
+                  <button
+                    className="btn btn-primary btn-login text-uppercase fw-bold"
+                    onClick={handleRegisterClick}
+                  >
+                    Register
+                  </button>
+                </div>
+                <hr className="my-4" />
+                <div className="d-grid mb-2">
+                  <GoogleLoginButton />
+                </div>
+              </form>
+              {error && <p className="error">{error}</p>}
+            </div>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
