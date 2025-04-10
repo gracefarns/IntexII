@@ -31,9 +31,9 @@ const RecommendationCarousel: React.FC<Props> = ({
       <h2 className="category-title">{title}</h2>
 
       <div className="carousel-wrapper">
-        <button className="scroll-button left" onClick={() => scroll('left')}>
+        {/* <button className="scroll-button left" onClick={() => scroll('left')}>
           &#10094;
-        </button>
+        </button> */}
 
         <div className="carousel-scroll-row" ref={scrollRef}>
           {movies.map((movie, index) => (
@@ -46,9 +46,9 @@ const RecommendationCarousel: React.FC<Props> = ({
           ))}
         </div>
 
-        <button className="scroll-button right" onClick={() => scroll('right')}>
+        {/* <button className="scroll-button right" onClick={() => scroll('right')}>
           &#10095;
-        </button>
+        </button> */}
       </div>
     </div>
   );

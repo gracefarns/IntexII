@@ -91,7 +91,8 @@ namespace RootkitAuth.API.Controllers
             {
                 ["5e2e9389-2da7-4cf1-91a2-114063032ca1"] = 1,
                 ["a5c5aa97-23a1-46b8-a569-56a6b68431ea"] = 2,
-                ["3fe9fdf4-6ea7-4caf-acc6-c2c25178db8b"] = 3
+                ["3fe9fdf4-6ea7-4caf-acc6-c2c25178db8b"] = 3,
+                ["37b45594-79fd-4619-bdf9-6d88d2c29e41"] = 4
                 // add the rest of the users
             };
 
