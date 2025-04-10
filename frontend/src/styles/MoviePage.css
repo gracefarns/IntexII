@@ -53,11 +53,10 @@ body {
 
 /* Hero Section */
 .hero-section {
-  padding: 60px 4% 30px;
-  background:
-    linear-gradient(to bottom, #14b8a6 0%, var(--bg-primary) 40%),
-    url('/api/placeholder/1920/600') center/cover no-repeat;
-  position: relative;
+  padding: 60px 4% 10px;
+  background: linear-gradient(45deg, #14b8a6, #485265) !important;
+  /* background: linear-gradient(to bottom, #14b8a6 0%, rgb(0, 0, 0)) 100% !important; */
+  margin-bottom: -160px !important;
 }
 
 .featured-content {
@@ -161,7 +160,7 @@ body {
 /* Main Content */
 .main-content {
   padding: 0px;
-  background-color: rgba(28, 30, 31);
+  background: linear-gradient(to bottom, #052d28 0%, rgb(0, 0, 0)) 100% !important;
 }
 
 /* Category Layout */
