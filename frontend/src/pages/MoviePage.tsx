@@ -200,7 +200,7 @@ const MoviePage: React.FC = () => {
           <div className="recommendation-section">
             {top10Recs.length > 0 && (
               <RecommendationCarousel
-                title="You’ll Love These"
+                title="Top 10 Picks For You"
                 movies={top10Recs}
                 onClickMovie={(movie) =>
                   navigate(`/moviedetails/${movie.show_id}`)
