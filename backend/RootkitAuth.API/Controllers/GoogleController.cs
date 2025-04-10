@@ -23,7 +23,7 @@ public class AuthController : ControllerBase
         {
             var payload = await GoogleJsonWebSignature.ValidateAsync(request.IdToken, new GoogleJsonWebSignature.ValidationSettings
             {
-                Audience = new[] { Environment.GetEnvironmentVariable("927787589560-ng122o7dcitoj65o59hrg2hpnbl4b1ah.apps.googleusercontent.com") } // Your client ID
+                Audience = new[] { "927787589560-ng122o7dcitoj65o59hrg2hpnbl4b1ah.apps.googleusercontent.com" } // Your client ID
             });
 
             // Check if user already exists
