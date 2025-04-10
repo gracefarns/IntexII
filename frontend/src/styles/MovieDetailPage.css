@@ -363,7 +363,7 @@
 
 .movie-recommendation-card {
   position: relative;
-  background-color: #252525;
+  background-color: #333;
   border-radius: 8px;
   overflow: hidden;
   height: 350px;

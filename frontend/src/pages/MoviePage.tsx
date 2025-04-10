@@ -142,6 +142,12 @@ const MoviePage: React.FC = () => {
 
   return (
     <>
+      <header className="header">
+        <div className="brand">
+          <span className="brand-cine">Cine</span>
+          <span className="brand-niche">Niche</span>
+        </div>
+      </header>
       <div className="movie-page">
         <div className="hero-section">
           <div className="featured-content">
