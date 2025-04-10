@@ -7,6 +7,8 @@ const PrivacyPage: React.FC = () => {
   return (
     <>
       <Navbar />
+      <br />
+      <br />
       <div className="homepage">
         <div className="content">
           <PrivacyPolicy />

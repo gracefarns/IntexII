@@ -1,26 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Header from './Header';
 import '../styles/Navbar.css';
 
 const Navbar: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handleSignIn = () => {
-    navigate('/login');
-  };
-
   return (
-    <nav className="navbar">
-      <div className="navbar-left">
-        <Header />
-      </div>
-      <div className="navbar-right">
-        <button className="sign-in-button" onClick={handleSignIn}>
-          Sign In
-        </button>
-      </div>
-    </nav>
+    <div>
+      <header className="header">
+        <div className="brand">
+          <span className="brand-cine">Cine</span>
+          <span className="brand-niche">Niche</span>
+        </div>
+      </header>
+    </div>
   );
 };
 
