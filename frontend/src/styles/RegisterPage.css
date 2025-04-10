@@ -1,0 +1,52 @@
+/* RegisterPage.css */
+html,
+body {
+  background-color: #000000 !important; /* or another gray shade */
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  min-height: 100vh; /* Full viewport height */
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  padding: 1rem; /* Optional padding */
+}
+
+/* Custom styles for Register page card */
+.card {
+  background-color: #e1eaeb !important; /* Use any gray shade you prefer */
+}
+
+.card .card-body {
+  background-color: #e1eaeb !important; /* Ensure the body inherits the gray background */
+  /* Optionally, adjust text color if needed */
+  color: #1f2937; /* A darker gray for text */
+}
+
+.card .card-title {
+  background-color: #e1eaeb !important; /* Make sure the title's background matches */
+  color: #1f2937; /* Dark text for contrast (adjust as needed) */
+}
+
+.card_1 {
+  box-shadow:
+    rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.card-body p-4 p-sm-5 {
+  background-color: #000000 !important; /* Ensure the body inherits the gray background */
+  color: #495361; /* A darker gray for text */
+}
+
+.card border-0 shadow rounded-3 {
+  background-color: #e52525 !important; /* Ensure the body inherits the gray background */
+  color: #495361; /* A darker gray for text */
+}
+
+.btn-primary btn-login text-uppercase fw-bold {
+  color: aqua !important;
+}

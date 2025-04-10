@@ -2,18 +2,16 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/identity.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+import '../styles/LoginPage.css';
 import GoogleLoginButton from '../components/GoogleLoginButton';
-
 function LoginPage() {
   // state variables for email and passwords
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [rememberme, setRememberme] = useState<boolean>(false);
-
   // state variable for error messages
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
-
   // handle change events for input fields
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type, checked, value } = e.target;
@@ -25,16 +23,13 @@ function LoginPage() {
       setPassword(value);
     }
   };
-
   const handleRegisterClick = () => {
     navigate('/register');
   };
-
   // handle submit event for the form
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(''); // Clear any previous errors
-
     if (!email || !password) {
       setError('Please fill in all fields.');
       return;
@@ -42,7 +37,6 @@ function LoginPage() {
     const loginUrl = rememberme
       ? 'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/login?useCookies=true'
       : 'https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/login?useSessionCookies=true';
-
     try {
       const response = await fetch(loginUrl, {
         method: 'POST',
@@ -50,28 +44,24 @@ function LoginPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-
       // Ensure we only parse JSON if there is content
       let data = null;
       const contentLength = response.headers.get('content-length');
       if (contentLength && parseInt(contentLength, 10) > 0) {
         data = await response.json();
       }
-
       if (!response.ok) {
         throw new Error(data?.message || 'Invalid email or password.');
       }
-
       navigate('/moviepage');
     } catch (error: any) {
       setError(error.message || 'Error logging in.');
       console.error('Fetch attempt failed:', error);
     }
   };
-
   return (
     <div className="container">
-      <div className="row">
+      <div>
         <div className="card border-0 shadow rounded-3 ">
           <div className="card-body p-4 p-sm-5">
             <h5 className="card-title text-center mb-5 fw-light fs-5">
@@ -100,7 +90,6 @@ function LoginPage() {
                 />
                 <label htmlFor="password">Password</label>
               </div>
-
               <div className="d-grid mb-2">
                 <button
                   className="btn btn-primary btn-login text-uppercase fw-bold"
@@ -129,5 +118,4 @@ function LoginPage() {
     </div>
   );
 }
-
 export default LoginPage;

@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Boldonse&display=swap');
 
 #root {
-  max-width: 100%;
+  background: 
+    /* Overlay with 50% opacity white; adjust the rgba as desired */
+    linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+    url('/assets/movies/Sundance.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
-  background: linear-gradient(180deg, #242424, #141414);
-  /* Removed text-align: center for more natural layout */
 }
 
 /* Use a dark background for rows instead of white */
@@ -73,4 +78,8 @@
   transform: scale(1.4);
   z-index: 10;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-title text-center mb-5 fw-light fs-5 {
+  font-weight: bold;
 }
