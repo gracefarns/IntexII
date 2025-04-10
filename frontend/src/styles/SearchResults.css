@@ -65,17 +65,17 @@
 
 .poster-info {
   width: 100%;
-  text-align: left;
+  text-align: center;
   margin-top: 8px;
   height: 40px;
-  overflow: hidden;
+  padding-bottom: 20px;
+  /* overflow: hidden; */
 }
 
 .movie-title {
-  font-size: 0.75rem; /* Reduced from 0.85rem to about half the previous size */
+  font-size: 12px;
   line-height: 1.2;
   color: var(--text-primary);
-  font-weight: 500;
   margin-bottom: 2px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -84,15 +84,7 @@
 
 .movie-rating {
   font-size: 0.65rem; /* Reduced from 0.75rem to maintain proportion */
-  color: var(--text-muted);
-}
-
-/* You could also add this to make the margin between title and poster smaller
-.poster-info {
-  margin-top: 6px;
-} */
-
-/* Optional: add this to handle titles that are now too small to read easily */
-.poster-tile:hover .movie-title {
-  text-decoration: underline;
+  color: green;
+  font: bold;
+  padding-bottom: 20rem;
 }
