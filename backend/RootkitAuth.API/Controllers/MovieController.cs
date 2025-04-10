@@ -9,7 +9,7 @@ namespace RootkitAuth.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class MovieController : ControllerBase
     {
         private MovieDbContext _movieDbContext;
