@@ -1,0 +1,17 @@
+.manage-movies-btn {
+  padding: 0.5rem 1.5rem;
+  background-color: transparent;
+  border: 2px solid #14b8a6; /* Matches the sigma-cine color */
+  color: #14b8a6; /* Matches the sigma-cine color */
+  border-radius: 10px; /* Fully rounded (pill shape) */
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.manage-movies-btn:hover {
+  background-color: #14b8a6;
+  color: #141414; /* Contrasting color on hover, similar to navbar's background */
+}

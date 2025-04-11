@@ -5,6 +5,7 @@ import Pagination from '../components/Pagination';
 import NewMovieForm from '../components/NewMovieForm';
 import EditMovieForm from '../components/EditMovieForm';
 import '../styles/AdminPage.css';
+import Navbar from '../components/Navbar';
 
 const AdminPage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -51,6 +52,9 @@ const AdminPage = () => {
 
   return (
     <div className="admin-container">
+      <Navbar />
+      <br />
+      <br />
       <div className="admin-header">
         <h1 className="admin-title">Manage Movies</h1>
         {!showForm && !editingMovie && (

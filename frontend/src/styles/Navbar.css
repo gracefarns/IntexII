@@ -1,11 +1,40 @@
-/* Navbar container */
+.sigma-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure the header uses flex layout for spacing */
+.skibidi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Container for left-side content */
+.skibidi-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Container for right-side content */
+.skibidi-right {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 15px;
+}
+
+/* Existing styles remain unchanged */
 .skibidi-navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 50;
-  padding: 1rem 25px;
+  padding: 1rem 0 1rem 25px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -14,41 +43,16 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* Optional: if you plan to use left/right sections in your Navbar */
-.skibidi-left,
-.skibidi-right {
-  display: flex;
-  align-items: center;
-}
-
-/* Brand styling */
 .ohio-brand {
   font-size: 2.25rem;
   font-weight: bold;
   text-align: left;
 }
 
-/* Brand colors */
 .sigma-cine {
   color: #14b8a6; /* teal-500 */
 }
 
 .ohio-niche {
   color: #d1d5db; /* gray-300 */
-}
-
-/* Sign-in button styling */
-.sigma-signin {
-  background-color: #5a7d7c;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.sigma-signin:hover {
-  background-color: #4a6c6b;
 }
