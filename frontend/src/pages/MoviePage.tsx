@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Movie } from '../types/Movie';
 import Footer from '../components/Footer';
 import { fetchMovies } from '../api/MoviesAPI';
@@ -19,6 +19,7 @@ const MoviePage: React.FC = () => {
     { genre: string; movies: Movie[] }[]
   >([]);
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+  const allMoviesRef = useRef<HTMLDivElement | null>(null);
 
   const GENRE_MAP: { [label: string]: keyof Movie } = {
     Action: 'action',
@@ -177,9 +178,14 @@ const MoviePage: React.FC = () => {
                 <button
                   key={genre}
                   className={`genre-chip ${selectedGenre === genre ? 'selected' : ''}`}
-                  onClick={() =>
-                    setSelectedGenre(selectedGenre === genre ? null : genre)
-                  }
+                  onClick={() => {
+                    setSelectedGenre(selectedGenre === genre ? null : genre);
+                    setTimeout(() => {
+                      allMoviesRef.current?.scrollIntoView({
+                        behavior: 'smooth',
+                      });
+                    }, 100); // Slight delay to ensure state change doesn’t block scroll
+                  }}
                 >
                   {genre.replace(/_/g, ' ')}
                 </button>
@@ -219,11 +225,13 @@ const MoviePage: React.FC = () => {
             ))}
 
             {/* 🔥 All Movies Infinite Scroll */}
-            <AllMoviesGrid
-              selectedGenre={selectedGenre}
-              genreMap={GENRE_MAP}
-              onMovieClick={handleResultClick}
-            />
+            <div ref={allMoviesRef}>
+              <AllMoviesGrid
+                selectedGenre={selectedGenre}
+                genreMap={GENRE_MAP}
+                onMovieClick={handleResultClick}
+              />
+            </div>
           </div>
         </div>
         <Footer />
