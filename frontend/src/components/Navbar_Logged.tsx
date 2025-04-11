@@ -7,8 +7,8 @@ import AuthorizeView from './AuthorizeView';
 const Navbar_Logged: React.FC = () => {
   const navigate = useNavigate();
 
-  const returnToHome = () => {
-    navigate('/');
+  const returnToMoviePage = () => {
+    navigate('/moviepage');
   };
 
   return (
@@ -18,7 +18,7 @@ const Navbar_Logged: React.FC = () => {
           <div className="skibidi-left">
             <div
               className="ohio-brand"
-              onClick={returnToHome}
+              onClick={returnToMoviePage}
               style={{ cursor: 'pointer' }}
             >
               <span className="sigma-cine">Cine</span>
