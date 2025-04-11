@@ -3,6 +3,8 @@ import '../styles/HomePage.css';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import CookieConsent from "react-cookie-consent";
+
 interface FaqItem {
   question: string;
   answer: string;
@@ -101,6 +103,7 @@ export default function HomePage() {
   const navigate = useNavigate();
   return (
     <div className="home-container">
+      <CookieConsent>This website uses cookies to enhance the user experience.</CookieConsent>
       <Navbar />
       <main>
         {/* Hero Section */}

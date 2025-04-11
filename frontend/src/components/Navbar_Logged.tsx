@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Navbar.css';
 import ManageMoviesButton from './ManageMoviesButton';
 import AuthorizeView from './AuthorizeView';
+import Logout from './Logout';
 
 const Navbar_Logged: React.FC = () => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const Navbar_Logged: React.FC = () => {
             <AuthorizeView>
               <ManageMoviesButton />
             </AuthorizeView>
+            <Logout>Log out</Logout>
           </div>
         </header>
       </div>
