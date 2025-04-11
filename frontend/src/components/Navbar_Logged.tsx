@@ -1,8 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Navbar.css';
-import ManageMoviesButton from './ManageMoviesButton';
-import AuthorizeView from './AuthorizeView';
 import Logout from './Logout';
 
 const Navbar_Logged: React.FC = () => {
@@ -27,9 +25,6 @@ const Navbar_Logged: React.FC = () => {
             </div>
           </div>
           <div className="skibidi-right">
-            <AuthorizeView>
-              <ManageMoviesButton />
-            </AuthorizeView>
             <Logout>Log out</Logout>
           </div>
         </header>
