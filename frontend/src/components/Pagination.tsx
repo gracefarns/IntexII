@@ -49,7 +49,7 @@ const Pagination = ({
     <>
       <div className="d-flex justify-content-center align-items-center gap-2 my-4 flex-wrap">
         <button
-          className="btn btn-outline-secondary"
+          className="bg-gray-800 text-white px-4 py-2 rounded"
           disabled={currentPage === 1}
           onClick={() => onPageChange(currentPage - 1)}
         >
@@ -60,7 +60,7 @@ const Pagination = ({
           typeof page === 'number' ? (
             <button
               key={idx}
-              className={`btn ${currentPage === page ? 'btn-primary' : 'btn-outline-primary'}`}
+              className={`btn ${currentPage === page ? 'btn-dark' : 'btn-outline-dark'}`}
               onClick={() => onPageChange(page)}
               disabled={currentPage === page}
             >
@@ -74,7 +74,7 @@ const Pagination = ({
         )}
 
         <button
-          className="btn btn-outline-secondary"
+          className="bg-gray-800 text-white px-4 py-2 rounded"
           disabled={currentPage === totalPages}
           onClick={() => onPageChange(currentPage + 1)}
         >
