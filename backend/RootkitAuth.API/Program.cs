@@ -117,7 +117,7 @@ app.MapPost("/logout", async (HttpContext context, SignInManager<IdentityUser> s
     context.Response.Cookies.Delete(".AspNetCore.Identity.Application", new CookieOptions
     {
         HttpOnly = true,
-        Secure = false,
+        Secure = true,
         SameSite = SameSiteMode.None
     });
 
