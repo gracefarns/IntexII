@@ -1,7 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import {UserContext} from "../components/AuthorizeView";
 
 function Logout(props: { children: React.ReactNode }) {
-  const navigate = useNavigate();
+
+    const user = useContext(UserContext);
+    const navigate = useNavigate();
+  
+    if (!user?.email) return null;
 
   const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
