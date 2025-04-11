@@ -102,8 +102,6 @@ export default function HomePage() {
   return (
     <div className="home-container">
       <Navbar />
-      <br />
-      <br />
       <main>
         {/* Hero Section */}
         <div className="hero-section">
@@ -177,6 +175,8 @@ export default function HomePage() {
           </div>
         </div>
       </main>
+      <br />
+      <br />
       {/* FAQ Section (below main, above footer) */}
       <div className="faq-section">
         <h2>
