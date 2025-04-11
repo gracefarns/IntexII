@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 function Logout(props: { children: React.ReactNode }) {
   const navigate = useNavigate();
 
-  const handleLogout = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {
       const response = await fetch('https://intex-backend-fmb8dnaxb0dkd8gv.eastus-01.azurewebsites.net/logout', {
         method: 'POST',
-        credentials: 'include', // Ensure cookies are sent
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -26,9 +26,9 @@ function Logout(props: { children: React.ReactNode }) {
   };
 
   return (
-    <a className="logout" href="#" onClick={handleLogout}>
+    <button className="logout" onClick={handleLogout}>
       {props.children}
-    </a>
+    </button>
   );
 }
 
