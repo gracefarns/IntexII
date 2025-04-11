@@ -4,7 +4,7 @@ import { Movie } from '../types/Movie';
 import { SimilarMovies } from '../types/SimilarMovies';
 import '../styles/MovieDetailPage.css';
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
+import Navbar_Logged from '../components/Navbar_Logged';
 
 const MovieDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -340,7 +340,7 @@ const MovieDetailPage: React.FC = () => {
 
   return (
     <div className="movie-detail-page">
-      <Navbar />
+      <Navbar_Logged />
       <br />
       <br />
       <br />

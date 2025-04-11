@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import RecommendationCarousel from '../components/RecommendationCarousel';
 import AllMoviesGrid from '../components/AllMoviesGrid';
 import '../styles/RecommendationCarousel.css';
-import Navbar from '../components/Navbar';
+import Navbar_Logged from '../components/Navbar_Logged';
 
 const MoviePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -145,7 +145,7 @@ const MoviePage: React.FC = () => {
   return (
     <>
       <div className="movie-page">
-        <Navbar />
+        <Navbar_Logged />
         <br />
         <br />
         <div className="hero-section">
