@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../styles/identity.css';
+import '@fortawesome/fontawesome-free/css/all.css';
+import '../styles/LoginPage.css';
 
 function UnauthorizedPage() {
   const navigate = useNavigate();
@@ -8,37 +10,32 @@ function UnauthorizedPage() {
     navigate('/');
   };
 
-  return (
+return (
+  <div>
     <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-md-8 col-lg-6">
-          <div className="niche-logo text-center mb-4">
-            <h1><span className="text-teal">Cine</span>Niche</h1>
-          </div>
-          <div className="card unauthorized-card">
-            <div className="card-body p-4 p-md-5">
-              <div className="text-center mb-4">
-                <i className="fas fa-exclamation-circle icon-unauthorized"></i>
-              </div>
-              <h2 className="text-center mb-3">
-                Access Denied
-              </h2>
-              <p className="text-center mb-4">
-                You do not have permission to view this page.
-              </p>
-              <div className="d-grid">
-                <button 
+      <div>
+        <br />
+        <br />
+        <div className="card border-0 shadow rounded-3 ">
+          <div className="card-body p-4 p-sm-5">
+            <h3>Access Denied</h3>
+            <h5 className="card-title text-center mb-5 fw-light fs-5">
+            You do not have permission to view this page.
+            </h5>
+              <hr className="my-4" />
+              <div className="d-grid mb-2">
+              <button 
                   onClick={handleRedirect}
                   className="btn btn-primary"
                 >
-                  Return to home page
-                </button>
+                 Return to home page
+               </button>
               </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   );
 }
 
