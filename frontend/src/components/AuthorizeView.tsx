@@ -1,17 +1,20 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Navigate } from 'react-router-dom';
 
-const UserContext = createContext<User | null>(null);
+
 
 interface User {
-  email: string;
+  email: string
+  roles: string[];
 }
+
+export const UserContext = createContext<User | null>(null);
 
 function AuthorizeView(props: { children: React.ReactNode }) {
   const [authorized, setAuthorized] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true); // add a loading state
   //const navigate = useNavigate();
-  let emptyuser: User = { email: '' };
+  let emptyuser: User = { email: '', roles: []};
 
   const [user, setUser] = useState(emptyuser);
 
@@ -31,7 +34,7 @@ function AuthorizeView(props: { children: React.ReactNode }) {
         const data = await response.json();
 
         if (data.email) {
-          setUser({ email: data.email });
+          setUser({ email: data.email , roles: data.roles});
           setAuthorized(true);
         } else {
           throw new Error('Invalid user session');

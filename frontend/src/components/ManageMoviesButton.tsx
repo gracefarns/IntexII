@@ -6,7 +6,7 @@ const ManageMoviesButton = () => {
   const user = useContext(UserContext);
   const navigate = useNavigate();
 
-  if (!user || !user.roles?.includes("Administrator")) return null;
+  if (!user || !user.roles.includes("Administrator")) return null;
 
   return (
     <button onClick={() => navigate("/admin")}>
