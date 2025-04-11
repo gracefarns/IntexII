@@ -137,17 +137,6 @@ export default function HomePage() {
                 </button>
               </div>
             </div>
-            <div className="hero-footer">
-              <div className="hero-links">
-                <a href="#" className="footer-link">
-                  Privacy Policy
-                </a>
-                <span>|</span>
-                <a href="#" className="footer-link">
-                  Help
-                </a>
-              </div>
-            </div>
           </div>
           {/* Right Panel - Hero Image */}
           <div className="hero-right">
