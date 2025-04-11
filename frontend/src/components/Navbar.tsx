@@ -3,12 +3,12 @@ import '../styles/Navbar.css';
 
 const Navbar: React.FC = () => {
   return (
-    <div>
-      <div className="home-container">
-        <header className="header">
-          <div className="brand">
-            <span className="brand-cine">Cine</span>
-            <span className="brand-niche">Niche</span>
+    <div className="skibidi-navbar">
+      <div className="sigma-container">
+        <header className="skibidi-header">
+          <div className="ohio-brand">
+            <span className="sigma-cine">Cine</span>
+            <span className="ohio-niche">Niche</span>
           </div>
         </header>
       </div>

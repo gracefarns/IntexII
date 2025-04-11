@@ -357,7 +357,7 @@ const MovieDetailPage: React.FC = () => {
           </div>
 
           <div className="movie-info">
-            <h1 className="movie-title">{movie.title}</h1>
+            <h1 className="movie-skibidi">{movie.title}</h1>
             <div className="movie-meta">
               <span className="meta-item">
                 {movie.release_year} — {primaryGenre} — {movie.duration}

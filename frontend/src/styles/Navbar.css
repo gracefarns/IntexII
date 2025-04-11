@@ -1,4 +1,5 @@
-.navbar {
+/* Navbar container */
+.skibidi-navbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -9,30 +10,35 @@
   justify-content: space-between;
   align-items: flex-start;
   border-bottom: 1px solid #18181b; /* Matches your header style */
-  background-color: #18181b; /* Solid dark background */
+  background-color: #141414; /* Solid dark background */
+  font-family: 'Poppins', sans-serif;
 }
 
-.navbar-left,
-.navbar-right {
+/* Optional: if you plan to use left/right sections in your Navbar */
+.skibidi-left,
+.skibidi-right {
   display: flex;
   align-items: center;
 }
 
-.brand {
+/* Brand styling */
+.ohio-brand {
   font-size: 2.25rem;
-  font-weight: 700;
+  font-weight: bold;
   text-align: left;
 }
 
-.brand-cine {
+/* Brand colors */
+.sigma-cine {
   color: #14b8a6; /* teal-500 */
 }
 
-.brand-niche {
+.ohio-niche {
   color: #d1d5db; /* gray-300 */
 }
 
-.sign-in-button {
+/* Sign-in button styling */
+.sigma-signin {
   background-color: #5a7d7c;
   color: #fff;
   border: none;
@@ -43,6 +49,6 @@
   transition: background-color 0.3s ease;
 }
 
-.sign-in-button:hover {
+.sigma-signin:hover {
   background-color: #4a6c6b;
 }

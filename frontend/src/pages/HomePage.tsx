@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import '../styles/HomePage.css';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 interface FaqItem {
   question: string;
   answer: string;
@@ -100,12 +101,7 @@ export default function HomePage() {
   const navigate = useNavigate();
   return (
     <div className="home-container">
-      <header className="header">
-        <div className="brand">
-          <span className="brand-cine">Cine</span>
-          <span className="brand-niche">Niche</span>
-        </div>
-      </header>
+      <Navbar />
       <br />
       <br />
       <main>
