@@ -1,31 +1,50 @@
-# WebAPI backend with React frontend
-This repo is indended for in-class demonstration and discussion and includes errors, inefficiencies, and structural oddities
+# Movie Streaming Platform with Recommendation Engines
 
-The project is a loose integration of the following projects:
-* https://github.com/profspencerhilton/WaterProject
-* https://github.com/codingwithtom1/ReactIdentity
+A full-stack movie streaming application built in 4 days that leverages machine learning models to provide personalized movie recommendations for each user.
 
-The WaterProject code did not contain a license. 
-Code adapted from the ReactIdentity library is licensed under the MIT License.
+## Overview
 
-MIT License
+This project combines a modern React frontend with a .NET backend to deliver an intelligent movie discovery platform. The application integrates machine learning algorithms to analyze user preferences and viewing history, generating tailored movie recommendations that enhance the user experience.
 
-Copyright (c) 2024 mckennajsv
+## Features
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+- **User Authentication**: Secure user registration and login system
+- **Movie Discovery**: Browse and search through a comprehensive movie catalog
+- **Personalized Recommendations**: ML-powered recommendation engine that learns from user interactions
+- **User Ratings**: Rate movies to improve recommendation accuracy
+- **Genre-Based Filtering**: Filter movies by genre and user preferences
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## Tech Stack
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+### Frontend
+
+- React with TypeScript
+- Vite build tool
+- Modern CSS styling
+- HTTP API integration
+
+### Backend
+
+- .NET Core Web API
+- Entity Framework Core for data persistence
+- Multiple database contexts for separated concerns
+- Authentication and role-based authorization
+
+## Project Structure
+
+```
+IntexII/
+├── backend/
+│   └── RootkitAuth.API/
+│       ├── Controllers/
+│       ├── Data/
+│       ├── Services/
+│       └── Program.cs
+└── frontend/
+    ├── src/
+    │   ├── components/
+    │   ├── pages/
+    │   ├── api/
+    │   └── context/
+    └── vite.config.ts
+```
