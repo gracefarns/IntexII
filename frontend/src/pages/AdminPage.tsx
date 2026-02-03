@@ -5,7 +5,7 @@ import Pagination from '../components/Pagination';
 import NewMovieForm from '../components/NewMovieForm';
 import EditMovieForm from '../components/EditMovieForm';
 import '../styles/AdminPage.css';
-import Navbar from '../components/Navbar';
+import Navbar_Logged from '../components/Navbar_Logged';
 
 const AdminPage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -52,7 +52,7 @@ const AdminPage = () => {
 
   return (
     <div className="admin-container">
-      <Navbar />
+      <Navbar_Logged />
       <br />
       <br />
       <div className="admin-header">
